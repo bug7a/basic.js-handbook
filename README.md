@@ -3,7 +3,7 @@
 In this book, you will find a list and brief explanations of the codes you can use with the basic.js library.<br>
 This JavaScript library helps you to create interactive user interface with basic programming skills.<br />
 
-<br><br>
+<br>
 
 ### Handbook:
 https://bug7a.github.io/basic.js-handbook/
@@ -15,7 +15,7 @@ https://bug7a.github.io/basic.js/
 https://bug7a.github.io/basic.js-examples/
 
 ### Project Example #1:
-https:///bug7a.github.io/javascript-single-page-application-example/
+https://bug7a.github.io/javascript-single-page-application-example/
 
 ### Project Example #2:
 https://bug7a.github.io/cordova-mobile-app-ui-template/
