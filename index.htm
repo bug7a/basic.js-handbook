@@ -1,0 +1,2891 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>basic.js LIBRARY (v1.6.5) - HANDBOOK</title>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+        <!-- LIBRARY FILES -->
+        <link rel="stylesheet" type="text/css" href="library/basic.min.css">
+        <script src="library/basic.min.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="js/components/ui-search-box.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/components/ui-item-list.js" type="text/javascript" charset="utf-8"></script>
+
+        <style>
+
+            body {
+                overflow: hidden;
+            }
+
+            .content-group {
+                margin:20px;
+            }
+
+            .content-title {
+                font-size: 30px;
+                margin:20px;
+                margin-top: 40px;
+                margin-bottom: 10px;
+                font-weight: bold;
+            }
+
+            .content-code {
+                font-size: 18px;
+                margin:20px;
+                margin-top: 10px;
+                width: fit-content; 
+                background-color: #141414;
+                color: #FFFFFF;
+                padding: 20px;
+                padding-left: 30px;
+                padding-right: 30px;
+                border-radius: 4px;
+            }
+
+            .content-text {
+                font-size: 18px;
+                margin:20px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            .content-sub-text {
+                font-size: 16px;
+                margin:15px;
+                margin-left: 40px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .content-sub-title {
+                font-size: 18px;
+                margin: 20px;
+                font-weight: bold;
+            }
+
+            .content-info-box-group {
+                font-size: 18px;
+                margin:20px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            .content-info-box {
+                font-size: 14px;
+                padding: 4px;
+                padding-left: 8px;
+                padding-right: 8px;
+                background-color: whitesmoke;
+                border-radius: 4px;
+            }
+
+            .content-info-box.colored {
+                background-color: #23ACCF20;
+            }
+
+            .content-note {
+                background-color: #EE755320;
+                padding: 15px;
+                border-left: 5px solid #EE7553;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            .content-info {
+                background-color: #a4a4a420;
+                padding: 15px;
+                border-left: 5px solid #a4a4a4;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            .code-1 {
+                color: #23ACCF;
+            }
+
+            .code-2 {
+                color: #EE7553;
+            }
+
+            .code-3 {
+                color: #CC75AA;
+            }
+
+            .code-example {
+                font-size: 14px;
+                margin:20px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                color: #CC75AA;
+                border: 1px solid #CC75AA40;
+                border-radius: 4px;
+                padding: 4px;
+                background-color: #CC75AA04;
+            }
+
+            table {
+                margin-left: 20px;
+                margin-right: 20px;
+                background-color: whitesmoke;
+                border-radius: 3px;
+                margin-top: 40px;
+                margin-bottom: 40px;
+            }
+
+            table th {
+                text-transform: uppercase;
+                font-size: 14px;
+                padding: 6px 8px;
+                text-align: left;
+                background-color: rgba(0, 0, 0, 0.07);
+                color: rgba(0, 0, 0, 0.5);
+                border-radius: 3px;
+            }
+
+            table td {
+                font-size: 14px;
+                padding: 8px;
+                text-align: left;
+            }
+
+            table td.normal {
+                text-align: left;
+                font-weight: bold;
+            }
+
+            table td.center {
+                text-align: center;
+                font-weight: bold;
+            }
+
+            .table-item-required {
+                color: white;
+                background-color: #EE7553;
+                border-radius: 3px;
+                padding: 2px;
+            }
+
+            /* width */
+            .basic_box::-webkit-scrollbar {
+            width: 3px;
+            border-radius: 2px;
+            }
+
+            /* Track */
+            .basic_box::-webkit-scrollbar-track {
+            background: transparent;
+            }
+
+            /* Handle */
+            .basic_box::-webkit-scrollbar-thumb {
+            background: #00000020;
+            }
+
+            /* Handle on hover */
+            .basic_box::-webkit-scrollbar-thumb:hover {
+            background: #555;
+            }
+            
+        </style>
+
+        <script>
+
+        var START_PAGE_ID = "c1";
+
+        /*
+
+        &#8226;
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        &lt;div&gt;
+
+        <div class="content-title">object.scrollY</div>
+        <div class="content-text">Adds a vertical scrollbar to the object as needed.</div>
+        <div class="content-info-box-group">
+            <span class="content-info-box colored">Type: <b>Boolean</b></span>
+            <span class="content-info-box">Default: <b>0</b></span>
+        </div>
+
+        <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>) : <span class="code-1">Float</span></div>
+        <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>, type: <span class="code-1">String</span>) : <span class="code-1">Float</span> or <span class="code-1">Integer</span></div>
+
+        <table>
+            <thead><tr><th>Value</th><th>Description</th></tr></thead>
+            <tbody>
+                <tr><td class="center">1</td><td>Add scrollbar if needed.</td></tr>
+                <tr><td class="center">0</td><td>Never add.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="code-example">
+        // Example:<br>
+        boxObject.dontMotion()<br>
+        boxObject.opacity = 0<br>
+        boxObject.withMotion(function(self) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;self.opacity = 1<br>
+        })
+        </div>
+
+        <div class="content-text">&#8226; Accepts <b>HTML</b> code.</div>
+        <div class="content-text content-info"><b>See</b>: 55-basic-css-animation.htm</div>
+
+        */
+        
+        var USED_WIDTH = 600
+        var LEFT_MENU_WIDTH = 250   
+        var leftMenu
+
+        var leftMenuDataList = [
+            { id: "c1", type: "item", name: "Introduction", searchText: "Introduction" }, 
+            { id: "c2", type: "item", name: "Data types used", searchText: "Data types used" },
+
+            { id: "t1", type: "title", name: "Basic Functions", iconPath: "", searchText: "Basic functions *" },
+            { id: "c4", type: "item", name: "print()", searchText: "print"  },
+            { id: "c3", type: "item", name: "random()", searchText: "random" },
+            { id: "c5", type: "item", name: "num()", searchText: "num"  },
+            { id: "c6", type: "item", name: "str()", searchText: "str"  },
+            { id: "c7", type: "item", name: "go()", searchText: "go"  },
+            { id: "c8", type: "item", name: "twoDigitFormat()", searchText: "twoDigitFormat"  },
+            { id: "c9", type: "item", name: "isMobile()", searchText: "isMobile"  },
+
+            { id: "t2", type: "title", name: "page Object", iconPath: "", searchText: "page object *"  },
+            { id: "c10", type: "item", name: ".bodyElement", searchText: "bodyElement"  },
+            { id: "c11", type: "item", name: ".color", searchText: "color"  },
+            { id: "c12", type: "item", name: ".width", searchText: "width"  },
+            { id: "c13", type: "item", name: ".height", searchText: "height"  },
+            { id: "c15", type: "item", name: ".zoom", searchText: "zoom"  },
+            { id: "c14", type: "item", name: ".fit()", searchText: "fit"  },
+            { id: "c16", type: "item", name: ".onClick()", searchText: "onClick on click event"  },
+            { id: "c17", type: "item", name: ".onResize()", searchText: "onResize on resize event"  },
+            { id: "c18", type: "item", name: ".add()", searchText: "add"  },
+            
+            { id: "t3", type: "title", name: "* Class", iconPath: "", searchText: "* object class"  },
+            { id: "c19", type: "item", name: "that", searchText: "that"  },
+            { id: "c20", type: "item", name: ".left", searchText: "left"  },
+            { id: "c21", type: "item", name: ".top", searchText: "top"  },
+            { id: "c22", type: "item", name: ".right", searchText: "right"  },
+            { id: "c23", type: "item", name: ".bottom", searchText: "bottom"  },
+            { id: "c24", type: "item", name: ".width", searchText: "width"  },
+            { id: "c25", type: "item", name: ".height", searchText: "height"  },
+            { id: "c26", type: "item", name: ".rotate", searchText: "rotate"  },
+            { id: "c111", type: "item", name: ".visible", searchText: "visible"  },
+            { id: "c27", type: "item", name: ".opacity", searchText: "opacity"  },
+            { id: "c28", type: "item", name: ".color", searchText: "color"  },
+            { id: "c29", type: "item", name: ".border", searchText: "border"  },
+            { id: "c30", type: "item", name: ".borderColor", searchText: "borderColor"  },
+            { id: "c31", type: "item", name: ".round", searchText: "round"  },
+            { id: "c32", type: "item", name: ".fontSize or .textSize", searchText: "fontSize"  },
+            { id: "c33", type: "item", name: ".textColor", searchText: "textColor text Color"  },
+            { id: "c34", type: "item", name: ".textAlign", searchText: "textAlign text Align"  },
+            { id: "c35", type: "item", name: ".clickable", searchText: "clickable"  },
+            { id: "c36", type: "item", name: ".element", searchText: "element"  },
+            { id: "c37", type: "item", name: ".upperObject", searchText: "upperObject"  },
+            { id: "c51", type: "item", name: ".onClick()", searchText: "onClick on Click event" },
+            { id: "c38", type: "item", name: ".onResize()", searchText: "onResize on Resize event"  },
+            { id: "c39", type: "item", name: ".center()", searchText: "center"  },
+            { id: "c40", type: "item", name: ".aline()", searchText: "aline"  },
+            { id: "c41", type: "item", name: ".remove()", searchText: "remove"  },
+            { id: "c42", type: "item", name: ".prop()", searchText: "prop"  },
+            { id: "c43", type: "item", name: ".setMotion()", searchText: "setMotion set Motion animation"  },
+            { id: "c44", type: "item", name: ".getMotion()", searchText: "getMotion get Motion animation" },
+            { id: "c46", type: "item", name: ".dontMotion()", searchText: "dontMotion dont Motion animation"  },
+            { id: "c45", type: "item", name: ".withMotion()", searchText: "withMotion with Motion animation"  },
+
+            { id: "t4", type: "title", name: "Box Class", iconPath: "assets/box-icon.svg", searchText: "Box object class *" },
+            { id: "c47", type: "item", name: "createBox()", searchText: "createBox create Box" },
+            { id: "c48", type: "item", name: ".text or .html", searchText: "text html htm" },
+            { id: "c49", type: "item", name: ".scrollX", searchText: "scrollX scroll X" },
+            { id: "c50", type: "item", name: ".scrollY", searchText: "scrollY scroll Y" },
+            { id: "c52", type: "item", name: ".add()", searchText: "add" },
+            //{ id: "c53", type: "item", name: ".element", searchText: "element" },
+
+            { id: "t5", type: "title", name: "Button Class", iconPath: "assets/button-icon.svg", searchText: "Button Object class *" },
+            { id: "c54", type: "item", name: "createButton()", searchText: "createButton create Button" },
+            { id: "c55", type: "item", name: ".text", searchText: "text" },
+            { id: "c56", type: "item", name: ".enabled", searchText: "enabled" },
+            { id: "c57", type: "item", name: ".minimal", searchText: "minimal" },
+            //{ id: "c58", type: "item", name: ".onClick()", searchText: "onClick on Click event" },
+            //{ id: "c59", type: "item", name: ".element", searchText: "element" },
+            { id: "c60", type: "item", name: ".buttonElement", searchText: "buttonElement button Element" },
+
+            { id: "t6", type: "title", name: "TextBox Class", iconPath: "assets/textbox-icon.svg", searchText: "TextBox object *" },
+            { id: "c61", type: "item", name: "createTextBox()", searchText: "createTextBox create TextBox" },
+            { id: "c62", type: "item", name: ".text", searchText: "text" },
+            { id: "c63", type: "item", name: ".title", searchText: "title" },
+            { id: "c64", type: "item", name: ".enabled", searchText: "enabled" },
+            { id: "c65", type: "item", name: ".minimal", searchText: "minimal" },
+            { id: "c66", type: "item", name: ".onChange()", searchText: "onChange on Change event" },
+            //{ id: "c67", type: "item", name: ".element", searchText: "element" },
+            { id: "c68", type: "item", name: ".inputElement", searchText: "inputElement input Element" },
+            { id: "c69", type: "item", name: ".titleElement", searchText: "titleElement title Element" },
+
+            { id: "t7", type: "title", name: "Label Class", iconPath: "assets/label-icon.svg", searchText: "Label object *" },
+            { id: "c70", type: "item", name: "createLabel()", searchText: "createLabel create Label" },
+            { id: "c71", type: "item", name: ".text", searchText: "text" },
+            { id: "c72", type: "item", name: ".space", searchText: "space" },
+            { id: "c73", type: "item", name: ".spaceX", searchText: "spaceX space X" },
+            { id: "c74", type: "item", name: ".spaceY", searchText: "spaceY space Y" },
+            //{ id: "c75", type: "item", name: ".onClick()", searchText: "onClick on Click event" },
+            //{ id: "c76", type: "item", name: ".element", searchText: "element" },
+
+            { id: "t8", type: "title", name: "Image Class", iconPath: "assets/image-icon.svg", searchText: "Image *" },
+            { id: "c77", type: "item", name: "createImage()", searchText: "createImage create Image" },
+            { id: "c78", type: "item", name: ".load()", searchText: "load" },
+            { id: "c79", type: "item", name: ".autoSize", searchText: "autoSize auto Size" },
+            { id: "c80", type: "item", name: ".naturalWidth", searchText: "naturalWidth natural Width" },
+            { id: "c81", type: "item", name: ".naturalHeight", searchText: "naturalHeight natural Height" },
+            { id: "c82", type: "item", name: ".space", searchText: "space" },
+            /*
+            { id: "c83", type: "item", name: ".spaceX" },
+            { id: "c84", type: "item", name: ".spaceY" },
+            */
+            //{ id: "c85", type: "item", name: ".onClick()", searchText: "onClick on Click event" },
+            { id: "c86", type: "item", name: ".onLoad()", searchText: "onLoad on Load event" },
+            //{ id: "c87", type: "item", name: ".element", searchText: "element" },
+            { id: "c88", type: "item", name: ".imageElement", searchText: "imageElement image Element" },
+
+            { id: "t9", type: "title", name: "Other Functions", iconPath: "", searchText: "General functions *" },
+            { id: "c89", type: "item", name: "setLoopTimer()", searchText: "setLoopTimer set Loop Timer" },
+            { id: "c90", type: "item", name: "selectBox()", searchText: "selectBox select Box" },
+            { id: "c91", type: "item", name: "getSelectedBox()", searchText: "getSelectedBox get Selected Box" },
+            { id: "c92", type: "item", name: "makeBasicObject()", searchText: "makeBasicObject make Basic Object" },
+
+            { id: "t10", type: "title", name: "clock Object", iconPath: "", searchText: "aline" },
+            { id: "c93", type: "item", name: "clock.hour", searchText: "aline" },
+            { id: "c94", type: "item", name: "clock.minute", searchText: "aline" },
+            { id: "c95", type: "item", name: "clock.second", searchText: "aline" },
+            { id: "c112", type: "item", name: "clock.milisecond", searchText: "aline" },
+
+            { id: "t11", type: "title", name: "date Object", iconPath: "", searchText: "date object *" },
+            { id: "c96", type: "item", name: "date.year", searchText: "date year" },
+            { id: "c97", type: "item", name: "date.mouthNumber", searchText: "date mouthNumber mouth Number" },
+            { id: "c98", type: "item", name: "date.ayAdi", searchText: "aline" },
+            { id: "c99", type: "item", name: "date.mountName", searchText: "aline" },
+            { id: "c100", type: "item", name: "date.dayNumber", searchText: "aline" },
+            { id: "c101", type: "item", name: "date.gunAdi", searchText: "aline" },
+            { id: "c102", type: "item", name: "date.dayName", searchText: "aline" },
+            { id: "c103", type: "item", name: "date.today", searchText: "aline" },
+            { id: "c104", type: "item", name: "date.now", searchText: "aline" },
+
+            { id: "t12", type: "title", name: "storage Object", iconPath: "", searchText: "storage object *" },
+            { id: "c105", type: "item", name: "storage.save()", searchText: "storage save" },
+            { id: "c106", type: "item", name: "storage.load()", searchText: "storage load" },
+            { id: "c107", type: "item", name: "storage.remove()", searchText: "storage remove" },
+
+            { id: "t13", type: "title", name: "Others", iconPath: "", searchText: "Others *" },
+            { id: "c108", type: "item", name: "CONSTANTS", searchText: "CONSTANTS" },
+            { id: "c109", type: "item", name: "SOME FREQUENT FAULTS", searchText: "SOME FREQUENT FAULTS" },
+            { id: "c110", type: "item", name: "AUTHOR", searchText: "AUTHOR" },
+
+        ]
+
+        var box
+            
+        // First running function.
+        var start = function() {
+
+            page.color = "white"
+
+            page.fit(USED_WIDTH)
+
+            // BOX: Content container box.
+            box = createBox(0, 0, USED_WIDTH, page.height)
+            that.color = "white"
+            that.scrollY = 1
+            that.html = document.getElementById(START_PAGE_ID).innerHTML
+            that.element.style.userSelect = "text"
+
+            // BOX: Menu button container box.
+            page.boxMenuOpen = createBox(0, 0, 30, 30)
+            page.add(that)
+            that.color = "rgba(0,0,0,0.05)"
+            that.right = 10
+            that.top = 10
+            that.round = 15
+            that.onClick(function(self) {
+                leftMenu.right = 0
+            })
+
+            // IMAGE: Menu button icon.
+            page.boxMenuOpen.imgMenu = createImage(0, 0, 18, 18)
+            page.boxMenuOpen.add(that)
+            that.load("assets/menu-button.svg")
+            that.opacity = 0.6
+            that.center()
+
+            // BOX: Left menu container box.
+            leftMenu = createBox(0, 0, LEFT_MENU_WIDTH, page.height)
+            that.color = "whitesmoke"
+            that.right = 0
+            //that.visible = 1
+            that.element.style.borderLeftWidth = "1px"
+            that.borderColor = "rgba(0, 0, 0, 0.1)"
+            that.setMotion("right 0.3s")
+
+            // IMAGE: logo image.
+            leftMenu.imgLogo = createImage(0, 20)
+            leftMenu.add(that)
+            that.load("assets/logo.svg")
+            that.autoSize = 2
+            //that.visible = 1
+            that.onLoad(function(self) {
+                self.center("left")
+            })
+
+            // UI SEARCH BOX: Search box.
+            leftMenu.txtSearch = createUISearchBox(10, 80, LEFT_MENU_WIDTH - 20)
+            leftMenu.add(that)
+            that.color = "rgba(0,0,0,0.05)"
+            //that.visible = 1
+
+            // UI ITEM LIST: Left menu items.
+            leftMenu.uiItemList = createUIItemList(0, 120, LEFT_MENU_WIDTH, page.height - 120 - 34)
+            leftMenu.add(that)
+            that.setItemAlign("vertical")
+            that.setInnerSpaces(0, 0, 0, 0)
+            that.setCreateFunctionOfItem(createLeftMenuItem)
+            that.createItemsByDataList(leftMenuDataList)
+            that.onChange(selectLeftMenuItem)
+            //that.visible = 1
+
+            leftMenu.lblVersion = createLabel(0, 0, LEFT_MENU_WIDTH, 16)
+            leftMenu.add(that)
+            that.text = "v1.6.5"
+            that.bottom = 10
+            that.fontSize = 12
+            that.textAlign = "center"
+            that.textColor = "rgba(0,0,0,0.5)"
+            //that.visible = 1
+
+            // BOX: Menu close button container box.
+            leftMenu.boxCloseBack = createBox(0, 0, 30, 30)
+            leftMenu.add(that)
+            that.color = "rgba(0,0,0,0.05)"
+            that.right = 10
+            that.top = 10
+            that.round = 15
+            that.onClick(function(self) {
+                leftMenu.right = -250
+            })
+
+            // IMAGE: Menu close button icon.
+            leftMenu.boxCloseBack.imgClose = createImage(0, 0, 12, 12)
+            leftMenu.boxCloseBack.add(that)
+            that.load("assets/close-button.svg")
+            that.opacity = 0.6
+            that.center()
+
+            // BOX: Waiting container box.
+            page.boxLoading = createBox(0, 0, page.width, page.height);
+            that.color = "white"
+            that.opacity = 1;
+            that.setMotion("opacity 0.4s");
+            setTimeout(function() {
+                page.boxLoading.opacity = 0;
+            }, 20);
+
+            resizePage()
+
+            page.onResize(resizePage)
+
+            leftMenu.txtSearch.onSearch(function(self, searchText) {
+                leftMenu.uiItemList.searchItemByText(searchText);
+            })
+
+            // Create editors.
+            /*
+            var codeEditor = ace.edit("code-editor1");
+            codeEditor.setTheme("ace/theme/monokai");
+            codeEditor.session.setMode("ace/mode/javascript");
+            */
+
+            // Select a list item.
+            leftMenu.uiItemList.selectItemByIndex(0)
+            
+        }
+
+        var resizePage = function() {
+
+            page.fit(USED_WIDTH)
+
+            box.height = page.height;
+            leftMenu.height = page.height;
+            leftMenu.uiItemList.height = page.height - 120 - 34;
+
+            if (page.width <= (USED_WIDTH + LEFT_MENU_WIDTH)) {
+                leftMenu.right = -250
+                leftMenu.boxCloseBack.visible = 1
+                box.center("left")
+            } else {
+                leftMenu.right = 0
+                leftMenu.boxCloseBack.visible = 0
+                box.center("left")
+                box.left -= 125
+            }
+
+            // loading box.
+            page.boxLoading.width = page.width;
+            page.boxLoading.height = page.height;
+
+        }
+
+        var createLeftMenuItem = function(itemData) {
+
+            var TITLE_ITEM_HEIGHT = 32
+
+            // BOX: Title item container box.
+            var box = createBox(0, 0, LEFT_MENU_WIDTH, TITLE_ITEM_HEIGHT)
+            leftMenu.add(that)
+            that.color = "transparent"
+            //that.visible = 1
+
+            switch (itemData.type) {
+
+                case "title":
+
+                    // BOX: Title item back box.
+                    box.boxA1Back = createBox(4, 1, LEFT_MENU_WIDTH - 8, TITLE_ITEM_HEIGHT - 2)
+                    box.add(that)
+                    that.color = "white"
+                    that.border = 1
+                    that.borderColor = "rgba(0, 0, 0, 0.4)"
+                    that.round = 4
+                    //that.visible = 1
+
+                    // IMAGE: Title item icon image.
+                    box.imgA1 = createImage(4, 0, TITLE_ITEM_HEIGHT, TITLE_ITEM_HEIGHT)
+                    box.add(that)
+                    if (itemData.iconPath != "") {
+                        that.load(itemData.iconPath)
+                    } else {
+                        that.visible = 0
+                    }
+                    that.load(itemData.iconPath)
+                    that.space = 30
+                    //that.visible = 1
+
+                    // LABEL: Title item text.
+                    box.lblA1 = createLabel(0, 6, LEFT_MENU_WIDTH, 19)
+                    box.add(that)
+                    that.text = itemData.name
+                    that.fontSize = 14
+                    that.textAlign = "center"
+                    //that.visible = 1
+                    that.onResize(function(self) {
+                        // self.center()
+                        // print(self.top)
+                    })
+                    break;
+
+                case "item":
+
+                    // BOX: Button item back box.
+                    box.boxA1Back = createBox(4, 1, LEFT_MENU_WIDTH - 8, TITLE_ITEM_HEIGHT - 2)
+                    box.add(that)
+                    that.color = "black"
+                    that.opacity = 0.04
+                    that.border = 0
+                    that.borderColor = "rgba(0, 0, 0, 0.4)"
+                    that.round = 4
+                    //that.visible = 1
+
+                    // LABEL: Button item text.
+                    box.lblA1 = createLabel(20, 6, LEFT_MENU_WIDTH - 40, 19)
+                    box.add(that)
+                    that.text = itemData.name
+                    that.fontSize = 14
+                    that.textAlign = "left"
+                    //that.visible = 1
+                    that.onResize(function(self) {
+                        // self.center()
+                        // print(self.top)
+                    })
+                    break;
+
+                case "item":
+
+                    // BOX: Button item back box.
+                    box.boxA1Back = createBox(4, 1, LEFT_MENU_WIDTH - 8, TITLE_ITEM_HEIGHT - 2)
+                    box.add(that)
+                    that.color = "black"
+                    that.opacity = 0.04
+                    that.border = 0
+                    that.borderColor = "rgba(0, 0, 0, 0.4)"
+                    that.round = 4
+                    //that.visible = 1
+
+                    // LABEL: Button item text.
+                    box.lblA1 = createLabel(20, 6, LEFT_MENU_WIDTH - 40, 19)
+                    box.add(that)
+                    that.text = itemData.name
+                    that.fontSize = 14
+                    that.textAlign = "left"
+                    //that.visible = 1
+                    that.onResize(function(self) {
+                        // self.center()
+                        // print(self.top)
+                    })
+                    break;
+
+            }
+
+            makeBasicObject(box)
+            return box;
+        }
+
+        var selectLeftMenuItem = function(uiItemList, clickedItem, prevClickedItem) {
+
+            if (prevClickedItem && prevClickedItem.getData().type != "title") {
+
+                prevClickedItem.boxA1Back.color = "black"
+                prevClickedItem.boxA1Back.opacity = 0.04
+                prevClickedItem.lblA1.textColor = basic.TEXT_COLOR
+                uiItemList.removeItemFromSelectedList(prevClickedItem)
+            
+            } else if (prevClickedItem && prevClickedItem.getData().type == "title") {
+
+                prevClickedItem.boxA1Back.color = "white"
+                prevClickedItem.boxA1Back.opacity = 1
+                prevClickedItem.boxA1Back.border = 1
+                prevClickedItem.boxA1Back.borderColor = "rgba(0, 0, 0, 0.4)"
+                prevClickedItem.lblA1.textColor = basic.TEXT_COLOR
+                uiItemList.removeItemFromSelectedList(prevClickedItem)
+
+            }
+
+            if (clickedItem.getData().type != "title") {
+
+                clickedItem.boxA1Back.color = "#23ACCF"
+                clickedItem.boxA1Back.opacity = 0.9
+                clickedItem.lblA1.textColor = "white"
+                uiItemList.addItemToSelectedList(clickedItem)
+                
+            } else {
+
+                //clickedItem.boxA1Back.color = "#EE7553"
+                //clickedItem.boxA1Back.color = "whitesmoke"
+                clickedItem.boxA1Back.color = "#23ACCF"
+                clickedItem.boxA1Back.opacity = 0.9
+                clickedItem.boxA1Back.border = 0
+                clickedItem.lblA1.textColor = "white"
+                uiItemList.addItemToSelectedList(clickedItem)
+
+            }
+
+            if (clickedItem.getData().id) {
+                box.html = document.getElementById(clickedItem.getData().id).innerHTML
+
+            }
+
+        }
+        
+        </script>
+
+    </head>
+    <body>
+        
+        <!-- HTML content -->
+        <div style="display:none;">
+
+            <div id="template">
+
+                <div class="content-title">random()</div>
+                <div class="content-code"><span class="code-2">random</span>(number1: <span class="code-1">Integer</span>, number2: <span class="code-1">Integer</span>) : <span class="code-1">Integer</span></div>
+                <div class="content-text">Generates a random number between two given numbers.</div>
+                <div class="content-sub-title">Parameters:</div>
+
+                <table>
+                    <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+                    <tbody><tr>
+                        <td>title <div class="label basic required">Required</div></td><td>string</td><td>The dialog's title. Passing <code>null</code> or empty string will hide the title.</td></tr>
+                        <tr><td>message</td><td>string</td><td>An optional message that appears below the dialog's title.</td></tr>
+                        <tr><td>buttons</td><td><a href="/docs/alert#buttons">Buttons</a></td><td>An optional array containing buttons configuration.</td></tr>
+                        <tr><td>options <div class="label android">Android</div></td><td><a href="/docs/alert#options-android">Options</a></td><td>An optional Alert configuration for the Android.</td></tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+<!-- START -->
+
+<div id="c1">
+
+<div class="content-title">INTRODUCTION</div>
+<div class="content-text">This JavaScript library helps you to create interactive user interface with basic programming skills.</div>
+<br>
+<!-- <div class="content-code"><span class="code-2">random</span>(number1: <span class="code-1">Integer</span>, number2: <span class="code-1">Integer</span>) : <span class="code-1">Integer</span></div> -->
+<div class="content-text">In this book, you will find a list and brief explanations of the codes you can use with the basic.js library.</div>
+<div class="content-text">&#8226; When a project using the library is first opened; If it exists, the <b>start()</b> function is called ONCE.</div>
+<!-- <div class="content-sub-text">Before, all the variables and functions written on the outermost are ready to be used.</div> -->
+<div class="content-text">&#8226; Uses the <b>"load"</b> event in JavaScript.</div>
+
+
+<div class="content-text content-info"><b>See Empty Project Template:</b> 00C-empty-project-template.htm</div>
+
+<div class="content-text">&#8226; <b>Library</b>: https://github.com/bug7a/basic.js</div>
+<div class="content-text">&#8226; <b>Examples</b>: https://github.com/bug7a/basic.js-examples</div>
+
+<br>
+
+<!--<div class="content-text"><b>Project website:</b><br><a href="https://bug7a.github.io/basic.js/">https://bug7a.github.io/basic.js/</a></div>-->
+
+</div>
+
+            <div id="c2">
+
+            <div class="content-title">DATA TYPES USED</div>
+
+            <div class="content-sub-title">Simple Data Types</div>
+            <div class="content-sub-text"><b>&#8226; String</b>: text. "A text"<br>
+            <b>&#8226; Integer</b>: integer. 10<br>
+            <b>&#8226; Float</b>: decimal number. 5.5<br>
+            <b>&#8226; Boolean</b>: 1 or 0</div>
+
+            <div class="content-sub-title">Advanced Data Types</div>
+            <div class="content-sub-text"><b>&#8226; Array</b>, array. [ ]<br>
+            <b>&#8226; Object</b>, object. { }</div>
+
+            <div class="content-sub-title">Other Types</div>
+            <div class="content-sub-text"><b>&#8226; BasicObject</b>: the basic UI object. It can be a <b>Label</b>, <b>Button</b>, <b>TextBox</b>, <b>Image</b> or <b>Box</b> object.</div>
+            <div class="content-sub-text content-info"><b>Info</b>: This name is a special designation used to identify objects in the basic.js library.</div>
+            
+            <div class="content-sub-text"><b>&#8226; Function</b>, function. function() { }</div>
+
+            <br>
+
+            </div>
+
+<div id="t1">
+
+    <div class="content-title">BASIC FUNCTIONS</div>
+    <div class="content-text">Commonly used functions.</div>
+
+</div>
+
+            <div id="c3">
+
+            <div class="content-title">random()</div>
+            <div class="content-text">Generates a random number between two given numbers.</div>
+            <div class="content-code"><span class="code-2">random</span>(number1: <span class="code-1">Integer</span>, number2: <span class="code-1">Integer</span>) : <span class="code-1">Integer</span></div>
+            
+            <br>
+
+            <div class="content-text">&#8226; The numbers given are included.</div>
+
+            <!--
+            <div class="content-group content-info">
+                <div class="content-text"><b>Info:</b> The meanings of the code shown above as an example are as follows;</div>
+                <div class="content-sub-text"><b>random</b> is the name of the function.</div>
+                <div class="content-sub-text"><b>number1</b> is the name of the first parameter.</div>
+                <div class="content-sub-text"><b>integer</b>, the data type of the first parameter.</div>
+                <div class="content-sub-text"><b>number2</b> is the name of the second parameter.</div>
+                <div class="content-sub-text"><b>integer</b>, the data type of the second parameter.</div>
+                <div class="content-sub-text"><b>integer</b>, the data type of the response returned by the function.</div>
+            </div>
+
+            <div class="content-text content-info"><b>Example:</b> random(1, 8) -- 5</div>
+            -->
+            <div class="content-text content-info"><b>See</b>: 04-dice.htm</div>
+
+            <br>
+
+            <!--
+            <table>
+                <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+                <tbody><tr>
+                    <td>number1 <span class="table-item-required">R</span></td><td>integer</td><td>The dialog's title. Passing <code>null</code> or empty string will hide the title.</td></tr>
+                    <tr><td>number2</td><td>integer</td><td>An optional message that appears below the dialog's title.</td></tr>
+                </tbody>
+            </table>
+            -->
+            
+        <!--
+            random(number1:integer, number2:integer) : integer
+            - Generates a random number between two given numbers.
+            -- The numbers given are included.
+            - The meanings of the code shown above as an example are as follows;
+            random is the name of the function.
+            number1 is the name of the first parameter.
+            integer, the data type of the first parameter.
+            number2 is the name of the second parameter.
+            integer, the data type of the second parameter.
+            integer, the data type of the response returned by the function.
+        -->
+
+            </div>
+
+            <div id="c4">
+
+                <div class="content-title">print()</div>
+                <div class="content-text">Sends a message to the console.</div>
+                <div class="content-code"><span class="code-2">print</span>(message: <span class="code-1">String</span>)</div>
+
+            </div>
+
+            <div id="c5">
+
+                <div class="content-title">num()</div>
+                <div class="content-text">Converts a text type value to a number type.</div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>) : <span class="code-1">Float</span></div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>, type: <span class="code-1">String</span>) : <span class="code-1">Float</span> or <span class="code-1">Integer</span></div>
+
+                <br>
+
+                <div class="content-text"><b>type</b>, determines the type of number to answer.</div>
+                <div class="content-sub-text">&#8226; <b>"integer"</b> or <b>"int"</b>: returns integer, <b>"float"</b>: returns decimal.</div>
+                <div class="content-sub-text">&#8226; Used as <b>"float"</b> when the parameter is left blank.</div>
+                <div class="content-text">In decimal numbers, only 2 digits after the period are allowed.</div>
+                <div class="content-text content-note"><b>Note:</b> If you need more digits, look into the <b>parseFloat()</b> function.</div>
+                <div class="content-text content-info"><b>See:</b> 03-basic-calculator.htm</div>
+
+                <!--
+                    num(text:string) : float
+                    num(text:string, type:string) : float veya integer
+                    - Converts a text type value to a number type.
+                    - type determines the type of number to answer.
+                    "integer" or "int": returns integer, "float": returns decimal.
+                    -- Used as "float" when the parameter is left blank.
+                    - In decimal numbers, only 2 digits after the period are allowed.
+                    Note: If you need more digits, look into the parseFloat() function.
+                    See: 03-basic-calculator.htm
+                -->
+                
+            </div>
+
+                <div id="c6">
+                <div class="content-title">str()</div>
+                <div class="content-text">Converts a number type value to text type.</div>
+                <div class="content-code"><span class="code-2">str</span>(number: <span class="code-1">Integer</span> or <span class="code-1">Float</span>) : <span class="code-1">String</span></div>
+
+            </div>
+
+            <div id="c7">
+
+                <div class="content-title">go()</div>
+                <div class="content-text">Redirects to another .htm file or URL.</div>
+                <div class="content-code"><span class="code-2">go</span>(url: <span class="code-1">String</span>)</div>
+                <div class="content-code"><span class="code-2">go</span>(url: <span class="code-1">String</span>, windowType: <span class="code-1">String</span>)</div>
+
+                <br>
+
+                <div class="content-text"><b>windowType</b>, determines how the page is opened.</div>
+                <div class="content-sub-text"><b>&#8226; "_self"</b>: open on same page, <b>"_blank"</b>: open on different page.</div>
+                <div class="content-sub-text">&#8226; Used as <b>"_self"</b> when the parameter is left blank.</div>
+                
+                <br>
+            
+            </div>
+
+            <div id="c8">
+
+                <div class="content-title">twoDigitFormat()</div>
+                <div class="content-text">Allows the number to be converted into a 2-digit text.</div>
+                <div class="content-code"><span class="code-2">twoDigitFormat</span>(number: <span class="code-1">Integer</span>) : <span class="code-1">String</span></div>
+
+                <br>
+
+                <div class="content-text content-info"><b>Info</b>: It can be used for values such as time, counter, date.</div>
+
+                <br>
+
+            </div>
+
+            <div id="c9">
+
+                <div class="content-title">isMobile()</div>
+                <div class="content-text">Checks if the device is mobile.</div>
+                <div class="content-code"><span class="code-2">isMobile</span>() : <span class="code-1">Boolean</span></div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">1</td><td>Mobile device.</td></tr>
+                        <tr><td class="center">0</td><td>Computer.</td></tr>
+                    </tbody>
+                </table>
+
+                <br>
+                
+            </div>
+
+<div id="t2">
+    <div class="content-title">PAGE OBJECT (OBJECT NAME: page, CLASS NAME: MainBox)</div>
+    <div class="content-text">It is the object that provides the management of the page.</div>
+
+    <br>
+
+    <div class="content-text content-note"><b>Note</b>: Represents the visible area of ​​the screen. Does not support scrollbar.</div>
+    <div class="content-text">&#8226;  The scrollbar is only available with the Box object.</div>
+       
+    <br>
+
+</div>
+
+            <div id="c10">
+
+                <div class="content-title">page.bodyElement</div>
+                <div class="content-text">Element object that connects the object with HTML.</div>
+
+                <br>
+
+                <div class="content-text">&#8226; Uses <b>&#60;body&#62;</b> element in HTML.</div>
+                <div class="content-text">&#8226; It is the object obtained by <b>document.getElementsByTagName("BODY")[0]</b> in JavaScript.</div>
+
+                <br>
+                
+            </div>
+
+            <div id="c11">
+
+                <div class="content-title">page.color</div>
+                <div class="content-text">Sets the page background color.</div>
+                
+                <br>
+
+                <br>
+
+            </div>
+
+            <div id="c12">
+
+                <div class="content-title">page.width</div>
+                <div class="content-text">Allows you to get the page width.</div>
+
+                <br>
+
+                <div class="content-text content-note"><b>Note</b>: This value cannot be changed. It can only be read.</div>
+
+                <br>
+
+            </div>
+
+            <div id="c13">
+
+                <div class="content-title">page.height</div>
+                <div class="content-text">Allows you to get the page height.</div>
+
+                <br>
+
+                <div class="content-text content-note"><b>Note:</b> This value cannot be changed. It can only be read.</div>
+
+                <br>
+            
+            </div>
+
+            <div id="c14">
+
+                <div class="content-title">page.fit()</div>
+                <div class="content-text">Adjusts the width of the content to fit the screen.</div>
+                <div class="content-code"><span class="code-2">page.fit</span>(originalWidth: <span class="code-1">Integer</span>)</div>
+                <div class="content-code"><span class="code-2">page.fit</span>(originalWidth: <span class="code-1">Integer</span>, maxWidth: <span class="code-1">Integer</span>)</div>
+
+                <br>
+
+                <div class="content-text"><b>originalWidth</b>, the width of the content you want to appear on the screen. (Including the spaces to be left on the sides.)</div>
+                <div class="content-text"><b>maxWidth</b>, the maximum width that the content can expand to.</div>
+                <div class="content-sub-text">&#8226; If the parameter is left blank, it is considered the same as the originalWidth value.</div>
+                <div class="content-sub-text">&#8226; maxWidth does not have to be larger than the originalWidth value.</div>
+
+                <div class="content-text content-info"><b>See</b>: 20-basic-mobile-app-template.htm</div>
+
+                <br>
+
+        </div>
+
+            <div id="c15">
+
+                <div class="content-title">page.zoom</div>
+                <div class="content-text">Adjusts the growth/shrinking rate of the page.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Float</b></span>
+                    <span class="content-info-box">Default: <b>1</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">1</td><td>100% size.</td></tr>
+                        <tr><td class="center">0.5</td><td>50% size.</td></tr>
+                        <tr><td class="center">1.5</td><td>150% size.</td></tr>
+                        <tr><td class="center">...</td><td>...</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text">&#8226; The <b>page.fit()</b> function sets the width of the page using this property.</div>
+                <div class="content-text">&#8226; Uses <b>transform: scale()</b> property in CSS.</div>
+
+                <br>
+                
+        </div>
+
+            <div id="c16">
+
+                <div class="content-title">page.onClick()</div>
+                <div class="content-text">Each time the page is pressed; the specified function is called.</div>
+                <div class="content-code">page.<span class="code-2">onClick</span>(func: <span class="code-1">Function</span>)</div>
+
+                <br>
+
+                <div class="content-text">&#8226; All objects added to the page are also part of the page. This event is also triggered when a different object in the page is pressed.</div>
+                <div class="content-text">&#8226; If you want to control printing, except for added objects, you can add a transparent box object inside the page object that will stay behind.</div>
+                <div class="content-text">&#8226; Remove with <b>page.remove_onClick(func: Function)</b></div>
+                <div class="content-text content-info"><b>See:</b> 65-length-measure-conversion-application.htm</div>
+
+                <br>
+
+        </div>
+
+            <div id="c17">
+
+                <div class="content-title">page.onResize()</div>
+                <div class="content-text">Every time the page size changes; the specified function is called.</div>
+                <div class="content-code">page.<span class="code-2">onResize</span>(func: <span class="code-1">Function</span>)</div>
+
+                <br>
+
+                <div class="content-text">&#8226; <b>NOT CALLED</b> for the initial size of the page on load.</div>
+                <div class="content-text">&#8226; Remove with <b>page.remove_onResize(func: Function)</b></div>
+
+                <br>
+
+        </div>
+
+            <div id="c18">
+
+                <div class="content-title">page.add()</div>
+                <div class="content-text">Used to move a base object back into the page.</div>
+                <div class="content-code">page.<span class="code-2">add</span>(object: <span class="code-1">BasicObject</span>)</div>
+
+                <br>
+
+                <div class="content-text">&#8226; Objects are created, by default, within the page object.</div>
+                <!--<div class="content-sub-text">&#8226; selectBox() fonksiyonu ile bu durum değiştirilebilir.</div>-->
+
+                <br>
+        </div>
+
+
+<div id="t3">
+    <div class="content-title">COMMON PROPERTIES AND METHODS OF BASIC UI OBJECTS</div>
+    <div class="content-text">Can also be used for five basic UI objects: <b>Label</b>, <b>Button</b>, <b>TextBox</b>, <b>Image</b> and <b>Box</b>.</div>
+</div>
+
+            <div id="c19">
+
+                <div class="content-title">that</div>
+                <div class="content-text">When a basic ui object is created, until another is created; This object can be accessed with the variable named <b>that</b>.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Label</b>, <b>Button</b>, <b>TextBox</b>, <b>Image</b> or <b>Box</b></span>
+                </div>
+
+                <br>
+
+                <div class="content-text">The previous object is passed to the <b>exThat</b> variable.</div>
+
+                <br>
+           
+            </div>
+
+            <div id="c20">
+
+                <div class="content-title">object.left</div>
+                <div class="content-text">Determines the distance of the object to the left.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Float</b></span>
+                    <span class="content-info-box">Default: <b>0</b></span>
+                </div>
+
+                <br>
+
+                <div class="content-text">&#8226; All positions and dimensions are in <b>"px"</b>.</div>
+                <div class="content-text">&#8226; Positioning as a float data type allows for smoother movements.</div>
+                
+
+                <br>
+        </div>
+
+            <div id="c21">
+
+                <div class="content-title">object.top</div>
+                <div class="content-text">Determines the distance of the object up.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Float</b></span>
+                    <span class="content-info-box">Default: <b>0</b></span>
+                </div>
+                
+                <br>
+
+                <br>
+            
+        </div>
+
+            <div id="c22">
+
+                <div class="content-title">object.right</div>
+                <div class="content-text">Left leaning is cancelled. And the object starts to justify right with the given value.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Float</b></span>
+                    <span class="content-info-box">Default: <b>NaN</b></span>
+                </div>
+                
+                <br>
+
+                <div class="content-text">&#8226; If the page or object size changes, the distance to the right is maintained.</div>
+
+                <br>
+
+        </div>
+
+            <div id="c23">
+
+                <div class="content-title">object.bottom</div>
+                <div class="content-text">The lean-up is cancelled. And the object starts to snap down with the given value.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Float</b></span>
+                    <span class="content-info-box">Default: <b>NaN</b></span>
+                </div>
+                
+                <br>
+
+                <div class="content-text">&#8226; If the page or object size changes, the distance to the bottom is maintained.</div>
+
+                <br>
+
+        </div>
+
+            <div id="c24">
+
+                <div class="content-title">object.width</div>
+                <div class="content-text">Sets the width of the object.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Integer</b></span>
+                    <span class="content-info-box">Min: <b>0</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Default</th><th>Object</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">270</td><td>Label</td></tr>
+                        <tr><td class="center">130</td><td>Button</td></tr>
+                        <tr><td class="center">270</td><td>TextBox</td></tr>
+                        <tr><td class="center">?</td><td>Image</td></tr>
+                        <tr><td class="center">100</td><td>Box</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text">&#8226; <b>Label</b> and <b>Button</b> objects support auto-width. Set as <b>"auto"</b>.</div>
+                <div class="content-text">&#8226; If you don't set Image object's <b>.width</b> or/and <b>.height</b>: It will be calculated automatically. See: Image object's <b>.autoSize</b> property.</div>
+
+                <br>
+
+        </div>
+
+            <div id="c25">
+
+                <div class="content-title">object.height</div>
+                <div class="content-text">Sets the height of the object.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Integer</b></span>
+                    <span class="content-info-box">Min: <b>0</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Default</th><th>Object</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">23</td><td>Label</td></tr>
+                        <tr><td class="center">50</td><td>Button</td></tr>
+                        <tr><td class="center">50</td><td>TextBox</td></tr>
+                        <tr><td class="center">?</td><td>Image</td></tr>
+                        <tr><td class="center">100</td><td>Box</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text">&#8226; <b>Label</b> and <b>Box</b> objects support auto-height. Set as <b>"auto"</b>.</div>
+
+                <br>
+
+        </div>
+
+            <div id="c26">
+
+                <div class="content-title">object.rotate</div>
+                <div class="content-text">Changes the angle of the object.</div>
+
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Integer</b></span>
+                    <span class="content-info-box">Default: <b>0</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">0</td><td>0 degrees</td></tr>
+                        <tr><td class="center">90</td><td>90 degrees</td></tr>
+                        <tr><td class="center">360</td><td>360 degrees</td></tr>
+                        <tr><td class="center">...</td><td>...</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text">&#8226; Uses <b>transform: rotate()</b> property in CSS.</div>
+
+                <br>
+
+        </div>
+
+            <div id="c111">
+
+                <div class="content-title">object.visible</div>
+                <div class="content-text">Makes the object visible/invisible.</div>
+
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Boolean</b></span>
+                    <span class="content-info-box">Default: <b>1</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">1</td><td>Visible</td></tr>
+                        <tr><td class="center">0</td><td>Invisible</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text">&#8226; Uses <b>display: block</b> or <b>none</b> property in CSS.</div>
+                
+                <br>
+        </div>
+
+            <div id="c27">
+
+                <div class="content-title">object.opacity</div>
+                <div class="content-text">Determines if the object is not transparent.</div>
+
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Float</b></span>
+                    <span class="content-info-box">Default: <b>1</b></span>
+                    <span class="content-info-box">Min: <b>0</b></span>
+                    <span class="content-info-box">Max: <b>1</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">1</td><td>Visible</td></tr>
+                        <tr><td class="center">0</td><td>Invisible</td></tr>
+                        <tr><td class="center">0.2</td><td>20% visible</td></tr>
+                        <tr><td class="center">0.55</td><td>55% visible</td></tr>
+                        <tr><td class="center">...</td><td>...</td></tr>
+                    </tbody>
+                </table>
+
+                <br>
+                
+                <!--
+                <div class="content-text"><b>1</b>: visible, <b>0</b>: invisible, <b>0.2</b>: 20% visible, <b>0.55</b>: 55% visible.</div>
+                <div class="content-text">The default value is <b>1</b>.</div>
+                <div class="content-text">Min: 0, Max: 1.</div>
+                <div class="content-text">The value data type is a <b>float</b>.</div>
+                -->
+
+                <br>
+        </div>
+
+            <div id="c28">
+
+                <div class="content-title">object.color</div>
+                <div class="content-text">Sets the color of the object.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>String</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Default</th><th>Object</th></tr></thead>
+                    <tbody>
+                        <tr><td class="normal">"transparent"</td><td>Label</td></tr>
+                        <tr><td class="normal">"#689BD2"</td><td>Button</td></tr>
+                        <tr><td class="normal">"white"</td><td>TextBox</td></tr>
+                        <tr><td class="normal">"transparent"</td><td>Image</td></tr>
+                        <tr><td class="normal">"whitesmoke"</td><td>Box</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text">&#8226; Uses <b>background-color</b> property in CSS.</div>
+
+                <br>
+        </div>
+
+            <div id="c29">
+
+                <div class="content-title">object.border</div>
+                <div class="content-text">Adds a (inner) border to the object.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Integer</b></span>
+                    <span class="content-info-box">Min: <b>0</b></span>
+                </div>
+
+                <table style="display:inline-block;">
+                    <thead><tr><th>Default</th><th>Object</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">0</td><td>Label</td></tr>
+                        <tr><td class="center">1</td><td>Button</td></tr>
+                        <tr><td class="center">1</td><td>TextBox</td></tr>
+                        <tr><td class="center">0</td><td>Image</td></tr>
+                        <tr><td class="center">0</td><td>Box</td></tr>
+                    </tbody>
+                </table>
+
+                <table style="display:inline-block;">
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">0</td><td>No border</td></tr>
+                        <tr><td class="center">1</td><td>1px thick border</td></tr>
+                        <tr><td class="center">2</td><td>2px thick border</td></tr>
+                        <tr><td class="center">3</td><td>3px thick border</td></tr>
+                        <tr><td class="center">...</td><td>...</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text content-note"><b>Note</b>: Border occupies space inward. Object's width and height do not change.</div>
+
+                <br>
+        </div>
+
+            <div id="c30">
+
+                <div class="content-title">object.borderColor</div>
+                <div class="content-text">Sets the border color of the object.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>String</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Default</th><th>Object</th></tr></thead>
+                    <tbody>
+                        <tr><td class="normal">"#4A4A4A"</td><td>Label</td></tr>
+                        <tr><td class="normal">"rgba(0, 0, 0, 0.40)"</td><td>Button</td></tr>
+                        <tr><td class="normal">"#4A4A4A"</td><td>TextBox</td></tr>
+                        <tr><td class="normal">"#4A4A4A"</td><td>Image</td></tr>
+                        <tr><td class="normal">"gray"</td><td>Box</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text content-note"><b>Note</b>: The <b>.border</b> property must be greater than <b>0</b> for it to appear.</div>
+
+                <br>
+        </div>
+
+            <div id="c31">
+
+                <div class="content-title">object.round</div>
+                <div class="content-text">Rounds the edges of the object.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Integer</b></span>
+                    <span class="content-info-box">Min: <b>0</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Default</th><th>Object</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">0</td><td>Label</td></tr>
+                        <tr><td class="center">4</td><td>Button</td></tr>
+                        <tr><td class="center">4</td><td>TextBox</td></tr>
+                        <tr><td class="center">0</td><td>Image</td></tr>
+                        <tr><td class="center">0</td><td>Box</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text content-info"><b>Info</b>: If you round a box to more than half its size; becomes a circle.</div>
+
+                <div class="content-text">&#8226; Uses <b>border-radius</b> property in CSS.</div>
+
+                <br>
+        </div>
+
+            <div id="c32">
+
+                <div class="content-title">object.fontSize or object.textSize</div>
+                <div class="content-text">Determines the text size of the object.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Integer</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Default</th><th>Object</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">20</td><td>Label</td></tr>
+                        <tr><td class="center">20</td><td>Button</td></tr>
+                        <tr><td class="center">20</td><td>TextBox</td></tr>
+                        <!--<tr><td class="center">undefined</td><td>Image</td></tr>-->
+                        <tr><td class="center">16</td><td>Box</td></tr>
+                    </tbody>
+                </table>
+
+                <br>
+        </div>
+
+            <div id="c33">
+
+                <div class="content-title">object.textColor</div>
+                <div class="content-text">Sets the text color of the object.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>String</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Default</th><th>Object</th></tr></thead>
+                    <tbody>
+                        <tr><td class="normal">"#4A4A4A"</td><td>Label</td></tr>
+                        <tr><td class="normal">"rgba(0, 0, 0, 0.65)"</td><td>Button</td></tr>
+                        <tr><td class="normal">"#4A4A4A"</td><td>TextBox</td></tr>
+                        <!--<tr><td class="normal">undefined</td><td>Image</td></tr>-->
+                        <tr><td class="normal">"#4A4A4A"</td><td>Box</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text">&#8226; Uses <b>color</b> property in CSS.</div>
+
+                <br>
+        </div>
+
+            <div id="c34">
+
+                <div class="content-title">object.textAlign</div>
+                <div class="content-text">Determines the position of the text in the object.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>String</b></span>
+                </div>
+
+                <table style="display:inline-block;">
+                    <thead><tr><th>Default</th><th>Object</th></tr></thead>
+                    <tbody>
+                        <tr><td class="normal">"left"</td><td>Label</td></tr>
+                        <tr><td class="normal">"center"</td><td>Button</td></tr>
+                        <tr><td class="normal">"left"</td><td>TextBox</td></tr>
+                        <!--<tr><td class="normal">undefined</td><td>Image</td></tr>-->
+                        <tr><td class="normal">"left"</td><td>Box</td></tr>
+                    </tbody>
+                </table>
+
+                <table style="display:inline-block;">
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="normal">"left"</td><td>Justified left.</td></tr>
+                        <tr><td class="normal">"right"</td><td>Justified right.</td></tr>
+                        <tr><td class="normal">"center"</td><td>Centered.</td></tr>
+                        <tr><td class="normal">"justify"</td><td>Auto-space between words.</td></tr>
+                    </tbody>
+                </table>
+
+                <br>
+            
+        </div>
+
+            <div id="c35">
+
+                <div class="content-title">object.clickable</div>
+                <div class="content-text">Makes the object clickable/non-clickable.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Boolean</b></span>
+                </div>
+
+                <table style="display:inline-block;">
+                    <thead><tr><th>Default</th><th>Object</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">0</td><td>Label</td></tr>
+                        <tr><td class="center">1</td><td>Button</td></tr>
+                        <tr><td class="center">1</td><td>TextBox</td></tr>
+                        <tr><td class="center">0</td><td>Image</td></tr>
+                        <tr><td class="center">0</td><td>Box</td></tr>
+                    </tbody>
+                </table>
+
+                <table style="display:inline-block;vertical-align: top;">
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">1</td><td>Clickable.</td></tr>
+                        <tr><td class="center">0</td><td>Non-clickable.</td></tr>
+                    </tbody>
+                </table>          
+
+                <div class="content-text">&#8226; When using the <b>object.onClick()</b> function: The object is automatically clickable.</div>
+                <div class="content-text">&#8226; Uses <b>pointer-events: auto</b> or <b>none</b> property in CSS.</div>
+
+                <br>
+        </div>
+
+            <div id="c36">
+
+                <div class="content-title">object.element</div>
+                <div class="content-text">Object that connects the Basic UI Object with HTML.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Object</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Default</th><th>Object</th><th>Alternative Usage</th></tr></thead>
+                    <tbody>
+                        <tr><td class="normal">&lt;div&gt; Element</td><td>Label</td><td>-</td></tr>
+                        <tr><td class="normal">&lt;button&gt; Element</td><td>Button</td><td>.buttonElement</td></tr>
+                        <tr><td class="normal">&lt;input&gt; Element</td><td>TextBox</td><td>.inputElement</td></tr>
+                        <tr><td class="normal">&lt;image&gt; Element</td><td>Image</td><td>.imageElement</td></tr>
+                        <tr><td class="normal">&lt;div&gt; Element</td><td>Box</td><td>-</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text">&#8226; It is the object obtained by <b>document.getElementById(id: String) : Object</b> in JavaScript.</div>
+
+                <br>
+        </div>
+
+            <div id="c37">
+
+                <div class="content-title">object.upperObject</div>
+                <div class="content-text">Returns a parent (containing) object of the object.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Box</b> or <b>MainBox</b></span>
+                    <span class="content-info-box">Default: <b>page</b></span>
+                </div>
+
+                <br>
+
+                <div class="content-text">&#8226; The top object is the <b>page</b>.</div>
+                <div class="content-text">&#8226; The created objects are first moved into the <b>page</b> object.</div>
+                <div class="content-text">&#8226; With the <b>selectBox(target: Box)</b> function, the first object to be moved can be changed.</div>
+
+                <br>
+        </div>
+
+        <div id="c51">
+
+                <div class="content-title">object.onClick()</div>
+                <div class="content-text">Each time the object is pressed; the specified function is called.</div>
+                <div class="content-code">object.<span class="code-2">onClick</span>(func: <span class="code-1">Function</span>)</div>
+
+                <br>
+
+                <div class="content-text">&#8226; The object itself is sent to the called function.</div>
+                <div class="content-text">&#8226; Remove with <b>object.remove_onClick(func: Function)</b></div>
+
+                <br>
+
+        </div>
+
+            <div id="c38">
+
+                <div class="content-title">object.onResize()</div>
+                <div class="content-text">Every time the size of the object changes; the specified function is called.</div>
+                <div class="content-code">object.<span class="code-2">onResize</span>(func: <span class="code-1">Function</span>)</div>
+
+                <br>
+
+                <div class="content-text">&#8226; Also called when the object is first created.</div>
+                <div class="content-text">&#8226; It can be used to update the positions of auto-sized objects in the coordinate system.</div>
+                
+                <div class="content-text">&#8226; Label object's <b>.width</b> and <b>.height</b>, Button object's <b>.width</b> and Box object's <b>.height</b> properties can be set to <b>"auto"</b>.</div>
+                <div class="content-text">&#8226; The object itself is sent to the called function.</div>
+                <div class="code-example">
+                    // Example:<br>
+                    createLabel()<br>
+                    that.text = "My Name"<br>
+                    that.width = "auto"<br>
+                    that.height = "auto"<br>
+                    that.onResize(function(self) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;print(self.width)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;print(self.height)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;self.center()<br>
+                    })<br>
+                </div>
+                <div class="content-text">&#8226; Remove with <b>object.remove_onResize(func: function)</b></div>
+
+                <br>
+
+        </div>
+
+            <div id="c39">
+
+                <div class="content-title">object.center()</div>
+                <div class="content-text">Centers the object relative to the object it is in.</div>
+                <!-- <div class="content-code">object.<span class="code-2">center</span>()</div> -->
+                <div class="content-code">object.<span class="code-2">center</span>(direction: <span class="code-1">String</span>)</div>
+
+                <br>
+
+                <div class="content-text">#1</div>
+                <div class="content-text"><b>direction</b>: In which direction you want to average.</div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="normal">Empty</td><td>Center by left and top.</td></tr>
+                        <tr><td class="normal">"top"</td><td>Center by top.</td></tr>
+                        <tr><td class="normal">"left"</td><td>Center by left.</td></tr>
+                    </tbody>
+                </table>
+
+                <!-- <div class="content-text">If the parameter is left blank, it will center in both directions.</div> -->
+                <div class="content-text content-note"><b>Note</b>: The <b>.left</b> and <b>.top</b> values ​​of the object are changed to appear in the middle.</div>
+                
+                
+                <div class="content-text content-info"><b>See:</b> 19-objects-align.htm</div>
+
+                <br>
+
+        </div>
+
+            <div id="c40">
+
+                <div class="content-title">object.aline()</div>
+                <div class="content-text">Positions one object relative to the position of another object.</div>
+                <!-- <div class="content-code">object.<span class="code-2">aline</span>(target: <span class="code-1">BasicObject</span>)</div>
+                <div class="content-code">object.<span class="code-2">aline</span>(target: <span class="code-1">BasicObject</span>, direction: <span class="code-1">String</span>)</div>
+                <div class="content-code">object.<span class="code-2">aline</span>(target: <span class="code-1">BasicObject</span>, direction: <span class="code-1">String</span>, space: <span class="code-1">Integer</span>)</div> -->
+                <div class="content-code">object.<span class="code-2">aline</span>(target: <span class="code-1">BasicObject</span>, direction: <span class="code-1">String</span>, space: <span class="code-1">Integer</span>, secondDirection: <span class="code-1">String</span>)</div>
+
+                <br>
+
+                <div class="content-text">#1 (Required)</div>
+                <div class="content-text"><b>target</b>: By which basic UI object to position.</div>
+
+                <br>
+
+                <div class="content-text">#2</div>
+                <div class="content-text"><b>direction</b>: In which direction it will be positioned.</div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="normal">Empty</td><td>Directly above the target object.</td></tr>
+                        <tr><td class="normal">"right"</td><td>Right of the target object.</td></tr>
+                        <tr><td class="normal">"left"</td><td>Left of the target object.</td></tr>
+                        <tr><td class="normal">"top"</td><td>Top of the target object.</td></tr>
+                        <tr><td class="normal">"bottom"</td><td>Bottom of the target object.</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text content-note"><b>Note</b>: If the target object uses the <b>.right</b> and/or <b>.bottom</b> properties for positioning, the positioned object will also use these properties.</div>
+
+                <br>
+
+                <div class="content-text">#3</div>
+                <div class="content-text"><b>space</b>: How much space to leave between objects.</div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="normal">Empty</td><td>0px space between objects.</td></tr>
+                        <tr><td class="center">1</td><td>1px space.</td></tr>
+                        <tr><td class="center">2</td><td>2px space.</td></tr>
+                        <tr><td class="center">20</td><td>20px space.</td></tr>
+                        <tr><td class="center">...</td><td>...</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text">#4</div>
+                <div class="content-text"><b>secondDirection</b>: When the object smaller than the target object then reposition the object according to its position.</div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th><th>position</th></tr></thead>
+                    <tbody>
+                        <tr><td class="normal">Empty</td><td>Left of the target object.</td><td><b>"top"</b> or <b>"bottom"</b></td></tr>
+                        <tr><td class="normal">Empty</td><td>Top of the target object.</td><td><b>"left"</b> or <b>"right"</b></td></tr>
+                        <tr><td class="normal">"center"</td><td>Center of the target object.</td><td>All</td></tr>
+                        <tr><td class="normal">"right"</td><td>Right of the target object.</td><td><b>"top"</b> or <b>"bottom"</b></td></tr>
+                        <tr><td class="normal">"bottom"</td><td>Bottom of the target object.</td><td><b>"left"</b> or <b>"right"</b></td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text content-info"><b>See:</b> 19-objects-align.htm</div>
+
+                <br>
+            
+            
+        </div>
+
+            <div id="c41">
+
+                <div class="content-title">object.remove()</div>
+                <div class="content-text">Deletes the object.</div>
+                
+                <br>
+
+                <br>
+
+        </div>
+
+            <div id="c42">
+
+                <div class="content-title">object.prop()</div>
+                <div class="content-text">Changes the properties of the object in bulk.</div>
+                <div class="content-code">object.<span class="code-2">prop</span>(properties: <span class="code-1">Object</span>)</div>
+                
+                <br>
+
+                <div class="content-text">#1 (Required)</div>
+                <div class="content-text"><b>properties</b>: Data list object of properties.</div>
+
+                <div class="code-example">
+                    // Example:<br>
+                    var redBoxStyle = {width: 100, height: 120, color: "red"}<br><br>
+                    createBox()<br>
+                    that.prop(redBoxStyle)<br>
+                </div>
+                <div class="code-example">
+                    // Alternative Example:<br>
+                    var redBoxStyle = function(obj) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;obj.width = 100<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;obj.height = 120<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;obj.color = "red"<br>
+                    }<br><br>
+                    createBox()<br>
+                    redBoxStyle(that)<br>
+                </div>
+                <div class="content-text content-info"><b>See: </b>20-basic-mobile-app-template.htm</div>
+
+                <br>
+        </div>
+
+            <div id="c43">
+
+                <div class="content-title">object.setMotion()</div>
+                <div class="content-text">It ensures that the changes in the specified properties of the object occur slowly in the specified time.</div>
+                <div class="content-code">object.<span class="code-2">setMotion</span>(motionString: <span class="code-1">String</span>)</div>
+
+                <br>
+
+                <div class="content-text">#1 (Required)</div>
+                <div class="content-text"><b>motionString</b>, the properties that are desired to be animated and the information for how long the motion will take place.</div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="normal">"all 0.3s"</td><td>All properties will be animated in 0.3 seconds.</td></tr>
+                        <tr><td class="normal">"left 1s, opacity 1s"</td><td>Smooth horizontal position change and transparency only. Let it take 1 second.</td></tr>
+                        <tr><td class="normal">"width 2s"</td><td>Only changes in the width of the object make it animated. Let it take 2 seconds.</td></tr>
+                        <tr><td class="normal">"left 1s, top 1s, width 0.5s, height 0.5s, transform 1s, background-color 1s, border-radius 1s, opacity 1s"</td><td>Many motions are softened.</td></tr>
+                        <tr><td class="normal">...</td><td>...</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text">&#8226; Once this property is set, that property of the object always changes slowly.</div>
+                <div class="content-text">&#8226; Use <b>object.setMotion("none")</b> to disable the object's motion property. Or, to pause it temporarily, <b>object.dontMotion()</b> can be used.</div>
+                <div class="content-text">&#8226; Uses <b>transition</b> property in CSS.</div>
+                <div class="code-example">
+                    // Example:<br>
+                    createBox()<br>
+                    that.left = 200<br>
+                    that.opacity = 0<br>
+                    that.setMotion("left 0.5s, opacity 0.5s")<br>
+                    that.withMotion(function(self) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;self.left = 0<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;self.opacity = 1<br>
+                    })
+                </div>
+                <div class="content-text content-info"><b>See:</b> 55-basic-css-animation.htm</div>
+
+                <br>
+        </div>
+
+            <div id="c44">
+
+                <div class="content-title">object.getMotion()</div>
+                <div class="content-text">Returns the object's motionString value set with the setMotion() function.</div>
+                <div class="content-code">object.<span class="code-2">getMotion</span>() : <span class="code-1">String</span></div>
+
+                <br>
+
+        </div>
+
+            <div id="c45">
+
+                <div class="content-title">object.withMotion()</div>
+                <div class="content-text">It is used if the initial value of the object to be moved is determined.</div>
+                <div class="content-code">object.<span class="code-2">withMotion</span>(func: <span class="code-1">Function</span>)</div>
+
+                <br>
+
+                <div class="code-example">
+                // Example:<br>
+                boxObjectName.dontMotion()<br>
+                boxObjectName.opacity = 0<br>
+                boxObjectName.withMotion(function(self) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;self.opacity = 1<br>
+                })
+                </div>
+
+                <div class="content-text content-info"><b>See</b>: 55-basic-css-animation.htm</div>
+
+                <br>
+        </div>
+
+            <div id="c46">
+
+                <div class="content-title">object.dontMotion()</div>
+                <div class="content-text">Motion of a defined object; temporarily allows its properties to be changed inactive.</div>
+                <div class="content-code">object.<span class="code-2">dontMotion</span>()</div>
+                
+                <br>
+
+                <div class="content-text content-info"><b>See</b>: 55-basic-css-animation.htm</div>
+
+                <br>
+        </div>
+
+<div id="t4">
+    <div class="content-title">BOX OBJECT (CLASS NAME: Box)</div>
+    <div class="content-text">Used to group other objects or create a shape.</div>
+</div>
+
+            <div id="c47">
+
+                <div class="content-title">createBox()</div>
+                <div class="content-text">Creates a new box object.</div>
+                <div class="content-code"><span class="code-2">createBox</span>(left: <span class="code-1">Float</span>, top: <span class="code-1">Float</span>, width: <span class="code-1">Integer</span>, height: <span class="code-1">Integer</span>) : <span class="code-1">Box</span></div>
+
+                <br>
+
+                <div class="content-text">&#8226; Alternatively, it can be used as <b>cbox(*)</b> or <b>new Box(*)</b>.</div>
+
+                <br>
+        </div>
+
+            <div id="c48">
+
+                <div class="content-title">object.text or object.html</div>
+                <div class="content-text">Edits the text inside the object.</div>
+
+                <br>
+
+                <div class="content-text">&#8226; Accepts <b>HTML</b> code.</div>
+                <div class="content-text">&#8226; To show content rendered in HTML inside the box object.</div>
+
+                <div class="code-example">
+                    // Example:<br>
+                    var box = createBox(10, 10, 200, 200)<br>
+                    that.color = "lightgray"<br><br>
+                    var btn = createButton()<br>
+                    box.add(that)<br>
+                    that.text = "Click me!"<br>
+                    that.center()<br>
+                </div>
+
+                <div class="code-example">
+                    // Example:<br>
+                    boxObjectName.html = document.getElementById("my-html-content-id").innerHTML
+                </div>
+
+                <div class="content-text content-info"><b>See</b>: 24-transfer-html-content-to-a-box.htm</div>
+
+                <br>
+        </div>
+
+            <div id="c49">
+
+                <div class="content-title">object.scrollX</div>
+                <div class="content-text">Adds a horizontal scroll bar to the object as needed.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Boolean</b></span>
+                    <span class="content-info-box">Default: <b>0</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">1</td><td>Add scrollbar if needed.</td></tr>
+                        <tr><td class="center">0</td><td>Never add.</td></tr>
+                    </tbody>
+                </table>
+
+                <br>
+
+        </div>
+
+            <div id="c50">
+
+                <div class="content-title">object.scrollY</div>
+                <div class="content-text">Adds a vertical scrollbar to the object as needed.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Boolean</b></span>
+                    <span class="content-info-box">Default: <b>0</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">1</td><td>Add scrollbar if needed.</td></tr>
+                        <tr><td class="center">0</td><td>Never add.</td></tr>
+                    </tbody>
+                </table>
+
+                <br>
+
+        </div>
+
+            <div id="c52">
+
+                <div class="content-title">object.add()</div>
+                <div class="content-text">Moves the object sent as a parameter inside the box object.</div>
+                <div class="content-code">object.<span class="code-2">add</span>(object: <span class="code-1">Label</span>, <span class="code-1">Button</span>, <span class="code-1">TextBox</span>, <span class="code-1">Image</span> or <span class="code-1">Box</span>)</div>
+
+                <br>
+
+                <div class="code-example">
+                    // Example:<br>
+                    var box = createBox(0, 0, 200, 200)<br><br>
+                    var img = createImage(20, 20, 50, 50)<br>
+                    box.add(that)<br>
+                    that.load("img/logo.png")<br>
+                </div>
+                <div class="content-text">&#8226;  To add a box object to a <b>&lt;div&gt;</b> element created in HTML.</div>
+                <div class="code-example">
+                    // Example:<br>
+                    document.getElementById("element-id").appendChild(boxObjectName.element)<br>
+                </div>
+
+                <div class="content-text content-info"><b>See</b>: 29-use-with-html.htm</div>
+
+                <br>
+
+        </div>
+
+        <!--
+            <div id="c53">
+
+                <div class="content-title">num()</div>
+                <div class="content-text">Converts a text type value to a number type.</div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>) : <span class="code-1">Float</span></div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>, type: <span class="code-1">String</span>) : <span class="code-1">Float</span> or <span class="code-1">Integer</span></div>
+
+                <br>
+
+                <br>
+            object.element
+            - Element object that connects the object with HTML.
+            - Uses <div> element in HTML.
+            </div>
+        -->
+
+<div id="t5">
+    <div class="content-title">BUTTON OBJECT (CLASS NAME: Button)</div>
+    <div class="content-text">The user; by pressing on the object, it enables it to run a function.</div>
+</div>
+
+            <div id="c54">
+
+                <div class="content-title">createButton()</div>
+                <div class="content-text">Creates a new button object.</div>
+                <div class="content-code"><span class="code-2">createButton</span>(left: <span class="code-1">Float</span>, top: <span class="code-1">Float</span>, width: <span class="code-1">Integer</span>, height: <span class="code-1">Integer</span>) : <span class="code-1">Box</span></div>
+
+                <br>
+
+                <div class="content-text">&#8226; Alternatively, it can be used as <b>cbtn(*)</b> or <b>new Button(*)</b>.</div>
+
+                <br>
+        </div>
+
+            <div id="c55">
+
+                <div class="content-title">object.text</div>
+                <div class="content-text">Sets the text of the object.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>String</b></span>
+                    <span class="content-info-box">Default: <b>"Button"</b></span>
+                </div>
+
+                <br>
+
+        </div>
+
+            <div id="c56">
+
+                <div class="content-title">object.enabled</div>
+                <div class="content-text">Makes the object passive.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Boolean</b></span>
+                    <span class="content-info-box">Default: <b>1</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">1</td><td>Enabled.</td></tr>
+                        <tr><td class="center">0</td><td>Not enabled.</td></tr>
+                    </tbody>
+                </table>
+
+                <br>
+                
+        </div>
+
+            <div id="c57">
+
+                <div class="content-title">object.minimal</div>
+                <div class="content-text">Makes the object flat.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Boolean</b></span>
+                    <span class="content-info-box">Default: <b>0</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">1</td><td>Flat.</td></tr>
+                        <tr><td class="center">0</td><td>With some effect.</td></tr>
+                    </tbody>
+                </table>
+
+                <br>
+        </div>
+
+        <!--
+            <div id="c58">
+
+                <div class="content-title">num()</div>
+                <div class="content-text">Converts a text type value to a number type.</div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>) : <span class="code-1">Float</span></div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>, type: <span class="code-1">String</span>) : <span class="code-1">Float</span> or <span class="code-1">Integer</span></div>
+
+                <br>
+
+                <br>
+            object.onClick(func:function)
+            - Each time the object is pressed; the specified function is called.
+            -- The object itself is sent to the called function.
+        </div>
+    -->
+    <!--
+            <div id="c59">
+
+                <div class="content-title">num()</div>
+                <div class="content-text">Converts a text type value to a number type.</div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>) : <span class="code-1">Float</span></div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>, type: <span class="code-1">String</span>) : <span class="code-1">Float</span> or <span class="code-1">Integer</span></div>
+
+                <br>
+
+                <br>
+            object.element
+            - Same as buttonElement as the object does not have a bearer element.
+        </div>
+    -->
+
+            <div id="c60">
+
+                <div class="content-title">object.buttonElement</div>
+                <div class="content-text">Element object that connects the object with HTML.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Object</b></span>
+                </div>
+
+                <br>
+
+                <div class="content-text">&#8226; Uses <b>&lt;button&gt;</b> element in HTML.</div>
+
+                <br>
+            </div>
+
+<div id="t6">
+    <div class="content-title">TEXT BOX OBJECT (CLASS NAME: TextBox)</div>
+    <div class="content-text">It is used to get information from the user.</div>
+</div>
+
+            <div id="c61">
+
+                <div class="content-title">createTextBox()</div>
+                <div class="content-text">Creates a new text box object.</div>
+                <div class="content-code"><span class="code-2">createTextBox</span>(left: <span class="code-1">Float</span>, top: <span class="code-1">Float</span>, width: <span class="code-1">Integer</span>, height: <span class="code-1">Integer</span>) : <span class="code-1">Box</span></div>
+
+                <br>
+
+                <div class="content-text">&#8226; Alternatively, it can be used as <b>ctxt(*)</b> or <b>new TextBox(*)</b>.</div>
+
+                <br>
+        </div>
+
+            <div id="c62">
+
+                <div class="content-title">object.text</div>
+                <div class="content-text">Sets the text of the object.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>String</b></span>
+                    <span class="content-info-box">Default: <b>""</b></span>
+                </div>
+
+                <br>
+        </div>
+
+            <div id="c63">
+
+                <div class="content-title">object.title</div>
+                <div class="content-text">Sets the title of the text box.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>String</b></span>
+                    <span class="content-info-box">Default: <b>""</b></span>
+                </div>
+
+                <br>
+
+        </div>
+
+            <div id="c64">
+
+                <div class="content-title">object.enabled</div>
+                <div class="content-text">Makes the object passive.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Boolean</b></span>
+                    <span class="content-info-box">Default: <b>1</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">1</td><td>Enabled.</td></tr>
+                        <tr><td class="center">0</td><td>Not enabled.</td></tr>
+                    </tbody>
+                </table>
+
+                <br>
+
+        </div>
+
+            <div id="c65">
+
+                <div class="content-title">object.minimal</div>
+                <div class="content-text">Makes the object flat.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Boolean</b></span>
+                    <span class="content-info-box">Default: <b>0</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">1</td><td>Flat.</td></tr>
+                        <tr><td class="center">0</td><td>With some effect.</td></tr>
+                    </tbody>
+                </table>
+
+                <br>
+
+        </div>
+
+            <div id="c66">
+
+                <div class="content-title">object.onChange()</div>
+                <div class="content-text">Each time the object content changes, the specified function is executed.</div>
+                <div class="content-code">object.<span class="code-2">onChange</span>(func: <span class="code-1">Function</span>)</div>
+
+                <br>
+
+                <div class="content-text">The object itself is sent to the called function.</div>
+                <div class="content-text">Remove with <b>object.remove_onChange(func: Function)</b></div>
+
+                <br>
+
+        </div>
+
+        <!--
+            <div id="c67">
+
+                <div class="content-title">num()</div>
+                <div class="content-text">Converts a text type value to a number type.</div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>) : <span class="code-1">Float</span></div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>, type: <span class="code-1">String</span>) : <span class="code-1">Float</span> or <span class="code-1">Integer</span></div>
+
+                <br>
+
+                <br>
+            object.element
+            - Element object that connects the object's container with HTML.
+            - Uses <div> element in HTML.
+            </div>
+        -->
+
+            <div id="c68">
+
+                <div class="content-title">object.inputElement</div>
+                <div class="content-text">Element object that connects the object with HTML.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Object</b></span>
+                </div>
+
+                <br>
+
+                <div class="content-text">&#8226; Uses <b>&lt;input&gt;</b> element in HTML.</div>
+
+                <br>
+
+        </div>
+
+            <div id="c69">
+
+                <div class="content-title">object.titleElement</div>
+                <div class="content-text">It is the element object that connects the title part of the object with HTML.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Object</b></span>
+                </div>
+
+                <br>
+
+                <div class="content-text">&#8226; Uses <b>&lt;div&gt;</b> element in HTML.</div>
+
+                <br>
+
+            </div>
+
+
+<div id="t7">
+    <div class="content-title">LABEL (TEXT) OBJECT (CLASS NAME: Label)</div>
+    <div class="content-text">Used to show text.</div>
+</div>
+
+            <div id="c70">
+
+                <div class="content-title">createLabel()</div>
+                <div class="content-text">Creates a new label object.</div>
+                <div class="content-code"><span class="code-2">createLabel</span>(left: <span class="code-1">Float</span>, top: <span class="code-1">Float</span>, width: <span class="code-1">Integer</span>, height: <span class="code-1">Integer</span>) : <span class="code-1">Box</span></div>
+
+                <br>
+
+                <div class="content-text">&#8226; Alternatively, it can be used as <b>clbl(*)</b> or <b>new Label(*)</b>.</div>
+
+                <br>
+
+        </div>
+
+            <div id="c71">
+
+                <div class="content-title">object.text</div>
+                <div class="content-text">Sets the text of the object.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>String</b></span>
+                    <span class="content-info-box">Default: <b>"Label Text"</b></span>
+                </div>
+
+                <br>
+                
+        </div>
+
+            <div id="c72">
+
+                <div class="content-title">object.space</div>
+                <div class="content-text">Leaves (inner) space between the text and the object boundary.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Integer</b></span>
+                    <span class="content-info-box">Default: <b>0</b></span>
+                </div>
+
+                <br>
+
+                <div class="content-text">&#8226; Uses padding <b>property</b> in CSS.</div>
+
+                <br>
+                
+        </div>
+
+            <div id="c73">
+
+                <div class="content-title">object.spaceX</div>
+                <div class="content-text">Leaves space to the left and right of the text and object boundary.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Integer</b></span>
+                    <span class="content-info-box">Default: <b>0</b></span>
+                </div>
+
+                <br>
+                
+        </div>
+
+            <div id="c74">
+
+                <div class="content-title">object.spaceY</div>
+                <div class="content-text">Leaves space above and below the text and object boundary.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Integer</b></span>
+                    <span class="content-info-box">Default: <b>0</b></span>
+                </div>
+
+                <br>
+
+        </div>
+
+        <!--
+            <div id="c75">
+
+                <div class="content-title">num()</div>
+                <div class="content-text">Converts a text type value to a number type.</div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>) : <span class="code-1">Float</span></div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>, type: <span class="code-1">String</span>) : <span class="code-1">Float</span> or <span class="code-1">Integer</span></div>
+
+                <br>
+
+                <br>
+            object.onClick(func:function)
+            - Each time the object is pressed; the specified function is called.
+            -- The object itself is sent to the called function.
+            - remove with object.remove_onClick(func:function)
+        </div>
+
+            <div id="c76">
+
+                <div class="content-title">num()</div>
+                <div class="content-text">Converts a text type value to a number type.</div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>) : <span class="code-1">Float</span></div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>, type: <span class="code-1">String</span>) : <span class="code-1">Float</span> or <span class="code-1">Integer</span></div>
+
+                <br>
+
+                <br>
+            object.element
+            - Element object that connects the object with HTML.
+            - Uses <div> element in HTML.
+            </div>
+        -->
+
+<div id="t8">
+    <div class="content-title">IMAGE OBJECT (CLASS NAME: Image)</div>
+    <div class="content-text">Used to display an image file (.png, .jpg, .gif, .svg etc.) on the screen.</div>
+</div>
+
+            <div id="c77">
+
+                <div class="content-title">createImage()</div>
+                <div class="content-text">Creates a new image object.</div>
+                <div class="content-code"><span class="code-2">createImage</span>(left: <span class="code-1">Float</span>, top: <span class="code-1">Float</span>, width: <span class="code-1">Integer</span>, height: <span class="code-1">Integer</span>) : <span class="code-1">Box</span></div>
+
+                <br>
+
+                <div class="content-text">&#8226; Alternatively, it can be used as <b>cimg(*)</b> or <b>new Image(*)</b>.</div>
+
+                <br>
+
+        </div>
+
+            <div id="c78">
+
+                <div class="content-title">object.load()</div>
+                <div class="content-text">Loads an image file into the object.</div>
+                <div class="content-code">object.<span class="code-2">load</span>(filePath: <span class="code-1">String</span>)</div>
+
+                <br>
+
+                <div class="content-text content-note"><b>Note</b>: The image file takes a while to load.</div>
+                <div class="content-text">&#8226; When the loading is complete, the function defined with <b>onLoad()</b> is called.</div>
+
+                <br>
+        </div>
+
+            <div id="c79">
+
+                <div class="content-title">object.autoSize</div>
+                <div class="content-text">Automatically resizes the uploaded image.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Integer</b></span>
+                    <span class="content-info-box">Default: <b>1</b></span>
+                </div>
+
+                <table>
+                    <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="center">0</td><td>Fit the specified size of the object.</td></tr>
+                        <tr><td class="center">1</td><td>Original size.</td></tr>
+                        <tr><td class="center">2</td><td>Half the original size.</td></tr>
+                        <tr><td class="center">3</td><td>One-third of the original size.</td></tr>
+                        <tr><td class="center">...</td><td>...</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="content-text content-note"><b>Note</b>: The sizes of the object are calculated when it is loaded.</div>
+                <div class="content-text content-note"><b>Note</b>: The autoSize value sets as 0 when the width or height of the image is changed.</div>
+                <div class="content-text content-info"><b>Info</b>: On high resolution mobile devices; In order to obtain a better quality view, image files can be saved large and reduced when loaded onto the screen.</div>
+
+                <br>
+            
+        </div>
+
+            <div id="c80">
+
+                <div class="content-title">object.naturalWidth</div>
+                <div class="content-text">Returns the original width of the image.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Integer</b></span>
+                </div>
+
+                <br>
+
+                <div class="content-text">&#8226; Must be used inside the <b>onLoad()</b> function.</div>
+                <div class="content-text content-note"><b>Note</b>: If <b>object.autoSize = 1</b>, the <b>.width</b> and <b>.naturalWidth</b> properties will have the same value when the image is loaded.</div>
+
+                <br>
+
+        </div>
+
+            <div id="c81">
+
+                <div class="content-title">object.naturalHeight</div>
+                <div class="content-text">Returns the original height of the image.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Integer</b></span>
+                </div>
+
+                <br>
+
+                <div class="content-text">&#8226; Must be used inside the <b>onLoad()</b> function.</div>
+                
+                <br>
+
+        </div>
+
+            <div id="c82">
+
+                <div class="content-title">object.space</div>
+                <div class="content-text">Leaves (inner) space between the image and the object boundary.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Integer</b></span>
+                    <span class="content-info-box">Default: <b>0</b></span>
+                    <span class="content-info-box">Min: <b>0</b></span>
+                    <span class="content-info-box">Max: <b>50</b></span>
+                </div>
+
+                <br>
+
+                <div class="content-text">&#8226; Value is used as a percentage of image sizes.</div>
+                <div class="content-text">&#8226; Uses <b>padding</b> property in CSS.</div>
+
+                <br>
+                
+        </div>
+
+        <!--
+            <div id="c85">
+
+                <div class="content-title">num()</div>
+                <div class="content-text">Converts a text type value to a number type.</div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>) : <span class="code-1">Float</span></div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>, type: <span class="code-1">String</span>) : <span class="code-1">Float</span> or <span class="code-1">Integer</span></div>
+
+                <br>
+
+                <br>
+            object.onClick(func:function)
+            - Each time the object is pressed; the specified function is called.
+            -- The object itself is sent to the called function.
+            - remove with object.remove_onClick(func:function)
+        </div>
+        -->
+
+            <div id="c86">
+
+                <div class="content-title">object.onLoad()</div>
+                <div class="content-text">When the image object is loaded, the function is called.</div>
+                <div class="content-code">object.<span class="code-2">onLoad</span>(func: <span class="code-1">Function</span>)</div>
+                
+                <br>
+
+                <div class="content-text">&#8226; The object itself is sent to the called function.</div>
+
+                <div class="code-example">
+                    // Example:<br>
+                    createImage()<br>
+                    that.load("images/roket.png")<br>
+                    that.onLoad(function(self) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;print(self.width)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;print(self.height)<br>
+                    })
+                </div>
+
+                <div class="content-text">&#8226; Remove with <b>object.remove_onLoad(func: Function)</b></div>
+
+                <br>
+                
+        </div>
+
+        <!--
+            <div id="c87">
+
+                <div class="content-title">num()</div>
+                <div class="content-text">Converts a text type value to a number type.</div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>) : <span class="code-1">Float</span></div>
+                <div class="content-code"><span class="code-2">num</span>(text: <span class="code-1">String</span>, type: <span class="code-1">String</span>) : <span class="code-1">Float</span> or <span class="code-1">Integer</span></div>
+
+                <br>
+
+                <br>
+            object.element
+            - Same as imageElement as the object does not have a bearer element.
+        </div>
+        -->
+
+            <div id="c88">
+
+                <div class="content-title">object.imageElement</div>
+                <div class="content-text">Element object that connects the object with HTML.</div>
+                <div class="content-info-box-group">
+                    <span class="content-info-box colored">Type: <b>Object</b></span>
+                </div>
+
+                <br>
+
+                <div class="content-text">&#8226; Uses <b>&lt;img&gt;</b> element in HTML.</div>
+
+                <br>
+
+        </div>
+
+
+<div id="t9">
+    <div class="content-title">OTHER FUNCTIONS</div>
+</div>
+
+            <div id="c89">
+
+                <div class="content-title">setLoopTimer()</div>
+                <div class="content-text">Determines how often the loop() function will run.</div>
+                <div class="content-code"><span class="code-2">setLoopTimer</span>(milisecond: <span class="code-1">Integer</span>)</div>
+
+                <br>
+
+                <div class="content-text">&#8226; The duration is in milliseconds.</div>
+                <div class="content-text">&#8226; Its standard value is 1000. (1 second)</div>
+
+                <br>
+                
+        </div>
+
+            <div id="c90">
+
+                <div class="content-title">selectBox()</div>
+                <div class="content-text">It determines the box in which the created objects will be moved first.</div>
+                <div class="content-code"><span class="code-2">selectBox</span>(boxObject: <span class="code-1">Box</span> or <span class="code-1">MainBox</span>)</div>
+               
+                <br>
+
+                <div class="content-text">&#8226; Its default value is the <b>page</b> object.</div>
+                <div class="content-text">&#8226; To revert to the default value, <b>selectBox(page)</b></div>
+
+                <br>
+
+        </div>
+
+            <div id="c91">
+
+                <div class="content-title">getSelectedBox()</div>
+                <div class="content-text">Returns the object to which the created objects were first moved.</div>
+                <div class="content-code"><span class="code-2">getSelectedBox</span>() : <span class="code-1">Box</span> or <span class="code-1">MainBox</span></div>
+
+                <br>
+
+        </div>
+
+            <div id="c92">
+
+                <div class="content-title">makeBasicObject()</div>
+                <div class="content-text">Include the custom object you created in the ecosystem of the basic.js library.</div>
+                <div class="content-code"><span class="code-2">makeBasicObject</span>(object: <span class="code-1">Label</span>, <span class="code-1">Button</span>, <span class="code-1">TextBox</span>, <span class="code-1">Image</span> or <span class="code-1">Box</span>)</div>
+
+                <br>
+
+                <div class="content-text">&#8226; The created object can be accessed with the <b>that</b> variable until a new object is created.</div>
+                <div class="content-text">&#8226; If specially designed objects consist of more than one basic object, as a carrier object; box object should be used.</div>
+
+                <br>
+                
+        </div>
+
+<div id="t10">
+    <div class="content-title">CLOCK OBJECT (OBJECT NAME: clock)</div>
+    <div class="content-text">It gives current time information.</div>
+
+    <br>
+
+    <div class="content-text content-info"><b>See</b>: 07-wall-clock.htm</div>
+
+    <br>
+
+</div>
+
+            <div id="c93">
+
+                <div class="content-title">clock.hour</div>
+                <div class="content-text">It gives the current time information.</div>
+
+                <br>
+            
+        </div>
+
+            <div id="c94">
+
+                <div class="content-title">clock.minute</div>
+                <div class="content-text">It gives the current minute information.</div>
+
+                <br>
+            
+        </div>
+
+            <div id="c95">
+
+                <div class="content-title">clock.second</div>
+                <div class="content-text">It gives the current second information.</div>
+
+                <br>
+            
+        </div>
+
+        <div id="c112">
+
+            <div class="content-title">clock.milisecond</div>
+            <div class="content-text">It gives the current milisecond information.</div>
+
+            <br>
+            
+        </div>
+
+
+<div id="t11">
+    <div class="content-title">DATE OBJECT (OBJECT NAME: date)</div>
+    <div class="content-text">It gives current date information.</div>
+
+    <br>
+
+    <div class="content-text content-info"><b>See</b>: 41-date-and-time.htm</div>
+
+    <br>
+
+</div>
+
+            <div id="c96">
+
+                <div class="content-title">date.year</div>
+                <div class="content-text">4 digits, what year we are in.</div>
+
+                <br>
+                
+        </div>
+
+            <div id="c97">
+
+                <div class="content-title">date.mouthNumber</div>
+                <div class="content-text">In numbers, what month we are in.</div>
+               
+                <br>
+
+        </div>
+
+            <div id="c98">
+
+                <div class="content-title">date.ayAdi</div>
+                <div class="content-text">The Turkish name of the current month.</div>
+                
+
+                <br>
+            
+        </div>
+
+            <div id="c99">
+
+                <div class="content-title">date.mountName</div>
+                <div class="content-text">The English name of the current month.</div>
+              
+                <br>
+
+        </div>
+
+            <div id="c100">
+
+                <div class="content-title">date.dayNumber</div>
+                <div class="content-text">As a number, what day of the week we are.</div>
+               
+                <br>
+
+        </div>
+
+            <div id="c101">
+
+                <div class="content-title">date.gunAdi</div>
+                <div class="content-text">The Turkish name of the day we are in.</div>
+               
+                <br>
+
+        </div>
+
+            <div id="c102">
+
+                <div class="content-title">date.dayName</div>
+                <div class="content-text">The English name of the current day.</div>
+             
+                <br>
+
+        </div>
+
+            <div id="c103">
+
+                <div class="content-title">date.today</div>
+                <div class="content-text">Information about what month it is.</div>
+                
+                <br>
+
+            </div>
+
+            <div id="c104">
+
+                <div class="content-title">date.now</div>
+                <div class="content-text">The unique numerical equivalent of this moment.</div>
+                
+                <br>
+                
+                <div class="content-text content-info"><b>Info</b>: Information referred to as Timestamp in databases.</div>
+
+                <br>
+
+        </div>
+
+<div id="t12">
+    <div class="content-title">INFORMATION STORAGE OBJECT (OBJECT NAME: storage)</div>
+    <div class="content-text">Stores the value of a variable on the browser.</div>
+    
+    <br>
+
+    <div class="content-text">&#8226; When the browser is closed and reopened; The stored information can be restored.</div>
+    <div class="content-text">&#8226; Can be used to store user selected settings.</div>
+    <div class="content-text">&#8226; It can be used to store information in a simple way that does not need a database.</div>
+    <div class="content-text">&#8226; Uses the <b>window.localStorage</b> property in JavaScript.</div>
+    <div class="content-text content-info"><b>See</b>: 58-to-do-list-app.htm</div>
+    
+    <br>
+
+    </div>
+
+            <div id="c105">
+
+                <div class="content-title">storage.save()</div>
+                <div class="content-text">Saves a variable with a key.</div>
+                <div class="content-code">storage.<span class="code-2">save</span>(key: <span class="code-1">String</span>, value: <span class="code-1">*</span>)</div>
+
+                <br>
+
+                <!--
+                <div class="content-text">&#8226; Key value example: <b>"app58-user-name"</b></div>
+                <div class="content-text content-note"><b>Note</b>: Care should be taken when choosing a key, information can be saved by another application with the same key.</div>
+                -->
+                <div class="content-text">&#8226; The value to save. It can be any data type.</div>
+
+        </div>
+
+            <div id="c106">
+
+                <div class="content-title">storage.load()</div>
+                <div class="content-text">Returns the contents of the variable saved with the key.</div>
+                <div class="content-code">storage.<span class="code-2">load</span>(key: <span class="code-1">String</span>) : <span class="code-1">*</span></div>
+                
+                <br>
+                
+        </div>
+
+            <div id="c107">
+
+                <div class="content-title">storage.remove()</div>
+                <div class="content-text">Deletes the contents of the variable saved with the key.</div>
+                <div class="content-code">storage.<span class="code-2">remove</span>(key: <span class="code-1">String</span>)</div>
+
+                <br>
+
+        </div>
+
+<div id="t13">
+    <div class="content-title">OTHERS</div>
+    
+    <br>
+
+    </div>
+
+
+            <div id="c108">
+
+                <div class="content-title">CONSTANTS</div>
+                <div class="content-text">Some constants that the library uses.</div>
+
+                <table>
+                    <thead><tr><th>Name</th><th>Value</th></tr></thead>
+                    <tbody>
+                        <tr><td class="normal">basic.ACTION_COLOR</td><td>"#689BD2"</td></tr>
+                        <tr><td class="normal">basic.ACTION2_COLOR</td><td>"cadetblue"</td></tr>
+                        <tr><td class="normal">basic.WARNING_COLOR</td><td>"tomato"</td></tr>
+                        <tr><td class="normal">basic.ALERT_COLOR</td><td>"gold"</td></tr>
+                        <tr><td class="normal">basic.CANCEL_COLOR</td><td>"lightgray"</td></tr>
+                        <tr><td class="normal">basic.TEXT_COLOR</td><td>"#4A4A4A"</td></tr>
+                        <tr><td class="normal">basic.BACKGROUND_COLOR</td><td>"whitesmoke"</td></tr>
+                        <tr><td class="normal">basic.DARK_BACKGROUND_COLOR</td><td>"#141414"</td></tr>
+                        <tr><td class="normal">basic.FONT_SIZE</td><td>20</td></tr>
+                        <tr><td class="normal">basic.BUTTON_WIDTH</td><td>130</td></tr>
+                        <tr><td class="normal">basic.BUTTON_HEIGHT</td><td>50</td></tr>
+                        <tr><td class="normal">basic.BUTTON_COLOR</td><td>basic.ACTION_COLOR</td></tr>
+                        <tr><td class="normal">basic.BUTTON_TEXT_COLOR</td><td>"rgba(0, 0, 0, 0.65)"</td></tr>
+                        <tr><td class="normal">basic.TEXTBOX_WIDTH</td><td>270</td></tr>
+                        <tr><td class="normal">basic.TEXTBOX_HEIGHT</td><td>50</td></tr>
+                        <tr><td class="normal">basic.LABEL_WIDTH</td><td>270</td></tr>
+                        <tr><td class="normal">basic.LABEL_HEIGHT</td><td>"auto"</td></tr>
+                        <tr><td class="normal">basic.BOX_WIDTH</td><td>100</td></tr>
+                        <tr><td class="normal">basic.BOX_HEIGHT</td><td>100</td></tr>
+                        <tr><td class="normal">basic.IMAGE_WIDTH</td><td>50</td></tr>
+                        <tr><td class="normal">basic.IMAGE_HEIGHT</td><td>50</td></tr>
+                    </tbody>
+                </table>
+
+                <br>
+
+        </div>
+
+
+            <div id="c109">
+
+                <div class="content-title">SOME FREQUENT FAULTS</div>
+                <div class="content-text">When you encounter an error while developing a project, you can search on Google by adding the word JavaScript to the beginning of the error message on the console.</div>
+
+                <br>
+
+                <div class="content-text" style="font-size:14px;color:#CC75AA;">Uncaught TypeError: Cannot read properties of undefined (reading 'height')</div>
+                <div class="content-text" style="font-size:14px;color:#CC75AA;">Uncaught TypeError: Cannot set properties of undefined (setting 'left')</div>
+                <div class="content-text">&#8226; The variable you are trying to reach is empty, the object is not passed. (undefined)</div>
+
+                <br>
+
+                <div class="content-text" style="font-size:14px;color:#CC75AA;">Uncaught SyntaxError: Unexpected identifier</div>
+                <div class="content-text" style="font-size:14px;color:#CC75AA;">Uncaught SyntaxError: Unexpected end of input</div>
+                <div class="content-text" style="font-size:14px;color:#CC75AA;">Uncaught SyntaxError: Unexpected token ')'</div>
+                <div class="content-text" style="font-size:14px;color:#CC75AA;">Uncaught SyntaxError: missing ) after argument list</div>
+                <div class="content-text">&#8226; Check curly braces, braces and other marks.</div>
+                <div class="content-sub-text">&#8226; The curly braces are not opened, but may be closed.</div>
+                <div class="content-sub-text">&#8226; Parenthesis may not be closed when calling the function.</div>
+
+                <br>
+
+        </div>
+
+            <div id="c110">
+
+                <div class="content-title">AUTHOR</div>
+
+                <br>
+
+                <div class="content-text">Bugra Ozden &lt;bugra.ozden@gmail.com&gt;</div>
+                <div class="content-text"><b>Personal Site</b>: https://bugraozden.com/</div>
+                <!--
+                <div class="content-text">Bugra Ozden</div>
+                <div class="content-text content-info"><b>E-mail</b>: bugra.ozden@gmail.com</div>
+                <div class="content-text content-info"><b>Personal Site</b>: https://bugraozden.com/</div>
+                -->
+
+                <br>
+
+            </div>
+
+            <!-- last c id 112, last t id 13 -->
+
+
+        </div>
+        
+    </body>
+</html>
