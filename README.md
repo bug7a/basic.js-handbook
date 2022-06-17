@@ -8,7 +8,7 @@ This JavaScript library helps you to create interactive user interface with basi
 ### Handbook:
 https://bug7a.github.io/basic.js-handbook/
 
-### Library:
+### Library Page:
 https://bug7a.github.io/basic.js/
 
 ### Examples:
