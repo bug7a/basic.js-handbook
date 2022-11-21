@@ -2,7 +2,7 @@
 <html>
     <head>
         
-        <title>basic.js LIBRARY (v1.6.5) - HANDBOOK</title>
+        <title>basic.js LIBRARY (v1.7) - HANDBOOK</title>
         
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -272,7 +272,7 @@
             { id: "c34", type: "item", name: ".textAlign", searchText: "textAlign text Align"  },
             { id: "c35", type: "item", name: ".clickable", searchText: "clickable"  },
             { id: "c36", type: "item", name: ".element", searchText: "element"  },
-            { id: "c37", type: "item", name: ".upperObject", searchText: "upperObject"  },
+            { id: "c37", type: "item", name: ".containerBox", searchText: "containerBox"  },
             /* { id: "c51", type: "item", name: ".onClick()", searchText: "onClick on Click event" }, */
             { id: "c38", type: "item", name: ".onResize()", searchText: "onResize on Resize event"  },
             { id: "c39", type: "item", name: ".center()", searchText: "center"  },
@@ -289,6 +289,7 @@
             { id: "c48", type: "item", name: ".text or .html", searchText: "text html htm" },
             { id: "c49", type: "item", name: ".scrollX", searchText: "scrollX scroll X" },
             { id: "c50", type: "item", name: ".scrollY", searchText: "scrollY scroll Y" },
+            { id: "c116", type: "item", name: ".position", searchText: "position absolute relative" },
             { id: "c51", type: "item", name: ".onClick()", searchText: "onClick on Click event" },
             { id: "c52", type: "item", name: ".add()", searchText: "add" },
             //{ id: "c53", type: "item", name: ".element", searchText: "element" },
@@ -355,8 +356,10 @@
 
             { id: "t9", type: "title", name: "Other Functions", iconPath: "", searchText: "General functions *" },
             { id: "c89", type: "item", name: "setLoopTimer()", searchText: "setLoopTimer set Loop Timer" },
-            { id: "c90", type: "item", name: "selectBox()", searchText: "selectBox select Box" },
-            { id: "c91", type: "item", name: "getSelectedBox()", searchText: "getSelectedBox get Selected Box" },
+            { id: "c90", type: "item", name: "setDefaultContainerBox()", searchText: "setDefaultContainerBox set Default Container Box" },
+            { id: "c91", type: "item", name: "getDefaultContainerBox()", searchText: "getDefaultContainerBox get Default Container Box" },
+            { id: "c115", type: "item", name: "restoreDefaultContainerBox()", searchText: "restoreDefaultContainerBox restore Default Container Box" },
+            { id: "c114", type: "item", name: "withPageZoom()", searchText: "zoom page" },
             { id: "c92", type: "item", name: "makeBasicObject()", searchText: "makeBasicObject make Basic Object" },
 
             { id: "t10", type: "title", name: "clock Object", iconPath: "", searchText: "aline" },
@@ -459,7 +462,7 @@
 
             leftMenu.lblVersion = createLabel(0, 0, LEFT_MENU_WIDTH, 16)
             leftMenu.add(that)
-            that.text = "v1.6.5"
+            that.text = "v1.7"
             that.bottom = 10
             that.fontSize = 12
             that.textAlign = "center"
@@ -728,11 +731,13 @@
 <!-- <div class="content-sub-text">Before, all the variables and functions written on the outermost are ready to be used.</div> -->
 <div class="content-text">&#8226; Uses the <b>"load"</b> event in JavaScript.</div>
 
-
+<div class="content-text content-note"><b>Note:</b> The library will set <b>body { margin: 0px; }</b></div>
+<div class="content-text content-note"><b>Note:</b> The library will set <b>body { overflow: hidden; }</b></div>
 <div class="content-text content-info"><b>See Empty Project Template:</b> 00C-empty-project-template.htm</div>
 
 <div class="content-text">&#8226; <b>Library</b>: https://github.com/bug7a/basic.js</div>
-<div class="content-text">&#8226; <b>Examples</b>: https://github.com/bug7a/basic.js-examples</div>
+<div class="content-text">&#8226; <b>Basic Examples</b>: https://github.com/bug7a/basic.js-examples</div>
+<div class="content-text">&#8226; <b>Example Project</b>: https://bug7a.github.io/cordova-mobile-app-ui-template/</div>
 
 <br>
 
@@ -1089,7 +1094,7 @@
 
                 <br>
 
-                <div class="content-text">The previous object is passed to the <b>exThat</b> variable.</div>
+                <div class="content-text">The previous object is passed to the <b>previousThat</b> variable.</div>
 
                 <br>
            
@@ -1101,14 +1106,15 @@
                 <div class="content-text">Determines the distance of the object to the left.</div>
                 <div class="content-info-box-group">
                     <span class="content-info-box colored">Type: <b>Float</b></span>
-                    <span class="content-info-box">Default: <b>0</b></span>
+                    <span class="content-info-box">Default: <b>-1000</b></span>
                 </div>
 
                 <br>
 
                 <div class="content-text">&#8226; All positions and dimensions are in <b>"px"</b>.</div>
                 <div class="content-text">&#8226; Positioning as a float data type allows for smoother movements.</div>
-                
+                <div class="content-text content-note"><b>Note:</b> The object is first rendered outside the screen. Will be displayed when the object is given a position.</div>
+                <div class="content-text content-info"><b>Info:</b> <b>.center()</b> and <b>.aline()</b> functions also give position to the object.</div>
 
                 <br>
         </div>
@@ -1119,7 +1125,7 @@
                 <div class="content-text">Determines the distance of the object up.</div>
                 <div class="content-info-box-group">
                     <span class="content-info-box colored">Type: <b>Float</b></span>
-                    <span class="content-info-box">Default: <b>0</b></span>
+                    <span class="content-info-box">Default: <b>-1000</b></span>
                 </div>
                 
                 <br>
@@ -1167,7 +1173,7 @@
                 <div class="content-title">object.width</div>
                 <div class="content-text">Sets the width of the object.</div>
                 <div class="content-info-box-group">
-                    <span class="content-info-box colored">Type: <b>Integer</b></span>
+                    <span class="content-info-box colored">Type: <b>Float</b></span>
                     <span class="content-info-box">Min: <b>0</b></span>
                 </div>
 
@@ -1194,7 +1200,7 @@
                 <div class="content-title">object.height</div>
                 <div class="content-text">Sets the height of the object.</div>
                 <div class="content-info-box-group">
-                    <span class="content-info-box colored">Type: <b>Integer</b></span>
+                    <span class="content-info-box colored">Type: <b>Float</b></span>
                     <span class="content-info-box">Min: <b>0</b></span>
                 </div>
 
@@ -1548,7 +1554,7 @@
 
             <div id="c37">
 
-                <div class="content-title">object.upperObject</div>
+                <div class="content-title">object.containerBox</div>
                 <div class="content-text">Returns a parent (containing) object of the object.</div>
                 <div class="content-info-box-group">
                     <span class="content-info-box colored">Type: <b>Box</b> or <b>MainBox</b></span>
@@ -1559,7 +1565,7 @@
 
                 <div class="content-text">&#8226; The top object is the <b>page</b>.</div>
                 <div class="content-text">&#8226; The created objects are first moved into the <b>page</b> object.</div>
-                <div class="content-text">&#8226; With the <b>selectBox(target: Box)</b> function, the first object to be moved can be changed.</div>
+                <div class="content-text">&#8226; With the <b>setDefaultContainerBox(target: Box)</b> function, the first object to be moved can be changed.</div>
 
                 <br>
         </div>
@@ -1928,6 +1934,27 @@
                 <br>
 
         </div>
+
+        <div id="c116">
+
+            <div class="content-title">object.position</div>
+            <div class="content-text">Set or get the positioning type of the object.</div>
+            <div class="content-info-box-group">
+                <span class="content-info-box colored">Type: <b>String</b></span>
+                <span class="content-info-box">Default: <b>"absolute"</b></span>
+            </div>
+
+            <table>
+                <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                <tbody>
+                    <tr><td class="center">"absolute"</td><td>Coordinate system active.</td></tr>
+                    <tr><td class="center">"relative"</td><td>Objects repel each other.</td></tr>
+                </tbody>
+            </table>
+
+            <br>
+
+    </div>
 
             <div id="c52">
 
@@ -2562,14 +2589,14 @@
 
             <div id="c90">
 
-                <div class="content-title">selectBox()</div>
+                <div class="content-title">setDefaultContainerBox()</div>
                 <div class="content-text">It determines the box in which the created objects will be moved first.</div>
-                <div class="content-code"><span class="code-2">selectBox</span>(boxObject: <span class="code-1">Box</span> or <span class="code-1">MainBox</span>)</div>
+                <div class="content-code"><span class="code-2">setDefaultContainerBox</span>(boxObject: <span class="code-1">Box</span> or <span class="code-1">MainBox</span>)</div>
                
                 <br>
 
                 <div class="content-text">&#8226; Its default value is the <b>page</b> object.</div>
-                <div class="content-text">&#8226; To revert to the default value, <b>selectBox(page)</b></div>
+                <div class="content-text">&#8226; To revert to the default value, <b>setDefaultContainerBox(page)</b></div>
 
                 <br>
 
@@ -2577,13 +2604,33 @@
 
             <div id="c91">
 
-                <div class="content-title">getSelectedBox()</div>
+                <div class="content-title">getDefaultContainerBox()</div>
                 <div class="content-text">Returns the object to which the created objects were first moved.</div>
-                <div class="content-code"><span class="code-2">getSelectedBox</span>() : <span class="code-1">Box</span> or <span class="code-1">MainBox</span></div>
+                <div class="content-code"><span class="code-2">getDefaultContainerBox</span>() : <span class="code-1">Box</span> or <span class="code-1">MainBox</span></div>
 
                 <br>
 
         </div>
+
+        <div id="c115">
+
+            <div class="content-title">restoreDefaultContainerBox()</div>
+            <div class="content-text">Set the previous container box for default.</div>
+            <div class="content-code"><span class="code-2">restoreDefaultContainerBox</span>()</div>
+
+            <br>
+
+    </div>
+
+        <div id="c114">
+
+            <div class="content-title">withPageZoom()</div>
+            <div class="content-text">Returns a length by also calculating the zooming of the page.</div>
+            <div class="content-code"><span class="code-2">withPageZoom</span>(length: <span class="code-1">Float</span>) : <span class="code-1">Float</span></div>
+
+            <br>
+
+    </div>
 
             <div id="c92">
 
@@ -2904,7 +2951,7 @@
 
         </div>
 
-            <!-- last c id 113, last t id 13 -->
+            <!-- last c id 116, last t id 13 -->
 
 
         </div>
