@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>basic.js test</title>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" type="text/css" href="basic/basic.min.css">
+        <script src="basic/basic.min.js" type="text/javascript" charset="utf-8"></script>
+
+        <script>
+            
+            window.onload=function(){let e=createComponent({value1:"A",value2:"value2",value3:"value3",value4:"25"});that.top=10,that.left=10;let t=createComponent({value1:"B",value2:"value2",value3:"value3",value4:"134"});t.aline(e,"bottom",4),createButton(),that.text="Change Properties",that.width=200,that.minimal=1,that.bottom=10,that.color="whitesmoke",that.center("left"),that.onClick(function(l){l.visible=0,e.lbl1.text="C",e.lbl1.color="yellow",e.color="lightblue",e.lbl2.text="edited",e.lbl3.text="",e.lbl4.textColor="red",t.height=160})};const createComponent=function(e){let t=startBox();return t.width=300,t.height=100,t.border=1,t.round=6,startFlexBox(),that.width=80,t.lbl1=createLabel(),that.text=e.value1,that.color="white",that.spaceX=16,that.spaceY=8,that.border=1,that.round=that.width,endFlexBox(),startFlexBox({flexDirection:"column",alignItems:"flex-start"}),that.width="calc(100% - 80px)",that.right=0,t.lbl2=createLabel(),that.text=e.value2,t.lbl3=createLabel(),that.text=e.value3,that.fontSize=14,that.opacity=.8,endFlexBox(),startFlexBox({justifyContent:"flex-end"}),that.width=150,that.right=20,t.lbl4=createLabel(),that.text=e.value4,that.element.style.fontFamily="opensans-bold",endFlexBox(),endBox(),makeBasicObject(t),t};
+
+        </script>
+
+    </head>
+    <body>        
+    </body>
+</html>
