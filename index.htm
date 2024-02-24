@@ -2,16 +2,17 @@
 <html>
     <head>
         
-        <title>basic.js LIBRARY (v1.7.2) - HANDBOOK</title>
+        <title>basic.js LIBRARY (v1.7.4) - HANDBOOK</title>
         
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
         <!-- LIBRARY FILES -->
         <script src="lib/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-        <link rel="stylesheet" type="text/css" href="basic/basic.min.css">
-        <script src="basic/basic.min.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" type="text/css" href="basic/basic.css">
+        <script src="basic/basic.js" type="text/javascript" charset="utf-8"></script>
 
+        <script src="js/components/ui-core.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/components/ui-search-box.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/components/ui-item-list.js" type="text/javascript" charset="utf-8"></script>
 
@@ -245,20 +246,21 @@
         var leftMenu
 
         var leftMenuDataList = [
-            { id: "c1", type: "item", name: "Introduction", searchText: "Introduction" }, 
-            { id: "c2", type: "item", name: "Data types used", searchText: "Data types used" },
+            { id: "c1", type: "item", name: "Get started", searchText: "Introduction get started" }, 
+            //{ id: "c118", type: "item", name: "Get started", searchText: "get started" },
+            { id: "c2", type: "item", name: "Object types", searchText: "Data types used object objects" },
 
             { id: "t1", type: "title", name: "Basic Functions", iconPath: "", searchText: "Basic functions *" },
-            { id: "c4", type: "item", name: "print()", searchText: "print"  },
+            //{ id: "c4", type: "item", name: "println()", searchText: "print"  },
             { id: "c3", type: "item", name: "random()", searchText: "random" },
             { id: "c5", type: "item", name: "num()", searchText: "num"  },
             { id: "c6", type: "item", name: "str()", searchText: "str"  },
-            { id: "c7", type: "item", name: "go()", searchText: "go"  },
-            { id: "c8", type: "item", name: "twoDigitFormat()", searchText: "twoDigitFormat"  },
-            { id: "c9", type: "item", name: "isMobile()", searchText: "isMobile"  },
+            //{ id: "c7", type: "item", name: "go()", searchText: "go"  },
+            //{ id: "c8", type: "item", name: "twoDigitFormat()", searchText: "twoDigitFormat"  },
+            //{ id: "c9", type: "item", name: "isMobile()", searchText: "isMobile"  },
             
-            { id: "t3", type: "title", name: "* Class", iconPath: "", searchText: "* object class"  },
-            { id: "c19", type: "item", name: "that", searchText: "that previousThat previous"  },
+            { id: "t3", type: "title", name: "Common Features", iconPath: "", searchText: "* object class Common features"  },
+            { id: "c19", type: "item", name: "that and prevThat", searchText: "that previousThat previous prevThat"  },
             { id: "c116", type: "item", name: ".position", searchText: "position absolute relative" },
             { id: "c20", type: "item", name: ".left", searchText: "left"  },
             { id: "c21", type: "item", name: ".top", searchText: "top"  },
@@ -273,25 +275,26 @@
             { id: "c29", type: "item", name: ".border", searchText: "border"  },
             { id: "c30", type: "item", name: ".borderColor", searchText: "borderColor"  },
             { id: "c31", type: "item", name: ".round", searchText: "round"  },
-            { id: "c32", type: "item", name: ".fontSize or .textSize", searchText: "fontSize"  },
+            { id: "c32", type: "item", name: ".fontSize", searchText: "fontSize"  },
             { id: "c33", type: "item", name: ".textColor", searchText: "textColor text Color"  },
             { id: "c34", type: "item", name: ".textAlign", searchText: "textAlign text Align"  },
             { id: "c35", type: "item", name: ".clickable", searchText: "clickable"  },
-            { id: "c36", type: "item", name: ".element", searchText: "element"  },
-            { id: "c37", type: "item", name: ".containerBox", searchText: "containerBox"  },
+            { id: "c36", type: "item", name: ".elem (element)", searchText: "element elem"  },
+            { id: "c37", type: "item", name: ".containerBox", searchText: "container parent box"  },
             /* { id: "c51", type: "item", name: ".onClick()", searchText: "onClick on Click event" }, */
             { id: "c38", type: "item", name: ".onResize()", searchText: "onResize on Resize event"  },
             { id: "c39", type: "item", name: ".center()", searchText: "center"  },
+            { id: "c119", type: "item", name: ".centerBy()", searchText: "center by"  },
             { id: "c40", type: "item", name: ".aline()", searchText: "aline"  },
             { id: "c41", type: "item", name: ".remove()", searchText: "remove"  },
-            { id: "c42", type: "item", name: ".prop() and styles", searchText: "prop styles"  },
+            { id: "c42", type: "item", name: ".props()", searchText: "prop props param params style styles"  },
             { id: "c43", type: "item", name: ".setMotion()", searchText: "setMotion set Motion animation"  },
             { id: "c44", type: "item", name: ".getMotion()", searchText: "getMotion get Motion animation" },
             { id: "c46", type: "item", name: ".dontMotion()", searchText: "dontMotion dont Motion animation"  },
             { id: "c45", type: "item", name: ".withMotion()", searchText: "withMotion with Motion animation"  },
 
             { id: "t4", type: "title", name: "Box Class", iconPath: "assets/box-icon.svg", searchText: "Box object class *" },
-            { id: "c47", type: "item", name: "createBox() or startBox()", searchText: "createBox startBox endBox startFlexBox endFlexBox create Box start flex box end" },
+            { id: "c47", type: "item", name: "Box() and startFlexBox()", searchText: "createBox startBox endBox startFlexBox endFlexBox create Box start flex box end" },
             { id: "c48", type: "item", name: ".text or .html", searchText: "text html htm" },
             { id: "c49", type: "item", name: ".scrollX", searchText: "scrollX scroll X" },
             { id: "c50", type: "item", name: ".scrollY", searchText: "scrollY scroll Y" },
@@ -299,8 +302,26 @@
             { id: "c52", type: "item", name: ".add()", searchText: "add" },
             //{ id: "c53", type: "item", name: ".element", searchText: "element" },
 
+            { id: "t7", type: "title", name: "Label Class", iconPath: "assets/label-icon.svg", searchText: "Label object *" },
+            { id: "c70", type: "item", name: "Label()", searchText: "createLabel create Label" },
+            { id: "c71", type: "item", name: ".text", searchText: "text" },
+            { id: "c72", type: "item", name: ".space", searchText: "space" },
+            { id: "c73", type: "item", name: ".spaceX", searchText: "spaceX space X" },
+            { id: "c74", type: "item", name: ".spaceY", searchText: "spaceY space Y" },
+            { id: "c51", type: "item", name: ".onClick()", searchText: "onClick on Click event" },
+            //{ id: "c75", type: "item", name: ".onClick()", searchText: "onClick on Click event" },
+            //{ id: "c76", type: "item", name: ".element", searchText: "element" },
+
+            { id: "t8", type: "title", name: "Icon Class", iconPath: "assets/image-icon.svg", searchText: "icon Icon image Image *" },
+            { id: "c77", type: "item", name: "Icon()", searchText: "createImage create Image icon Icon" },
+            { id: "c78", type: "item", name: ".load()", searchText: "load" },
+            { id: "c79", type: "item", name: ".autoSize", searchText: "autoSize auto Size" },
+            { id: "c80", type: "item", name: ".naturalWidth", searchText: "naturalWidth natural Width" },
+            { id: "c81", type: "item", name: ".naturalHeight", searchText: "naturalHeight natural Height" },
+            { id: "c82", type: "item", name: ".space", searchText: "space" },
+
             { id: "t5", type: "title", name: "Button Class", iconPath: "assets/button-icon.svg", searchText: "Button Object class *" },
-            { id: "c54", type: "item", name: "createButton()", searchText: "createButton create Button" },
+            { id: "c54", type: "item", name: "Button()", searchText: "createButton create Button" },
             { id: "c55", type: "item", name: ".text", searchText: "text" },
             { id: "c56", type: "item", name: ".enabled", searchText: "enabled" },
             { id: "c57", type: "item", name: ".minimal", searchText: "minimal" },
@@ -310,8 +331,8 @@
             //{ id: "c59", type: "item", name: ".element", searchText: "element" },
             { id: "c60", type: "item", name: ".buttonElement", searchText: "buttonElement button Element" },
 
-            { id: "t6", type: "title", name: "TextBox Class", iconPath: "assets/textbox-icon.svg", searchText: "TextBox object *" },
-            { id: "c61", type: "item", name: "createTextBox()", searchText: "createTextBox create TextBox" },
+            { id: "t6", type: "title", name: "Input Class", iconPath: "assets/textbox-icon.svg", searchText: "Input input TextBox object *" },
+            { id: "c61", type: "item", name: "Input()", searchText: "createTextBox create TextBox input Input" },
             { id: "c62", type: "item", name: ".text", searchText: "text" },
             { id: "c63", type: "item", name: ".title", searchText: "title" },
             { id: "c64", type: "item", name: ".enabled", searchText: "enabled" },
@@ -321,23 +342,7 @@
             { id: "c68", type: "item", name: ".inputElement", searchText: "inputElement input Element" },
             { id: "c69", type: "item", name: ".titleElement", searchText: "titleElement title Element" },
 
-            { id: "t7", type: "title", name: "Label Class", iconPath: "assets/label-icon.svg", searchText: "Label object *" },
-            { id: "c70", type: "item", name: "createLabel()", searchText: "createLabel create Label" },
-            { id: "c71", type: "item", name: ".text", searchText: "text" },
-            { id: "c72", type: "item", name: ".space", searchText: "space" },
-            { id: "c73", type: "item", name: ".spaceX", searchText: "spaceX space X" },
-            { id: "c74", type: "item", name: ".spaceY", searchText: "spaceY space Y" },
-            { id: "c51", type: "item", name: ".onClick()", searchText: "onClick on Click event" },
-            //{ id: "c75", type: "item", name: ".onClick()", searchText: "onClick on Click event" },
-            //{ id: "c76", type: "item", name: ".element", searchText: "element" },
 
-            { id: "t8", type: "title", name: "Image Class", iconPath: "assets/image-icon.svg", searchText: "Image *" },
-            { id: "c77", type: "item", name: "createImage()", searchText: "createImage create Image" },
-            { id: "c78", type: "item", name: ".load()", searchText: "load" },
-            { id: "c79", type: "item", name: ".autoSize", searchText: "autoSize auto Size" },
-            { id: "c80", type: "item", name: ".naturalWidth", searchText: "naturalWidth natural Width" },
-            { id: "c81", type: "item", name: ".naturalHeight", searchText: "naturalHeight natural Height" },
-            { id: "c82", type: "item", name: ".space", searchText: "space" },
             /*
             { id: "c83", type: "item", name: ".spaceX" },
             { id: "c84", type: "item", name: ".spaceY" },
@@ -367,6 +372,7 @@
             { id: "c114", type: "item", name: "withPageZoom()", searchText: "zoom page" },
             { id: "c92", type: "item", name: "makeBasicObject()", searchText: "makeBasicObject make Basic Object" },
 
+            /*
             { id: "t10", type: "title", name: "clock Object", iconPath: "", searchText: "aline" },
             { id: "c93", type: "item", name: "clock.hour", searchText: "aline" },
             { id: "c94", type: "item", name: "clock.minute", searchText: "aline" },
@@ -383,12 +389,13 @@
             { id: "c102", type: "item", name: "date.dayName", searchText: "aline" },
             { id: "c103", type: "item", name: "date.today", searchText: "aline" },
             { id: "c104", type: "item", name: "date.now", searchText: "aline" },
+            */
 
             { id: "t12", type: "title", name: "storage Object", iconPath: "", searchText: "storage object *" },
             { id: "c105", type: "item", name: "storage.save()", searchText: "storage save" },
             { id: "c106", type: "item", name: "storage.load()", searchText: "storage load" },
             { id: "c107", type: "item", name: "storage.remove()", searchText: "storage remove" },
-
+            
             { id: "t13", type: "title", name: "Others", iconPath: "", searchText: "Others *" },
             { id: "c117", type: "item", name: "USEFUL TIPS", searchText: "USEFUL TIPS" },
             { id: "c108", type: "item", name: "CONSTANTS", searchText: "CONSTANTS" },
@@ -397,7 +404,7 @@
 
         ]
 
-        var box = null;
+        var box;
             
         // First running function.
         var start = function() {
@@ -450,9 +457,17 @@
                 self.center("left")
             })
 
-            // UI SEARCH BOX: Search box.
-            leftMenu.txtSearch = createUISearchBox(10, 80, LEFT_MENU_WIDTH - 20)
+            // UI SEARCH BOX: Search box. //10, 80, LEFT_MENU_WIDTH - 20
+            leftMenu.txtSearch = UISearchBox.create({
+                width: LEFT_MENU_WIDTH - 10,
+                height: 42,
+                searchIconFile: "js/components/ui-search-box/search.svg",
+                clearIconFile: "js/components/ui-search-box/clear.svg",
+                fontSize: 15,
+            })
             leftMenu.add(that)
+            that.left = 5;
+            that.top = 72;
             that.color = "rgba(0,0,0,0.05)"
             //that.visible = 1
 
@@ -468,7 +483,7 @@
 
             leftMenu.lblVersion = createLabel(0, 0, LEFT_MENU_WIDTH, 16)
             leftMenu.add(that)
-            that.text = "v1.7.2"
+            that.text = "v1.7.4"
             that.bottom = 10
             that.fontSize = 12
             that.textAlign = "center"
@@ -535,7 +550,7 @@
 
             page.onResize(resizePage)
 
-            leftMenu.txtSearch.onSearch(function(self, searchText) {
+            leftMenu.txtSearch.onSearch(function(searchText) {
                 leftMenu.uiItemList.searchItemByText(searchText);
             })
 
@@ -629,7 +644,7 @@
                     //that.visible = 1
                     that.onResize(function(self) {
                         // self.center()
-                        // print(self.top)
+                        // println(self.top)
                     })
                     break;
 
@@ -654,7 +669,7 @@
                     //that.visible = 1
                     that.onResize(function(self) {
                         // self.center()
-                        // print(self.top)
+                        // println(self.top)
                     })
                     break;
 
@@ -679,7 +694,7 @@
                     //that.visible = 1
                     that.onResize(function(self) {
                         // self.center()
-                        // print(self.top)
+                        // println(self.top)
                     })
                     break;
 
@@ -833,7 +848,7 @@
 
 <div id="c1">
 
-<div class="content-title">INTRODUCTION</div>
+<div class="content-title">GET STARTED</div>
 <div class="content-text">This JavaScript library helps you to create an interactive user interface with basic programming skills.</div>
 <br>
 <!-- <div class="content-code"><span class="code-2">random</span>(number1: <span class="code-1">Integer</span>, number2: <span class="code-1">Integer</span>) : <span class="code-1">Integer</span></div> -->
@@ -847,7 +862,225 @@
     // Example 1:
     window.onload = function() {
 
-        print("The library is ready to use.");
+        println("The library is ready to use.");
+        
+    };
+</div>
+
+<div class="content-text">What does the code look like? Look the example:</div>
+
+<div class="code-example">
+    // Example 2:
+    let lblText;
+    let clickedCount = 0;
+
+    window.onload = function() {
+        
+        // GROUP: Autolayout (Default: centered)
+        startFlexBox();
+
+            // LABEL: Clickable label
+            lblText = Label({
+                text: "Click Me",
+                color: "lightgray",
+                spaceX: 12,
+                spaceY: 4,
+                round: 4,
+                border: 1,
+                borderColor: "rgba(0, 0, 0, 0.1)",
+            });
+            that.elem.style.cursor = "pointer";
+            that.onClick(increaseOne);
+
+        endFlexBox();
+        
+    };
+    
+    const increaseOne = function() {
+
+        clickedCount++;
+        lblText.text = "Clicked Count: " + clickedCount;
+
+        println(clickedCount);
+        
+    };
+</div>
+
+<div class="content-text content-note">The library will set <b>body { margin: 0px; overflow: hidden; }</b></div>
+<!-- <div class="content-text content-note">The library will set <b>body {  }</b></div> -->
+<!-- <div class="content-sub-text">&#8226; To use scrollbar; look the Box object, <b>.scrollX, .scrollY</b> methods.</div> -->
+
+<br>
+
+<!-- <div class="content-text">&#8226; An project can be created by just writing code.</div> -->
+<div class="content-text">&#8226; Everything is an object and all its properties can be changeable any time after it is created.</div>
+<!-- <div class="content-text">&#8226; It is not a low code technology, but readable code and full control of on your project.</div>-->
+<!-- <div class="content-text">&#8226; It is not a low code technology, but full control of your user interface and readable code techniques can be applied.</div> -->
+
+<div class="content-text">An other example:</div>
+
+<div class="code-example">
+
+    let item1;
+    let item2;
+
+    window.onload = function() {
+
+        // CUSTOM COMPONENT: item1
+        item1 = CustomComponent({
+            top: 10,
+            left: 10,
+            value1: "A",
+            value2: "value2",
+            value3: "value3",
+            value4: "25",
+        });
+
+        // CUSTOM COMPONENT: item2
+        item2 = CustomComponent({
+            value1: "B",
+            value2: "value2",
+            value3: "value3",
+            value4: "134",
+        });
+        // Show at:
+        item2.aline(item1, "bottom", 4);
+
+        // BUTTON: Change Properties
+        Button({
+            bottom: 10,
+            width: 200,
+            text: "Change Properties",
+            minimal: 1,
+            color: "whitesmoke",
+        });
+        that.center("left");
+        that.setMotion("opacity 0.3s");
+        that.onClick((clickedButton) => {
+
+            clickedButton.opacity = 0;
+            clickedButton.clickable = 0;
+            item1.lbl1.text = "C";
+            item1.lbl1.color = "yellow";
+            item1.color = "lightblue";
+            item1.lbl2.text = "edited";
+            item1.lbl3.text = "";
+            item1.lbl4.textColor = "red";
+            item2.height = 160;
+            
+        });      
+
+    };
+
+    const CustomComponent = (params = {}) => {
+
+        const defaults = {
+            width: 300,
+            height: 100,
+            border: 1,
+            round: 6,
+        }
+
+        // BOX: item container.
+        const item = startBox();
+        item.props(defaults, params);
+
+            // GROUP: Label at left.
+            startFlexBox({
+                width: 60,
+            });
+
+                // LABEL: Character 
+                item.lbl1 = Label({
+                    text: params.value1,
+                    color: "white",
+                    spaceX: 16,
+                    spaceY: 8,
+                    border: 1,
+                });
+                that.round = that.width;
+
+            endFlexBox();
+
+            // GROUP: Labels at center.
+            startFlexBox({
+                flexDirection: "column",
+                alignItems: "flex-start",
+                width: "calc(100% - 80px)",
+                right: 0,
+            });
+
+                // LABEL: Title
+                item.lbl2 = Label({
+                    text: params.value2,
+                });
+
+                // LABEL: Description
+                item.lbl3 = Label({
+                    text: params.value3,
+                    fontSize: 14,
+                    opacity: 0.8,
+                });
+
+            endFlexBox();
+
+            // GROUP: Label at right.
+            startFlexBox({
+                justifyContent: "flex-end",
+                width: 150,
+                right: 20,
+            });
+
+                // LABEL: Number
+                item.lbl4 = Label();
+                that.text = params.value4;
+                that.element.style.fontFamily = "opensans-bold";
+
+            endFlexBox();
+
+        endBox();
+
+        makeBasicObject(item);
+        return item;
+
+    };
+    </div>
+
+
+<div class="content-text content-info"><b>Empty Project Template:</b> 00C-empty-project-template.htm</div>
+
+<div class="content-text">&#8226; <b>Library Website</b>:</div>
+<div class="content-sub-text">https://github.com/bug7a/basic.js</div>
+<div class="content-text">&#8226; <b>Beginner Examples</b>:</div>
+<div class="content-sub-text">https://github.com/bug7a/basic.js-examples</div>
+<div class="content-sub-text">&#8226; Other examples are in this project.</div>
+<div class="content-text">&#8226; <b>Full Project</b>:</div>
+<div class="content-sub-text">https://bug7a.github.io/javascript-mobile-app-template/</div>
+
+<br>
+
+<!--<div class="content-text"><b>Project website:</b><br><a href="https://bug7a.github.io/basic.js/">https://bug7a.github.io/basic.js/</a></div>-->
+
+</div>
+
+
+<div id="c118">
+
+<div class="content-title">DELETEDGET STARTED</div>
+<div class="content-text">This JavaScript library helps you to create an interactive user interface with basic programming skills.</div>
+<br>
+<!-- <div class="content-code"><span class="code-2">random</span>(number1: <span class="code-1">Integer</span>, number2: <span class="code-1">Integer</span>) : <span class="code-1">Integer</span></div> -->
+<div class="content-text">In this book, you will find a list and brief explanations of the codes you can use with the basic.js library.</div>
+<!-- <div class="content-text">&#8226; When a project using the library is first opened; If it exists, the <b>start()</b> function is called ONCE.</div> -->
+<!-- <div class="content-sub-text">Before, all the variables and functions written on the outermost are ready to be used.</div> -->
+<div class="content-text">&#8226; This library can usable after the page is loaded.</div>
+<!-- <div class="content-sub-text">&#8226; You can use <b>window.onload = function() {  }</b></div> -->
+
+<div class="code-example">
+    // Example 1:
+    window.onload = function() {
+
+        println("The library is ready to use.");
         
     };
 </div>
@@ -873,6 +1106,8 @@
 
         clickedCount++;
         lblText.text = "Clicked Count: " + clickedCount;
+
+        println(clickedCount);
         
     };
 </div>
@@ -1012,7 +1247,7 @@
 <div class="content-sub-text">https://github.com/bug7a/basic.js-examples</div>
 <div class="content-sub-text">&#8226; Other examples are in this project.</div>
 <div class="content-text">&#8226; <b>Full Project</b>:</div>
-<div class="content-sub-text">https://bug7a.github.io/cordova-mobile-app-ui-template/</div>
+<div class="content-sub-text">https://bug7a.github.io/javascript-mobile-app-template/</div>
 
 <br>
 
@@ -1022,7 +1257,7 @@
 
             <div id="c2">
 
-            <div class="content-title">DATA TYPES USED</div>
+            <div class="content-title">OBJECT TYPES</div>
 
             <div class="content-sub-title">Simple Data Types</div>
             <div class="content-sub-text"><b>&#8226; String</b>: text. "A text"<br>
@@ -1036,13 +1271,13 @@
 
             <div class="content-sub-title">Other Types</div>
             <div class="content-sub-text"><b>&#8226; Function</b>, function. function() { }</div>
-            <div class="content-sub-text"><b>&#8226; BasicObject</b>: It can be a <b>Label</b>, <b>Button</b>, <b>TextBox</b>, <b>Image</b> or <b>Box</b> object.</div>
+            <div class="content-sub-text"><b>&#8226; BasicObject</b>: It can be a <b>Label</b>, <b>Button</b>, <b>Input</b>, <b>Icon</b> or <b>Box</b> object.</div>
             <!-- <div class="content-sub-text content-info">This name is a special designation used to identify objects in the basic.js library.</div> -->
             
             <div class="code-example">
     window.onload = function() {
 
-        // GROUP:
+        // GROUP: Autolayout
         startFlexBox({
             flexDirection: "column",
             justifyContent: "space-around",
@@ -1050,29 +1285,35 @@
         that.color = "lightblue";
 
             // BOX:
-            createBox();
-            that.border = 1;
-            that.color = "indianred";
+            Box({
+                border: 1,
+                color: "indianred",
+            });
 
             // LABEL:
-            createLabel();
-            that.border = 1;
-            that.color = "white";
+            Label({
+                text: "Label Text",
+                border: 1,
+                color: "white",
+            });
 
             // TEXTBOX:
-            createTextBox();
+            Input();
 
             // BUTTON:
-            createButton();
-            that.color = "white";
+            Button({
+                text: "Button Text",
+                color: "white",
+            });
 
             // IMAGE:
-            createImage();
-            that.width = 100;
-            that.height = 100;
+            Icon({
+                width: 100,
+                height: 100,
+                border: 1,
+                color: "white",
+            });
             that.load("assets/broccoli.png");
-            that.border = 1;
-            that.color = "white";
 
         endFlexBox();
 
@@ -1101,20 +1342,24 @@
             <div class="content-text">&#8226; The numbers given are included.</div>
 
             <div class="code-example">
+
+    let lblNumbers;
+
     window.onload = function() {
 
         // LABEL: Numbers
-        page.lblNumbers = createLabel();
-        that.text = "";
-        that.textAlign = "center";
-        that.border = 1;
-        that.spaceX = 6;
-        that.spaceY = 4;
-        that.top = 30;
-        that.left = 40;
+        lblNumbers = Label({
+            left: 40,
+            top: 30,
+            text: "",
+            textAlign: "center",
+            border: 1,
+            spaceX: 6,
+            spaceY: 4,
+        });
 
         for(var i = 1; i <= 10; i++) {
-            page.lblNumbers.text += random(1, 100) + "&#60;br>";
+            lblNumbers.text += random(1, 100) + "&#60;br>";
         }
 
     };
@@ -1164,13 +1409,13 @@
 
             <div id="c4">
 
-                <div class="content-title">print()</div>
+                <div class="content-title">println()</div>
                 <div class="content-text">Sends a message to the console.</div>
-                <div class="content-code"><span class="code-2">print</span>(message: <span class="code-1">String</span>)</div>
+                <div class="content-code"><span class="code-2">println</span>(message: <span class="code-1">String</span>)</div>
                 
                 <br>
                 
-                <div class="content-text content-info">If you want to print the page, use the <b>printThePage()</b></div>
+                <!-- <div class="content-text content-info">If you want to print the page, use the <b>printThePage()</b></div> -->
 
                 <br>
 
@@ -1448,47 +1693,54 @@
 
             <div id="c19">
 
-                <div class="content-title">that</div>
+                <div class="content-title">that and prevThat</div>
                 <div class="content-text">When a basic ui object is created, until another is created; This object can be accessed with the variable named <b>that</b>.</div>
                 <div class="content-info-box-group">
-                    <span class="content-info-box colored">Type: <b>Label</b>, <b>Button</b>, <b>TextBox</b>, <b>Image</b> or <b>Box</b></span>
+                    <span class="content-info-box colored">Type: <b>Label</b>, <b>Button</b>, <b>Input</b>, <b>Icon</b> or <b>Box</b></span>
                 </div>
 
                 <br>
 
-                <div class="content-text">The previous object is passed to the <b>previousThat</b> variable.</div>
+                <div class="content-text">The previous object is passed to the <b>prevThat</b> variable.</div>
 
                 <div class="code-example">
     window.onload = function() {
 
         // BOX: Red
-        createBox(10, 10, 100, 100);
-        that.color = "red";
+        Box(10, 10, 100, 100, {
+            color: "red",
+        });
 
         // BOX: Blue
-        createBox();
-        that.color = "blue";
-        // Make same size.
-        that.width = previousThat.width / 2;
-        that.height = previousThat.height / 2;
+        Box({
+            color: "blue",
+        });
+        // Make half size.
+        that.width = prevThat.width / 2;
+        that.height = prevThat.height / 2;
 
         // Put it at the right of the Red box.
-        that.aline(previousThat, "right", 5, "center");
+        that.aline(prevThat, "right", 5, "center");
 
     }
                 </div>
 
                 <div class="code-example">
+    let box1;
+    let box2;
+
     // Example with names.
     window.onload = function() {
 
         // BOX: Red
-        const box1 = createBox(10, 10, 100, 100);
-        that.color = "red";
+        box1 = Box(10, 10, 100, 100, {
+            color: "red",
+        });
 
         // BOX: Blue
-        const box2 = createBox();
-        that.color = "blue";
+        box2 = Box({
+            color: "blue",
+        });
         // Make same size.
         that.width = box1.width / 2;
         that.height = box1.height / 2;
@@ -1518,21 +1770,36 @@
                 <div class="content-text">&#8226; Positioning as a float data type allows for smoother movements.</div>
                 <div class="content-text content-note">The object is first rendered outside the screen. Will be displayed when the object is given a position.</div>
                 <div class="code-example">
+
+    let boxBlue;
+    let boxGreen;
+    let boxRed;
+
     window.onload = function() {
 
+        // BOX: Blue box.
+        boxBlue = Box(10, 10, {
+            color: "blue",
+        });
+
+        // OR
+
+        // BOX: Green box.
+        boxGreen = Box({
+            left: 10,
+            top: 120,
+            color: "green",
+        });
+
+        // OR
+
         // BOX: Red box.
-        const boxRed = createBox();
+        boxRed = Box();
         that.color = "red";
 
         // Show object:
         that.left = 10;
-        that.top = 10;
-
-        // OR
-        
-        // BOX: Blue box.
-        const boxBlue = createBox(10, 120);
-        that.color = "blue";
+        that.top = 230;
 
     }
                 </div>
@@ -1543,18 +1810,23 @@
                 <div class="content-text content-note"><b>.center()</b> and <b>.aline()</b> methods only work for an object that has an <b>"absolute"</b> position. And work only when called.</div>
 
                 <div class="code-example">
+    let boxRed;
+    let boxBlue;
+
     window.onload = function() {
 
         // BOX: Red box.
-        const boxRed = createBox();
-        that.color = "red";
+        boxRed = Box({
+            color: "red",
+        });
 
         // Show red box object:
         that.center();
 
         // BOX: Blue box.
-        const boxBlue = createBox();
-        that.color = "blue";
+        boxBlue = Box({
+            color: "blue",
+        });
 
         // Show blue box object:
         boxBlue.aline(boxRed, "bottom", 10);
@@ -1566,11 +1838,14 @@
                 <div class="content-text">&#8226; Or set <b>.position</b> to <b>"relative"</b> to show object.</div>
 
                 <div class="code-example">
+    let boxRed;
+    
     window.onload = function() {
 
         // BOX: Red box.
-        const boxRed = createBox();
-        that.color = "red";
+        boxRed = Box({
+            color: "red",
+        });
 
         // Show red box object:
         that.position = "relative";
@@ -1882,8 +2157,8 @@
 
             <div id="c32">
 
-                <div class="content-title">object.fontSize or object.textSize</div>
-                <div class="content-text">Determines the text size of the object.</div>
+                <div class="content-title">object.fontSize</div>
+                <div class="content-text">Determines the font size of the object.</div>
                 <div class="content-info-box-group">
                     <span class="content-info-box colored">Type: <b>Integer</b></span>
                 </div>
@@ -1956,15 +2231,18 @@
                 </table>
 
                 <div class="code-example">
+    let lbl;
+                
     window.onload = function() {
 
-        const lbl = createLabel();
-        that.text = "Some Text";
-        that.top = 10;
-        that.left = 0;
-        that.width = "100%";
-        that.textAlign = "center";
-        that.color = "lightgray";
+        lbl = Label({
+            left: 0,
+            top: 0,
+            width: "100%",
+            text: "Some Text",
+            textAlign: "center",
+            color: "lightgray",
+        });
 
     }
                 </div>
@@ -2008,10 +2286,10 @@
 
             <div id="c36">
 
-                <div class="content-title">object.element</div>
+                <div class="content-title">object.elem (element)</div>
                 <div class="content-text">Object that connects the Basic UI Object with HTML.</div>
                 <div class="content-info-box-group">
-                    <span class="content-info-box colored">Type: <b>Object</b></span>
+                    <span class="content-info-box colored">Type: <b>Document Object Model</b></span>
                 </div>
 
                 <table>
@@ -2077,26 +2355,30 @@
                 <!-- <div class="content-text">&#8226; Label object's <b>.width</b> and <b>.height</b>, Button object's <b>.width</b> and Box object's <b>.height</b> properties can be set to <b>"auto"</b>.</div> -->
                 <div class="content-text">&#8226; The object itself is sent to the called function.</div>
 <div class="code-example">
+    let lblName;
+
     window.onload = function() {
 
         // LABEL: 
-        window.lblName = createLabel();
-        that.text = "My Name";
-        that.width = "auto";
-        that.height = "auto";
-        that.onResize(function(resizedLabel) {
-            print(resizedLabel.width);
-            print(resizedLabel.height);
+        lblName = Label({
+            width: "auto",
+            height: "auto",
+            text: "My name",
+        });
+        that.onResize((resizedLabel) => {
+            println(resizedLabel.width);
+            println(resizedLabel.height);
             resizedLabel.center();
         });
 
         // BUTTON:
-        createButton();
-        that.text = "Change Text";
-        that.minimal = 1;
-        that.bottom = 10;
+        Button({
+            bottom: 10,
+            text: "Change Text",
+            minimal: 1,
+        });
         that.center("left");
-        that.onClick(function(clickedButton) {
+        that.onClick((clickedButton) => {
             lblName.text = "An other name";
         });
 
@@ -2143,8 +2425,8 @@
         that.color = "red";
         that.top = 0;
         that.center("left");
-        print("Red box left: " + that.left);
-        print("Red box position: " + that.position);
+        println("Red box left: " + that.left);
+        println("Red box position: " + that.position);
 
         // BOX: Blue at left center;
         createBox();
@@ -2163,6 +2445,56 @@
                 <br>
 
         </div>
+
+        <div id="c119">
+
+            <div class="content-title">object.centerBy()</div>
+            <div class="content-text">Centers the object relative to the an other object.</div>
+            <!-- <div class="content-code">object.<span class="code-2">center</span>()</div> -->
+            <div class="content-code">object.<span class="code-2">centerBy</span>(target: <span class="code-1">BasicObject</span>, direction: <span class="code-1">String</span>)</div>
+
+            <br>
+
+            <div class="content-text">#1</div>
+            <div class="content-text"><b>target</b>: According to which object will it be positioned?</div>
+
+            <table>
+                <thead><tr><th>Value</th><th>Description</th></tr></thead>
+                <tbody>
+                    <tr><td class="normal">Empty</td><td>Center by left and top.</td></tr>
+                    <tr><td class="normal">"top"</td><td>Center by top.</td></tr>
+                    <tr><td class="normal">"left"</td><td>Center by left.</td></tr>
+                </tbody>
+            </table>
+
+            <!-- <div class="content-text">If the parameter is left blank, it will center in both directions.</div> -->
+            <div class="content-text content-note">The <b>.left</b> and <b>.top</b> values ​​of the object are changed to appear in the middle.</div>
+
+            <div class="code-example">
+window.onload = function() {
+
+    // BOX: Red at top center.
+    window.boxA = createBox(20, 20, 200, 200);
+    that.color = "red";
+    println("Red box left: " + that.left);
+    println("Red box position: " + that.position);
+
+    // BOX: Blue at left center;
+    createBox();
+    that.color = "blue";
+    that.centerBy(window.boxA);
+
+    // BOX: Pink at center;
+    createBox();
+    that.color = "pink";
+    that.centerBy(window.boxA, "left");
+
+}
+            </div>
+
+            <br>
+
+    </div>
 
             <div id="c40">
 
@@ -2246,9 +2578,9 @@
 
             <div id="c42">
 
-                <div class="content-title">object.prop() and styles</div>
+                <div class="content-title">object.props()</div>
                 <div class="content-text">Changes the properties of the object in bulk.</div>
-                <div class="content-code">object.<span class="code-2">prop</span>(properties: <span class="code-1">Object</span>)</div>
+                <div class="content-code">object.<span class="code-2">props</span>(props: <span class="code-1">Object</span>, p2: <span class="code-1">Object</span>, p3: <span class="code-1">Object</span>)</div>
                 
                 <br>
 
@@ -2256,7 +2588,7 @@
                 <div class="content-text"><b>properties</b>: Data list object of properties.</div>
 
     <div class="code-example">
-    const redBoxProp = {
+    const redBoxStyle = {
         width: 200, 
         height: 200, 
         color: "red", 
@@ -2269,7 +2601,7 @@
     window.onload = function() {
         
         createBox();
-        that.prop(redBoxProp);
+        that.props(redBoxStyle);
         that.left = 10;
         that.top = 10;
         
@@ -2279,7 +2611,7 @@
     <div class="content-text">&#8226; Alternative method:</div>
     <div class="code-example">
     const styles = {};
-    styles.redBoxStyle = function(box) {
+    styles.redBox = function(box) {
 
         box.width = 200;
         box.height = 200;
@@ -2294,7 +2626,7 @@
     window.onload = function() {
         
         createBox();
-        styles.redBoxStyle(that);
+        styles.redBox(that);
         that.left = 10;
         that.top = 10;
         
@@ -2331,10 +2663,12 @@
                 <div class="content-text">&#8226; Use <b>object.setMotion("none")</b> to disable the object's motion property. Or, to pause it temporarily, <b>object.dontMotion()</b> can be used.</div>
                 <div class="content-text">&#8226; Uses <b>transition</b> property in CSS.</div>
     <div class="code-example">
+    let boxRed;
+
     window.onload = function() {
 
         // BOX: Red
-        window.boxRed = createBox();
+        boxRed = createBox();
         that.color = "red";
         that.opacity = 0;
         that.width = 50;
@@ -2492,13 +2826,13 @@
 <div class="code-example">
     window.onload = function() {
 
-        // GROUP:
+        // GROUP: Values are also defaults.
         startFlexBox({
-            flexDirection: "row",
-            flexWrap: "nowrap",
-            alignContent: "center",
-            justifyContent: "center",
-            alignItems: "center",
+            flexDirection: "row", // row, column
+            flexWrap: "nowrap", // wrap, nowrap
+            alignContent: "center", // flex-start, center, flex-end, space-between, space-around, stretch (up to down)
+            justifyContent: "center", // flex-start, center, flex-end, space-between, space-around, space-evenly (left to right)
+            alignItems: "center", // flex-start, flex-end, center, baseline, stretch
         });
         that.width = "100%";
         that.height = "100%";
@@ -2537,7 +2871,7 @@
         that.center();
 
         that.onClick(function(clickedButton) {
-            print("button clicked");
+            println("button clicked");
         });
 
     }
@@ -2620,34 +2954,39 @@
                 </tbody>
             </table>
 
+            <div class="content-text content-note">If an object is created inside a <b>startFlexBox()</b>, its position value is <b>"relative"</b> by default. In all other cases, the default value is <b>"absolute"</b>.</div>
+
+            <div class="content-text content-note">If the position of an object is <b>"absolute"</b>, its coordinates must be given for the object to be visible.</div>
+
+
             <div class="code-example"> 
     window.onload = function() {
 
-        // LABEL: relative
-        createLabel();
-        that.text = "absolute label";
-        that.bottom = 20;
-        that.right = 20;
+        // LABEL: Absolute
+        Label({
+            right: 20,
+            bottom: 20,
+            text: "absolute label",
+        });
 
-        // GROUP: Labels
+        // GROUP: Autolayout (Default: centered)
         startFlexBox();
 
-            // LABEL: relative
-            createLabel();
-            that.text = "relative label";
+            // LABEL: Relative
+            Label({ text: "relative label" });
 
             // LABEL: absolute
-            createLabel();
-            that.text = "absolute label in flexBox";
-            that.position = "absolute";
-            that.top = 20;
-            that.left = 20;
-
-        endFlexBox();
+            Label({
+                left: 20,
+                top: 20,
+                text: "absolute label in flexBox",
+                position: "absolute",
+            });
+            
+        endFlexBox(); // END Autolayout
 
     }
             </div>
-            <div class="content-text content-note">If an object is created inside a <b>startFlexBox()</b>, its position value is <b>"relative"</b> by default.</div>
 
             <br>
 
@@ -2728,7 +3067,7 @@
 
                 <br>
 
-                <div class="content-text">&#8226; Alternatively, it can be used as <b>cbtn(*)</b> or <b>new Button(*)</b>.</div>
+                <div class="content-text">&#8226; Alternatively, it can be used as <b>Button(props: Object)</b>.</div>
 
                 <br>
         </div>
@@ -2835,19 +3174,19 @@
             </div>
 
 <div id="t6">
-    <div class="content-title">TEXT BOX OBJECT (CLASS NAME: TextBox)</div>
+    <div class="content-title">INPUT OBJECT (CLASS NAME: Input)</div>
     <div class="content-text">It is used to get information from the user.</div>
 </div>
 
             <div id="c61">
 
-                <div class="content-title">createTextBox()</div>
-                <div class="content-text">Creates a new text box object.</div>
-                <div class="content-code"><span class="code-2">createTextBox</span>(left: <span class="code-1">Float</span>, top: <span class="code-1">Float</span>, width: <span class="code-1">Integer</span>, height: <span class="code-1">Integer</span>) : <span class="code-1">Box</span></div>
+                <div class="content-title">createInput()</div>
+                <div class="content-text">Creates a new input object.</div>
+                <div class="content-code"><span class="code-2">createInput</span>(left: <span class="code-1">Float</span>, top: <span class="code-1">Float</span>, width: <span class="code-1">Integer</span>, height: <span class="code-1">Integer</span>) : <span class="code-1">Box</span></div>
 
                 <br>
 
-                <div class="content-text">&#8226; Alternatively, it can be used as <b>ctxt(*)</b> or <b>new TextBox(*)</b>.</div>
+                <div class="content-text">&#8226; Alternatively, it can be used as <b>Input(props: Object)</b>.</div>
 
                 <br>
         </div>
@@ -2997,7 +3336,7 @@
 
                 <br>
 
-                <div class="content-text">&#8226; Alternatively, it can be used as <b>clbl(*)</b> or <b>new Label(*)</b>.</div>
+                <div class="content-text">&#8226; Alternatively, it can be used as <b>Label(props: Object)</b>.</div>
 
                 <div class="code-example">
     window.onload = function() {
@@ -3065,11 +3404,11 @@
 
                     if (clickedLabel.color == "white") {
                         clickedLabel.color = "seagreen";
-                        print("Clicked label (" + clickedLabel.text + ") is green.");
+                        println("Clicked label (" + clickedLabel.text + ") is green.");
 
                     } else {
                         clickedLabel.color = "white";
-                        print("Clicked label (" + clickedLabel.text + ") is white.");
+                        println("Clicked label (" + clickedLabel.text + ") is white.");
                     } 
 
                 });
@@ -3090,7 +3429,7 @@
 
             for(const lbl of lblList) {
                 lbl.color = "lightgray";
-                print("label (" + lbl.text + ") is gray.");
+                println("label (" + lbl.text + ") is gray.");
             }
 
         });
@@ -3192,21 +3531,21 @@
         -->
 
 <div id="t8">
-    <div class="content-title">IMAGE OBJECT (CLASS NAME: Image)</div>
+    <div class="content-title">ICON OBJECT (CLASS NAME: Icon)</div>
     <div class="content-text">Used to display an image file (.png, .jpg, .gif, .svg etc.) on the screen.</div>
 </div>
 
             <div id="c77">
 
-                <div class="content-title">createImage()</div>
+                <div class="content-title">createIcon()</div>
                 <div class="content-text">Creates a new image object.</div>
-                <div class="content-code"><span class="code-2">createImage</span>(left: <span class="code-1">Float</span>, top: <span class="code-1">Float</span>, width: <span class="code-1">Integer</span>, height: <span class="code-1">Integer</span>) : <span class="code-1">Box</span></div>
+                <div class="content-code"><span class="code-2">createIcon</span>(left: <span class="code-1">Float</span>, top: <span class="code-1">Float</span>, width: <span class="code-1">Integer</span>, height: <span class="code-1">Integer</span>) : <span class="code-1">Box</span></div>
 
                 <br>
 
-                <div class="content-text">&#8226; Alternatively, it can be used as <b>cimg(*)</b> or <b>new Image(*)</b>.</div>
+                <div class="content-text">&#8226; Alternatively, it can be used as <b>Icon(props: Object)</b>.</div>
 
-                <div class="content-text content-info">If you want to use JavaScript Image Object, use <b>new ImageObj()</b></div>
+                <!-- <div class="content-text content-info">If you want to use JavaScript Image Object, use <b>new ImageObj()</b></div> -->
 
                 <br>
 
@@ -3342,8 +3681,8 @@
         that.load("assets/broccoli.png");
         that.onLoad(function(loadedImage) {
             loadedImage.center();
-            print(loadedImage.width);
-            print(loadedImage.height);
+            println(loadedImage.width);
+            println(loadedImage.height);
         });
 
     }
@@ -3737,7 +4076,7 @@
                 <br>
 
                 <div class="content-text">Bugra Ozden &lt;bugra.ozden@gmail.com&gt;</div>
-                <div class="content-text"><b>Personal Site</b>: https://bugraozden.com/</div>
+                <div class="content-text"><b>Personal Site</b>: https://bug7a.github.io/</div>
                 <div class="content-text"><b>GitHub</b>: https://github.com/bug7a</div>
                 <!--
                 <div class="content-text">Bugra Ozden</div>
@@ -4059,7 +4398,7 @@ window.onload = function() {
 
         </div>
 
-            <!-- last c id 117, last t id 13 -->
+            <!-- last c id 119, last t id 13 -->
 
 
         </div>

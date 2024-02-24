@@ -15,11 +15,45 @@ basicEditor.create = function($code = "") {
     that.scrollY = 1;
     that.center("left")
 
+    // GROUP ALL
+    startFlexBox({
+        flexDirection: "row", // row, column
+        flexWrap: "wrap", // wrap, nowrap
+        alignContent: "flex-start", // flex-start, center, flex-end, space-between, space-around, stretch (up to down)
+        justifyContent: "center", // flex-start, center, flex-end, space-between, space-around, space-evenly (left to right)
+        alignItems: "flex-start", // flex-start, flex-end, center, baseline, stretch
+    });
+    //that.color = "blue";
+    that.scrollY = 1;
+    that.elem.style.paddingTop = "20px";
+
+    // BOX: Preview container box.
+    basicEditor.box.boxPreview = createBox(0, 0, 450, 450) //10 + basicEditor.box.left, 10, 450, 450
+    //basicEditor.box.add(that);
+    that.color = "white"
+    that.round = 4;
+    //that.element.style.position = "fixed";
+    that.setMotion("top 0.2s");
+    that.position = "sticky";
+    /*
+    window.top.document.addEventListener("scroll", function(event) {
+        console.log("scroll");
+    });
+    */
+   /*
+    window.top.box.element.addEventListener("scroll", function(event) {
+        //console.log(window.top.box.element.scrollTop);
+        basicEditor.box.boxPreview.top = window.top.box.element.scrollTop;
+        console.log(window.document.top);
+    });
+    */
+
+
     // BOX: code box
     basicEditor.box.boxEditor = createBox(0, 0, 530, "auto")
-    basicEditor.box.add(that)
-    that.color = "transparent"
-    that.right = 0
+    //basicEditor.box.add(that)
+    that.color = "black"
+    //that.right = 0
     that.element.setAttribute("id", "editor1")
     that.element.setAttribute("class", "editor")
     that.clickable = 1;
@@ -43,37 +77,20 @@ basicEditor.create = function($code = "") {
     editor1.setValue($code);
     editor1.gotoLine(2);
 
-    // BOX: Preview container box.
-    basicEditor.box.boxPreview = createBox(10 + basicEditor.box.left, 10, 450, 450)
-    basicEditor.box.add(that);
-    that.color = "white"
-    that.round = 0
-    that.element.style.position = "fixed";
-    that.setMotion("top 0.2s");
-    //that.position = "sticky";
-    /*
-    window.top.document.addEventListener("scroll", function(event) {
-        console.log("scroll");
-    });
-    */
-   /*
-    window.top.box.element.addEventListener("scroll", function(event) {
-        //console.log(window.top.box.element.scrollTop);
-        basicEditor.box.boxPreview.top = window.top.box.element.scrollTop;
-        console.log(window.document.top);
-    });
-    */
 
-    // LABEL: print preview
-    basicEditor.box.lblPrint = createLabel(0, 0, 450, "auto")
-    basicEditor.box.add(that)
-    that.text = ""
-    that.textColor = "white"
-    that.opacity = 0.6
-    that.fontSize = 12
-    that.setMotion("top 0.2s");
-    that.element.style.position = "fixed";
-    that.aline(basicEditor.box.boxPreview, "bottom", 10);
+        /*
+        createBox();
+        that.color = "yellow";
+        that.width = 400;
+        that.height = 400;
+
+        createBox();
+        that.color = "orange";
+        that.width = 400;
+        that.height = 1400;
+        */
+
+    endFlexBox();
     
     page.onResize(pageResized)
 
@@ -97,8 +114,28 @@ basicEditor.runCodeAndRefresh = function() {
     
     try {
 
-        basicEditor.box.boxPreview.html = ""
-        basicEditor.box.lblPrint.text = ""
+    basicEditor.box.boxPreview.html = ""
+    //basicEditor.box.lblPrint.text = ""
+
+    // LABEL: print preview
+    basicEditor.box.lblPrint = createLabel(20, 20, "auto", "auto")
+    //that.color = "grey";
+    //that.top = 20;
+    //that.left = 20;
+    basicEditor.box.boxPreview.add(that);
+    that.position = "absolute";
+    //basicEditor.box.add(that)
+    that.text = ""
+    that.textColor = "#141414";
+    that.spaceX = 8;
+    that.spaceY = 2;
+    that.color = "transparent";
+    that.opacity = 0.6
+    that.fontSize = 12
+    that.textAlign = "left";
+    that.setMotion("top 0.2s");
+    //that.element.style.position = "fixed";
+    //that.aline(basicEditor.box.boxPreview, "bottom", 10);
 
         var content = eval("editor1.getValue();")
         var runFunctionStr
@@ -118,7 +155,7 @@ basicEditor.runCodeAndRefresh = function() {
         
     } catch(e) {
         
-        print("Error: " + e.message);
+        println("Error: " + e.message);
         
     }
 }
@@ -136,8 +173,17 @@ basicEditor.changeCode = function($code) {
 
 }
 
-var print = function(message) {
+var println = function(message) {
+
+    basicEditor.box.lblPrint.text = message + "<br>" + basicEditor.box.lblPrint.text
+    basicEditor.box.lblPrint.color = "lightgray";
+    
+}
+
+/*
+console.log = function(message) {
 
     basicEditor.box.lblPrint.text = message + "<br>" + basicEditor.box.lblPrint.text
     
 }
+*/

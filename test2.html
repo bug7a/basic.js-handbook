@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .input-container {
+      position: relative;
+      margin: 50px;
+    }
+
+    input {
+      width: 220px; /* Sınırları biraz daha genişlettik */
+      height: 22px;
+      padding: 10px;
+      padding-top: 20px;
+      font-size: 16px;
+    }
+
+    label {
+      position: absolute;
+      top: 50%;
+      left: 12px; /* Sol boşluk biraz daha artırıldı */
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: #999;
+      pointer-events: none;
+      transition: 0.2s ease-out;
+    }
+
+    input:focus + label,
+    input:valid + label {
+      top: 10px;
+      transform: translateY(10%);
+      font-size: 10px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="input-container">
+    <input type="text" id="emailInput" required>
+    <label for="emailInput">EMail</label>
+  </div>
+
+</body>
+</html>
