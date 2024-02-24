@@ -1,43 +1,30 @@
-### basic.js LIBRARY (v1.6.5) - HANDBOOK
+### basic.js LIBRARY (v1.7.4)
 
-In this book, you will find a list and brief explanations of the codes you can use with the basic.js library.<br>
-This JavaScript library helps you to create interactive user interface with basic programming skills.<br />
+Create interactive user interfaces with basic programming skills. (A JavaScript library for web app and hybrid mobile app development.)<br />
 
 <br>
+
+### Library Website:
+https://bug7a.github.io/basic.js/
 
 ### Handbook:
 https://bug7a.github.io/basic.js-handbook/
 
-### Library Page:
-https://bug7a.github.io/basic.js/
-
-### Examples:
+### More Beginner Examples:
 https://bug7a.github.io/basic.js-examples/
 
 ### Project Example #1:
 https://bug7a.github.io/javascript-single-page-application-example/
 
-### Project Example #2:
-https://bug7a.github.io/cordova-mobile-app-ui-template/
+### Project Example (Full Project) #2:
+https://bug7a.github.io/javascript-mobile-app-template/
+
 
 <br><br>
 
-### Contact information
+### LICENSE:
 
-Starting Date: 25 October 2020<br>
-Developer: Bugra Ozden<br>
-Email: bugra.ozden@gmail.com<br>
-Web Site: http://bugraozden.com<br><br>
+Copyright 2020-2024 Bugra Ozden <bugra.ozden@gmail.com><br />
+Licensed under the Apache License, Version 2.0<br /><br />
 
-I wish you well,<br />
-Good work.<br /><br />
-
-### License
-
-You are free:<br />
-
-to Share — to copy, distribute and transmit the work<br />
-to Remix — to adapt the work<br />
-to make commercial use of the work<br />
-
-<https://creativecommons.org/licenses/by/4.0/><br /><br />
+Have Fun.
