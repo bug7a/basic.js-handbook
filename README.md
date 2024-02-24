@@ -1,14 +1,15 @@
-### basic.js LIBRARY (v1.7.4)
+### basic.js LIBRARY (v1.6.5) - HANDBOOK
 
-Create interactive user interfaces with basic programming skills. (A JavaScript library for web app and hybrid mobile app development.)<br />
+In this book, you will find a list and brief explanations of the codes you can use with the basic.js library.<br>
+This JavaScript library helps you to create interactive user interface with basic programming skills.<br />
 
 <br>
 
-### Library Website:
-https://bug7a.github.io/basic.js/
-
 ### Handbook:
 https://bug7a.github.io/basic.js-handbook/
+
+### Library Website:
+https://bug7a.github.io/basic.js/
 
 ### More Beginner Examples:
 https://bug7a.github.io/basic.js-examples/
@@ -16,11 +17,17 @@ https://bug7a.github.io/basic.js-examples/
 ### Project Example #1:
 https://bug7a.github.io/javascript-single-page-application-example/
 
-### Project Example (Full Project) #2:
+### Project Example #2:
 https://bug7a.github.io/javascript-mobile-app-template/
 
-
 <br><br>
+
+### Contact information
+
+Starting Date: 25 October 2020<br>
+Developer: Bugra Ozden<br>
+Email: bugra.ozden@gmail.com<br>
+Web Site: https://bug7a.github.io/<br><br>
 
 ### LICENSE:
 
