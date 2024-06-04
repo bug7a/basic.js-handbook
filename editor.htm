@@ -9,8 +9,8 @@
 
         <!-- LIBRARY FILES -->
         <script src="lib/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-        <link rel="stylesheet" type="text/css" href="basic/basic.css">
-        <script src="basic/basic.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" type="text/css" href="basic/basic.min.css">
+        <script src="basic/basic.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/basic-editor.js" type="text/javascript" charset="utf-8"></script>
 
         <style>
@@ -26,6 +26,18 @@
                 border-radius: 6px;
                 font-size: 11px;
                 
+            }
+
+            .highlight {
+                background-color: yellow;
+                border: 2px solid red;
+                cursor: wait;
+                pointer-events: auto;
+            }
+
+            .highlight:hover {
+                background-color: red;
+                border: 2px solid black;
             }
 
         </style>
@@ -51,6 +63,13 @@
 
     // code
 
+</div>
+
+<div style="display:none;">
+<div id="element-id">
+    <h1>My First Heading</h1>
+    <p>My first paragraph. <a href="https://bug7a.github.io/">link</a></p>
+</div>
 </div>
         
     </body>
