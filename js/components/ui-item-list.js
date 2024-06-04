@@ -92,6 +92,15 @@ var createUIItemList = function(left = 0, top = 0, width = 600, height = page.he
     box.element.style.wordSpacing = "0px"
     box.element.style.letterSpacing = "0px"
     box.element.style.fontSize = "0px"
+
+    ScrollBar({
+        scrollableBox: box,
+        bar_width: 4,
+        bar_mouseOverWidth: 8,
+        scrollOnContent: 0,
+        bar_mouseOverColor: "indianred",
+        bar_mouseOverOpacity: 1,
+    });
     
     // *** PRIVATE METHODS:
     var addItem = function(item) {
