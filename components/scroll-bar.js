@@ -308,13 +308,13 @@ const ScrollBar = function(params = {}) {
     });
 
     const _highlightLeftBar = function() {
-        box.boxScrollBarLeft.width = box.bar_mouseOverWidth;
+        box.boxScrollBarLeft.height = box.bar_mouseOverWidth;
         box.boxScrollBarLeft.color = box.bar_mouseOverColor;
         box.boxScrollBarLeft.opacity = box.bar_mouseOverOpacity;
     };
 
     const _lowlightLeftBar = function() {
-        box.boxScrollBarLeft.width = box.bar_width;
+        box.boxScrollBarLeft.height = box.bar_width;
         box.boxScrollBarLeft.color = box.bar_color;
         box.boxScrollBarLeft.opacity = box.bar_opacity;
     };
