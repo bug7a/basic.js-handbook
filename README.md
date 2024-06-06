@@ -30,7 +30,7 @@ https://bug7a.github.io/javascript-mobile-app-template/
 https://play.google.com/store/apps/details?id=com.bugraozden.expense
 
 ### PC Game on Steam:
-https://bug7a.github.io/javascript-mobile-app-template/
+https://store.steampowered.com/app/2923920/
 
 <br><br>
 
