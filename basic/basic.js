@@ -3,10 +3,10 @@
 
 /*
 
-basic.js (v24.06) Create interactive user interfaces with basic programming skills.
+basic.js (v25.06) Use basic programming to create web-based applications. You don't have to write HTML or CSS with this technique.
 - Project Site: https://bug7a.github.io/basic.js/
 
-Copyright 2020-2024 Bugra Ozden <bugra.ozden@gmail.com>
+Copyright 2020-2025 Bugra Ozden <bugra.ozden@gmail.com>
 - https://github.com/bug7a
 
 Licensed under the Apache License, Version 2.0
@@ -16,7 +16,6 @@ Licensed under the Apache License, Version 2.0
 (function() {
 "use strict";
 const basic = {};
-const win = window;
 
 /*
 if ( typeof module === "object" && typeof module.exports === "object" ) {
@@ -45,55 +44,10 @@ basic.BUTTON_TEXT_COLOR = "rgba(0, 0, 0, 0.65)";
 basic.TEXTBOX_WIDTH = 270;
 basic.TEXTBOX_HEIGHT = 50;
 
-basic.gunler = [
-    "Pazar",
-    "Pazartesi", 
-    "Salı", 
-    "Çarşamba", 
-    "Perşembe", 
-    "Cuma", 
-    "Cumartesi"
-];
-
-basic.days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-];
-
-basic.aylar = [
-    "Ocak", 
-    "Şubat", 
-    "Mart", 
-    "Nisan",
-    "Mayıs",
-    "Haziran",
-    "Temmuz",
-    "Ağustos",
-    "Eylül",
-    "Ekim",
-    "Kasım",
-    "Aralık"
-];
-
-basic.months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-];
+basic.gunler = ["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
+basic.days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+basic.aylar = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
+basic.months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
 window.that = null;
 window.previousThat = null;
@@ -158,7 +112,7 @@ basic.afterStart = function () {
     // console.log(timeUsed);
 };
 
-//window.printThePage = window.print;
+// you cant use console.log in *.min.js files but println
 window.println = function ($message, $type = "log") {
     const _console = console;
     _console[$type]($message);
@@ -172,14 +126,14 @@ window.random = function ($first, $second) {
     if ($second != undefined) {
 
         if ($second < $first) {
-            console.error("basic.js: random(): The second parameter (number) must be greater than the first.");
+            println("basic.js: random(): The second parameter (number) must be greater than the first.", "error");
         
         } else {
             result = $first + Math.round(Math.random() * ($second - $first));
         }
 
     } else {
-        console.error("basic.js: random(): Two parameters (numbers) must be sent.");
+        println("basic.js: random(): Two parameters (numbers) must be sent.", "error");
     }
 
     return result;
@@ -353,6 +307,7 @@ class Basic_UIComponent {
         this._displayType = "block";
         this._opacity = 1;
         this._rotate = 0;
+        this._padding = 0;
 
         this._motionString = "none";
         this._clickable = 0;
@@ -422,6 +377,14 @@ class Basic_UIComponent {
     set bottom($value) {
         this.contElement.style.top = "";
         this.contElement.style.bottom = parseFloat($value) + "px";
+    }
+
+    get totalLeft() {
+        return calcSpace(this.contElement, "Left");
+    }
+
+    get totalTop() {
+        return calcSpace(this.contElement, "Top");
     }
     
     get width() {
@@ -529,6 +492,53 @@ class Basic_UIComponent {
     set color($value) {
         this._backgroundColor = $value;
         this.contElement.style.backgroundColor = $value;
+    }
+
+    get padding() {
+        return this._padding || 0;
+    }
+
+    set padding($value) {
+
+        this._padding = $value;
+        let paddingLeft, paddingRight, paddingTop, paddingBottom;
+
+        if (typeof $value === 'number') {
+            paddingLeft = paddingRight = paddingTop = paddingBottom = $value;
+        }
+        
+        else if (Array.isArray($value)) {
+            const len = $value.length;
+
+            if (len === 1) {
+                paddingLeft = paddingRight = paddingTop = paddingBottom = $value[0];
+            }
+            else if (len === 2) {
+                paddingLeft  = paddingRight  = $value[0];
+                paddingTop   = paddingBottom = $value[1];
+            }
+            else if (len === 3) {
+                paddingLeft  = paddingRight  = $value[0];
+                paddingTop   = paddingBottom = $value[1];
+            }
+            else if (len === 4) {
+                paddingLeft   = $value[0];
+                paddingTop    = $value[1];
+                paddingRight  = $value[2];
+                paddingBottom = $value[3];
+            }
+            else {
+                //throw new Error('padding değeri 1–4 elemanlı bir dizi ya da tek sayı olmalıdır.');
+            }
+        }
+        else {
+            //throw new Error('padding değeri ya sayı olmalı ya da 1–4 elemanlı bir dizi olmalıdır.');
+        }
+
+        this.contElement.style.paddingLeft   = paddingLeft  + 'px';
+        this.contElement.style.paddingTop    = paddingTop   + 'px';
+        this.contElement.style.paddingRight  = paddingRight + 'px';
+        this.contElement.style.paddingBottom = paddingBottom+ 'px';
     }
 
     // -- Genel özellikler SONU
@@ -706,7 +716,8 @@ class Basic_UIComponent {
         //this.setMotionNow($motionString);
         const _that = this;
 
-        setTimeout(function(){
+        if(this._setMotionTimeout) clearTimeout(this._setMotionTimeout);
+        this._setMotionTimeout = setTimeout(function(){
             _that.setMotionNow($motionString);
         }, motionController.DONT_MOTION_TIME);
 
@@ -728,7 +739,8 @@ class Basic_UIComponent {
 
         const _that = this;
 
-        setTimeout(function() {
+        if(this._withMotionTimeout) clearTimeout(this._withMotionTimeout);
+        this._withMotionTimeout = setTimeout(function() {
             _that.canMotionNow();
              $func(_that);
          }, motionController.WITH_MOTION_TIME);
@@ -741,7 +753,8 @@ class Basic_UIComponent {
         this.contElement.style.transition = "none";
         const _that = this;
 
-        setTimeout(function(){
+        if(this._dontMotionTimeout) clearTimeout(this._dontMotionTimeout);
+        this._dontMotionTimeout = setTimeout(function(){
             _that.contElement.style.transition = _that._motionString;
         }, motionController.DONT_MOTION_TIME);
 
@@ -865,7 +878,7 @@ class MainBox {
     };
 
     // fit
-    fitAuto($contentWidth, $contentHeight) {
+    autoFit($contentWidth, $contentHeight) {
 
         // WHY: onResize da hesaplama yaparken, zoom değerini hesaba katmasın diye.
         // mesela page.width zoom değeri hesaba katıldığında farklı oluyor.
@@ -890,10 +903,12 @@ class MainBox {
 
     };
 
+    
     refreshSize() {
         page.mainBox.width = page.width;
         page.mainBox.height = page.height;
-    }    
+    }   
+    
 
     onClick($func) {
         this._box._addEventListener("click", $func, window);
@@ -942,6 +957,8 @@ class BBox extends Basic_UIComponent {
         this._textColor = "rgba(0, 0, 0, 0.8)";
         this._textAlign = "left";
 
+        this._clipContent = 1;
+
         const divElement = document.createElement("DIV");
         divElement.classList.add("basic_box");
 
@@ -953,7 +970,7 @@ class BBox extends Basic_UIComponent {
         if (defaultContainerBox != null) {
             defaultContainerBox.element.appendChild(this._element);
         } else {
-            console.error("basic.js: The library is not yet ready for use. Put your code in window.onload");
+            println("basic.js: The library is not yet ready for use. Put your code in window.onload", "error");
         }
 
         this.width = $width;
@@ -994,6 +1011,21 @@ class BBox extends Basic_UIComponent {
 
     set html($value) {
         this.element.innerHTML = $value;
+    }
+
+    get clipContent() {
+        return this._clipContent;
+    }
+
+    set clipContent($value) {
+        this._clipContent = $value;
+        if ($value) {
+            this.contElement.style.overflowX = "hidden";
+            this.contElement.style.overflowY = "hidden";
+        } else {
+            this.contElement.style.overflowX = "visible";
+            this.contElement.style.overflowY = "visible";
+        }
     }
     
     get scrollX() {
@@ -1181,7 +1213,7 @@ class BButton extends Basic_UIComponent {
     }
 
     add($obj) {
-        console.error("basic.js: add(): Insertion cannot be made inside the Button object.");
+        println("basic.js: add(): Insertion cannot be made inside the Button object.", "error");
     }
 
 }
@@ -1415,7 +1447,7 @@ class BTextBox extends Basic_UIComponent {
     }
 
     add($obj) {
-        console.error("basic.js: add(): Insertion cannot be made inside the TextBox object.");
+        println("basic.js: add(): Insertion cannot be made inside the TextBox object.", "error");
     }
 
 }
@@ -1539,7 +1571,7 @@ class BLabel extends Basic_UIComponent {
     }
 
     add($obj) {
-        console.error("basic.js: add(): Insertion cannot be made inside the Label object.");
+        println("basic.js: add(): Insertion cannot be made inside the Label object.", "error");
     }
 
 }
@@ -1729,10 +1761,11 @@ class BImage extends Basic_UIComponent {
 
     load($imagePath) {
         this.imageElement.setAttribute("src", $imagePath);
+        this.imageElement.setAttribute("alt", $imagePath);
     }
 
     add($obj) {
-        console.error("basic.js: add(): Insertion cannot be made inside the BImage object.");
+        println("basic.js: add(): Insertion cannot be made inside the Image object.", "error");
     }
 
 }
@@ -1758,7 +1791,7 @@ window.cimg = function ($left, $top, $width, $height) {
 }
 */
 
-class Sound {
+class BSound {
 
     /*
     _element;
@@ -1869,6 +1902,25 @@ class Sound {
 
 
 /* ### FUNCTIONS ### */
+
+// - bir elementin verilen yöne doğru ekran sınırına olan uzaklığını hesaplar.
+// elem: box.elem, lbl.elem
+// dir: "Left", "Top"
+const calcSpace = function(elem, dir) {
+
+    const _firstDiv = elem;
+
+    let _space = 0;
+    let _currentDiv = _firstDiv;
+
+    while (_currentDiv.offsetParent) {
+        _space += _currentDiv["offset" + dir];
+        _currentDiv = _currentDiv.offsetParent;
+    }
+
+    return _space;
+
+};
 
 // Set styles with style object.
 const setProparties = function ($this, $defaultParams = [], $params = [], $props = []) {
@@ -2223,7 +2275,7 @@ const checkStartedBox = function() {
         const startedBoxCount = startedBoxList.length - 1;
 
         if (startedBoxCount > 0) {
-            console.warn("basic.js: Some started boxes were not ended. Count: " + startedBoxCount);
+            println("basic.js: Some started boxes were not ended. Count: " + startedBoxCount, "warn");
         }
 
     }, 100);
@@ -2266,29 +2318,214 @@ window.startFlexBox = function(p1 = {}, p2, p3, p4, p5) {
     const defaultFlexStyles = {
         flexDirection: "row", // row, column
         flexWrap: "nowrap", // wrap, nowrap
-        alignContent: "center", // flex-start, center, flex-end (column)
+        alignContent: "center", 
         justifyContent: "center", // flex-start, center, flex-end (row)
-        alignItems: "center",
+        alignItems: "center", // flex-start, center, flex-end (column)
         gap: "0px",
+        flexBasis: "auto", // Öğenin doğal boyutuna göre yer kaplamasını sağlar.
+        flexGrow: 0, // Öğenin büyümesini engeller.
+        flexShrink: 0, // Öğenin küçülmesini engeller.
     };
 
-    //if (!props.flexDirection) props.flexDirection = "row"; // row, column
-    //if (!props.flexWrap) props.flexWrap = "nowrap"; // wrap, nowrap
-    //if (!props.alignContent) props.alignContent = "center"; // flex-start, center, flex-end (column)
-    //if (!props.justifyContent) props.justifyContent = "center"; // flex-start, center, flex-end (row)
-    //if (!props.alignItems) props.alignItems = "center";
-    //if (!props.color) props.color = "transparent";
+    // align; flow a ihtiyaç duyuyor. Eğer align verilmiş ama flow boş geçilmiş ise; default flow is "horizontal".
+    if (props.align) {
+        if (!props.flow) {
+            props.flow = "horizontal";
+        }
+    }
+
+    const getFlexDirection = function(flow) {
+        let flexDirection = defaultFlexStyles.flexDirection;
+        switch(flow) {
+            case "horizontal":
+                flexDirection = "row";
+                break;
+            case "vertical":
+                flexDirection = "column";
+                break;
+        }
+        return flexDirection;
+    };
+
+    // FLOW:
+    if (props.flow) {
+        box._flow = props.flow;
+        props.flexDirection = getFlexDirection(props.flow);
+    }
+
+    const getAlignList = function(align = "center") {
+
+        // NOTE: Bu flexDirection = "row" için, eğer row değil ise justifyContent, alignItems yer değiştir.
+
+        // else: set as default
+        let alignContent = "center";
+        let justifyContent = "center";
+        let alignItems = "center";
+
+        switch(align) {
+            case "top left":
+            case "left top":
+                alignContent = "center";
+                justifyContent = "flex-start";
+                alignItems = "flex-start";
+                break;
+            case "top center":
+            case "center top":
+                alignContent = "center";
+                justifyContent = "center";
+                alignItems = "flex-start";
+                break;
+            case "top right":
+            case "right top":
+                alignContent = "center";
+                justifyContent = "flex-end";
+                alignItems = "flex-start";
+                break;
+            
+            case "center left":
+            case "left center":
+                alignContent = "center";
+                justifyContent = "flex-start";
+                alignItems = "center";
+                break;
+            case "center":
+            case "center center":
+                alignContent = "center";
+                justifyContent = "center";
+                alignItems = "center";
+                break;
+            case "center right":
+            case "right center":
+                alignContent = "center";
+                justifyContent = "flex-end";
+                alignItems = "center";
+                break;
+
+            case "bottom left":
+            case "left bottom":
+                alignContent = "center";
+                justifyContent = "flex-start";
+                alignItems = "flex-end";
+                break;
+            case "bottom center":
+            case "center bottom":
+                alignContent = "center";
+                justifyContent = "center";
+                alignItems = "flex-end";
+                break;
+            case "bottom right":
+            case "right bottom":
+                alignContent = "center";
+                justifyContent = "flex-end";
+                alignItems = "flex-end";
+                break;
+            
+        }
+
+        return [alignContent, justifyContent, alignItems];
+    }
+
+    // ALIGN:
+    if (props.align) {
+
+        box._align = props.align;
+        const alignList = getAlignList(props.align);
+        
+        // else: set as default
+        props.alignContent = alignList[0];
+        if (props.flexDirection == "row") {
+            props.justifyContent = alignList[1];
+            props.alignItems = alignList[2];
+        } else {
+            props.justifyContent = alignList[2];
+            props.alignItems = alignList[1];
+        }
+        
+
+    };
+
+    const checkGap = function(gap) {
+        if (Number.isInteger(gap)) {
+            return gap = gap + "px";
+        } else {
+            return gap;
+        }
+    }
+
+    if (Number.isInteger(props.gap)) {
+        props.gap = checkGap(props.gap);
+    }
 
     that.element.style.display = "flex";
     box.props(defaults, defaultFlexStyles, props);
 
+    /*
+    Object.defineProperty(box, 'gap', {
+        get: function() {
+            return this._gap;
+        },
+        set: function(value) {
+            this._gap = value;
+            this.elem.style.gap = value + "px";
+        }
+    });
+    */
+
     //const box = createBox(0, 0, "100%", "100%");
     //that.color = "transparent";
 
-    
     for (let parameterName in defaultFlexStyles) {
         box.element.style[parameterName] = box[parameterName];
     }
+
+    // .flow: getter, setter
+    Object.defineProperty(box, 'flow', {
+        get: function() {
+            return this._flow;
+        },
+        set: function(flow) {
+            this._flow = flow;
+            this.elem.style.flexDirection = getFlexDirection(flow);
+            this.align = this.align;
+        }
+    });
+
+    // .align: 
+    Object.defineProperty(box, 'align', {
+        get: function() {
+            return this._align;
+        },
+        set: function(align) {
+            this._align = align;
+            const alignList = getAlignList(align);
+
+            this.elem.style.alignContent = alignList[0];
+            if (box.elem.style.flexDirection == "row") {
+                this.elem.style.justifyContent = alignList[1];
+                this.elem.style.alignItems = alignList[2];
+            } else {
+                this.elem.style.justifyContent = alignList[2];
+                this.elem.style.alignItems = alignList[1];
+            }
+            
+        }
+    });
+
+    // GAP:
+    if (box.gap) {
+        box._gap = box.gap;
+    };
+
+    // .gap: 
+    Object.defineProperty(box, 'gap', {
+        get: function() {
+            return this._gap;
+        },
+        set: function(gap) {
+            this._gap = checkGap(gap);
+            this.elem.style.gap = this._gap;
+        }
+    });
 
     if (startedBoxList.length == 0) {
         startedBoxList.push(getDefaultContainerBox());
@@ -2303,10 +2540,18 @@ window.startFlexBox = function(p1 = {}, p2, p3, p4, p5) {
 
 };
 //window.startFlexBox = basic.startFlexBox;
+window.AutoLayout = window.startFlexBox;
 
-window.startBox = function(p1 = {}, p2, p3, p4, p5) {
+window.startBox = function(...args) {
 
-    let props = {};
+    //let props = {};
+    console.log(args.length);
+    const box = Box(...args);
+
+    /*
+
+    params: (p1, p2, p3, p4, p5)
+
     let box = null;
 
     if (typeof p1 == "object") {
@@ -2333,6 +2578,7 @@ window.startBox = function(p1 = {}, p2, p3, p4, p5) {
     }
 
     box.props(props);
+    */
 
     if (startedBoxList.length == 0) {
         startedBoxList.push(getDefaultContainerBox());
@@ -2365,6 +2611,7 @@ window.endBox = function() {
 //window.endBox = basic.endBox;
 //window.endFlexBox = basic.endBox;
 window.endFlexBox = window.endBox;
+window.endAutoLayout = window.endBox;
 
 /*
 basic.useImageAsText = function(parameters = {}, editCreatedImage) {
@@ -2423,9 +2670,22 @@ window.restoreThatFromSaved = function() {
 // Lbl, Inp, Img, Box, Btn
 // *** Label, Input, Icon, Box, Button
 
-window.Label = function(p1, p2, p3, p4, p5) {
+window.Label = function(...args) {
 
-    // Bu kolaylık için, gereksiz bu kadar işlem yapmaya gerek var mı?
+  let props = {};
+  if (args.length && typeof args[args.length - 1] === "object") {
+    props = args.pop();
+  }
+
+  const label = createLabel(...args);
+  label.props(props);
+
+  return label;
+
+};
+
+/*
+window.Label = function(p1, p2, p3, p4, p5) {
 
     let props = {};
     let obj = null;
@@ -2457,151 +2717,92 @@ window.Label = function(p1, p2, p3, p4, p5) {
     return obj;
 
 };
+*/
 
-window.Input = function(p1, p2, p3, p4, p5) {
-
-    // Bu kolaylık için, gereksiz bu kadar işlem yapmaya gerek var mı?
+window.Input = function(...args) {
 
     let props = {};
-    let obj = null;
-
-    if (typeof p1 == "object") {
-        obj = createTextBox();
-        props = p1;
-
-    } else if (typeof p2 == "object") {
-        obj = createTextBox(p1);
-        props = p2;
-
-    } else if (typeof p3 == "object") {
-        obj = createTextBox(p1, p2);
-        props = p3;
-        
-    } else if (typeof p4 == "object") {
-        obj = createTextBox(p1, p2, p3);
-        props = p4;
-        
-    } else if (typeof p5 == "object") {
-        obj = createTextBox(p1, p2, p3, p4);
-        props = p5;
-    } else {
-        obj = createTextBox(p1, p2, p3, p4);
+    if (args.length && typeof args[args.length - 1] === "object") {
+        props = args.pop();
     }
 
+    const obj = createTextBox(...args);
     obj.props(props);
+
     return obj;
 
 };
 
-window.Icon = function(p1, p2, p3, p4, p5) {
-
-    // Bu kolaylık için, gereksiz bu kadar işlem yapmaya gerek var mı?
+window.Icon = function(...args) {
 
     let props = {};
-    let obj = null;
-
-    if (typeof p1 == "object") {
-        obj = createImage();
-        props = p1;
-
-    } else if (typeof p2 == "object") {
-        obj = createImage(p1);
-        props = p2;
-
-    } else if (typeof p3 == "object") {
-        obj = createImage(p1, p2);
-        props = p3;
-        
-    } else if (typeof p4 == "object") {
-        obj = createImage(p1, p2, p3);
-        props = p4;
-        
-    } else if (typeof p5 == "object") {
-        obj = createImage(p1, p2, p3, p4);
-        props = p5;
-    } else {
-        obj = createImage(p1, p2, p3, p4);
+    if (args.length && typeof args[args.length - 1] === "object") {
+        props = args.pop();
     }
 
+    const obj = createImage(...args);
     obj.props(props);
+
     return obj;
 
 };
 
-window.Box = function(p1, p2, p3, p4, p5) {
-
-    // Bu kolaylık için, gereksiz bu kadar işlem yapmaya gerek var mı?
+window.Box = function(...args) {
 
     let props = {};
-    let obj = null;
-
-    if (typeof p1 == "object") {
-        obj = createBox();
-        props = p1;
-
-    } else if (typeof p2 == "object") {
-        obj = createBox(p1);
-        props = p2;
-
-    } else if (typeof p3 == "object") {
-        obj = createBox(p1, p2);
-        props = p3;
-        
-    } else if (typeof p4 == "object") {
-        obj = createBox(p1, p2, p3);
-        props = p4;
-        
-    } else if (typeof p5 == "object") {
-        obj = createBox(p1, p2, p3, p4);
-        props = p5;
-    } else {
-        obj = createBox(p1, p2, p3, p4);
+        if (args.length && typeof args[args.length - 1] === "object") {
+        props = args.pop();
     }
 
+    const obj = createBox(...args);
     obj.props(props);
+
     return obj;
 
 };
 
-window.Button = function(p1, p2, p3, p4, p5) {
-
-    // Bu kolaylık için, gereksiz bu kadar işlem yapmaya gerek var mı?
+window.Button = function(...args) {
 
     let props = {};
-    let obj = null;
-
-    if (typeof p1 == "object") {
-        obj = createButton();
-        props = p1;
-
-    } else if (typeof p2 == "object") {
-        obj = createButton(p1);
-        props = p2;
-
-    } else if (typeof p3 == "object") {
-        obj = createButton(p1, p2);
-        props = p3;
-        
-    } else if (typeof p4 == "object") {
-        obj = createButton(p1, p2, p3);
-        props = p4;
-        
-    } else if (typeof p5 == "object") {
-        obj = createButton(p1, p2, p3, p4);
-        props = p5;
-    } else {
-        obj = createButton(p1, p2, p3, p4);
+    if (args.length && typeof args[args.length - 1] === "object") {
+        props = args.pop();
     }
 
+    const obj = createButton(...args);
     obj.props(props);
+
     return obj;
 
 };
 
-window.startObject = function() {
+window.startObject = function(any) {
+
+    if (any) {
+        println("basic.js: startObject(): Use .props(defaults, props) for giving parameters.", "warn");
+    }
 
     saveCurrentThat();
-    return startBox();
+    return startBox({
+        color: "transparent", // WHY: Bir UI nesnesinin başlangıç arkaplanının "transparent" olması daha uygun.
+    });
+
+    /*
+    let props = {};
+    if (args.length && typeof args[args.length - 1] === "object") {
+        props = args.pop();
+    }
+
+    const defaults = {
+        color: "transparent", // WHY: Bir UI nesnesinin başlangıç arkaplanının "transparent" olması daha uygun.
+    }
+
+    saveCurrentThat();
+
+    const box =  startBox(...args);
+    box.props(defaults, props);
+
+    return box;
+    */
 
 };
 
