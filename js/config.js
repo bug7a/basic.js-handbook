@@ -58,7 +58,7 @@ const CONFIG = {
 
     // *** LINKS:
     githubURL: "https://github.com/bug7a/js-components",
-    componentsURL: "https://bug7a.github.io/basic.js-ui-components/",
+    componentsURL: "https://bug7a.github.io/js-components/",
 
     // *** LOADING:
     // Aynı anda okunan el kitabı dosyası sayısı.
