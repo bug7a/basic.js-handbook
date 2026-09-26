@@ -22,6 +22,7 @@ const CONFIG = {
 
     // *** BRAND:
     brandName: "basic.js Handbook",
+    logoFile: "assets/basicjs-handbook.svg", // Üst çubuktaki logo (356 x 83) / Header logo, relative to this page
 
     // *** PATHS: (Bu sayfaya göre)
     // Canlı örnekler buradaki basic/basic.min.js ile çalışır. (Site kendi içinden çalışır: basic/ bu klasörde.)

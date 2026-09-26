@@ -72,18 +72,15 @@ Layout.createHeader = function () {
             // Menü (çekmece)
             Layout.btnMenu = SITE.button({ icon: "menu", kind: "plain", height: 38, hint: T.menu, onClick: Layout.toggleDrawer });
 
-            // GROUP: Logo + ad + sürüm
+            // GROUP: Logo + sürüm
             Layout.logo = HGroup({ width: "auto", height: "auto", align: "left center", gap: 10 });
             Layout.logo.elem.style.cursor = "pointer";
             Layout.logo.elem.style.flexShrink = "0";
 
-                // LABEL: Logo
-                Label({ text: SITE.svg("book", "#FFFFFF", 17, 2.2), width: 32, height: 32, color: SITE.INK, round: 9 });
-                that.elem.style.display = "flex";
-                that.elem.style.alignItems = "center";
-                that.elem.style.justifyContent = "center";
-
-                Layout.lblBrand = SITE.label(CONFIG.brandName, { bold: 1, fontSize: 16, textColor: SITE.INK });
+                // ICON: Logo (356 x 83)
+                Layout.imgLogo = Icon({ width: 142, height: 33, color: "transparent" });
+                that.load(CONFIG.logoFile);
+                that.elem.title = CONFIG.brandName;
 
                 // LABEL: Kütüphanenin sürümü (basic.version)
                 Layout.lblVersion = Label({ text: "v" + (basic.version || ""), fontSize: 11, textColor: SITE.TEXT_SOFT, color: SITE.BG_SOFT, round: 100 });
@@ -387,7 +384,8 @@ Layout.relayout = function () {
     Layout.headerRow.padding = [L.mobile ? 10 : 20, 0];
     Layout.headerRow.gap = L.mobile ? 6 : 10;
     Layout.btnMenu.visible = L.drawer ? 1 : 0;
-    Layout.lblBrand.visible = L.mobile ? 0 : 1;
+    Layout.imgLogo.width = L.mobile ? 103 : 142;
+    Layout.imgLogo.height = L.mobile ? 24 : 33;
     Layout.lblVersion.visible = (L.w >= 720 && basic.version) ? 1 : 0;
     Layout.headerSpacer.visible = L.mobile ? 0 : 1;
     Layout.searchBox.width = L.mobile ? "auto" : 300;

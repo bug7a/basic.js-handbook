@@ -112,6 +112,7 @@ Webpage: https://bug7a.github.io/js-components/
         // OFFLINE FILES START
         offlineFiles: [
             "./",
+            "assets/basicjs-handbook.svg",
             "basic/LICENSE",
             "basic/basic.min.css",
             "basic/basic.min.js",
