@@ -60,12 +60,11 @@ Webpage: https://bug7a.github.io/js-components/
     "use strict";
 
     // *** SETTINGS: Change this part for your site.
-    // (basic.js Handbook: offline mode, light theme, launch screen closed by the site when a chapter is drawn.)
 
     const SETTINGS = {
 
         // The name under the icon on iPhone and in the install banner.
-        appName: "basic.js Handbook",
+        appName: "Demo Shop",
 
         // Files. Relative to this file (Ex: "icon/icon-192.png" -> site.com/icon/icon-192.png).
         manifestUrl: "manifest.webmanifest",
@@ -73,7 +72,7 @@ Webpage: https://bug7a.github.io/js-components/
         appleTouchIconUrl: "icon/apple-touch-icon.png",
 
         // The color of the browser bar. Added only when the page has no <meta name="theme-color">.
-        themeColor: "#FBFBF9",
+        themeColor: "#141414",
 
         // Texts: "auto" (Turkish for a Turkish browser, English for the others), "tr" or "en".
         language: "auto",
@@ -104,78 +103,10 @@ Webpage: https://bug7a.github.io/js-components/
         //   video parts (206) and offlineExcludePaths.
         //   Do NOT use it for pages that change for every visitor (cart, account, payment, prices): an old copy
         //   would be shown offline. Exclude them with offlineExcludePaths, or keep offlineMode false.
-        offlineMode: true,
+        offlineMode: false,
         // Saved when the service worker is installed (the first visit), so they open offline before they are
         // used. Relative to this file. Ex: ["./", "index.htm", "js/site.js", "docs/chapter-1.md"]
-        // WHY: The chapters of both languages and the files of the live examples, so they also open offline
-        //      before they are used. The list is written by _update-copies.sh (every file of the site).
-        // OFFLINE FILES START
-        offlineFiles: [
-            "./",
-            "assets/basicjs-handbook.svg",
-            "basic/LICENSE",
-            "basic/basic.min.css",
-            "basic/basic.min.js",
-            "basic/font/open-sans/OpenSans-Bold.ttf",
-            "basic/font/open-sans/OpenSans-Regular.ttf",
-            "basic/img/button-background.png",
-            "basic/img/textbox-background.png",
-            "basic/scroll-bar.min.js",
-            "comp/search-results.min.js",
-            "comp/toast.min.js",
-            "comp/web-view.min.js",
-            "easy-pwa.js",
-            "handbook/english/00-introduction.md",
-            "handbook/english/00-what-is-new.md",
-            "handbook/english/01-label.md",
-            "handbook/english/02-box.md",
-            "handbook/english/03-image.md",
-            "handbook/english/04-common-properties.md",
-            "handbook/english/05-autolayout.md",
-            "handbook/english/06-button.md",
-            "handbook/english/07-input.md",
-            "handbook/english/08-page.md",
-            "handbook/english/09-useful-examples.md",
-            "handbook/english/10-motion.md",
-            "handbook/english/11-other-functions.md",
-            "handbook/english/12-utilities.md",
-            "handbook/english/13-sound.md",
-            "handbook/english/test-project.htm",
-            "handbook/english/test.png",
-            "handbook/turkce/00-introduction.md",
-            "handbook/turkce/00-what-is-new.md",
-            "handbook/turkce/01-label.md",
-            "handbook/turkce/02-box.md",
-            "handbook/turkce/03-image.md",
-            "handbook/turkce/04-common-properties.md",
-            "handbook/turkce/05-autolayout.md",
-            "handbook/turkce/06-button.md",
-            "handbook/turkce/07-input.md",
-            "handbook/turkce/08-page.md",
-            "handbook/turkce/09-useful-examples.md",
-            "handbook/turkce/10-motion.md",
-            "handbook/turkce/11-other-functions.md",
-            "handbook/turkce/12-utilities.md",
-            "handbook/turkce/13-sound.md",
-            "handbook/turkce/test-project.htm",
-            "handbook/turkce/test.png",
-            "icon/apple-touch-icon.png",
-            "icon/icon-192.png",
-            "icon/icon-512.png",
-            "icon/icon-maskable-512.png",
-            "index.htm",
-            "js/code-block.js",
-            "js/code-highlight.js",
-            "js/config.js",
-            "js/doc-view.js",
-            "js/layout.js",
-            "js/markdown.js",
-            "js/site.js",
-            "js/texts.js",
-            "js/theme.js",
-            "manifest.webmanifest",
-        ],
-        // OFFLINE FILES END
+        offlineFiles: [],
         // Never saved: addresses that start with these paths. Ex: ["/cart", "/account", "/api/"]
         offlineExcludePaths: [],
         // ms. A slow network (weak mobile signal): after this time the saved copy is shown, if there is one.
@@ -186,16 +117,16 @@ Webpage: https://bug7a.github.io/js-components/
 
         // The install banner at the bottom. (EasyPWA.install() works without it too.)
         installBanner: true,
-        installBannerOnDesktop: true,               // Chrome / Edge on a computer can install too.
+        installBannerOnDesktop: false,              // Chrome / Edge on a computer can install too.
         installBannerDelay: 3000,                   // ms after the page is opened.
         installBannerHideDays: 14,                  // Closed by the visitor -> comes back after this many days.
         installBannerHiddenPaths: [],               // No banner on these pages. Ex: ["/cart", "/checkout", "/sepet", "/odeme"]
 
         // Colors of the "No internet connection" page and of the launch screen:
         // "auto" (light or dark by the setting of the device), "light" or "dark". The colors are in themes.
-        theme: "light",
+        theme: "auto",
         themes: {
-            light: { page: "#FBFBF9", title: "rgba(0, 0, 0, 0.85)", text: "rgba(0, 0, 0, 0.55)", spinner: "#2F6FEB" },
+            light: { page: "#F4F6F8", title: "rgba(0, 0, 0, 0.85)", text: "rgba(0, 0, 0, 0.55)", spinner: "#3D7A6B" },
             dark: { page: "#141414", title: "rgba(255, 255, 255, 0.9)", text: "rgba(255, 255, 255, 0.55)", spinner: "#5FB39F" },
         },
 
@@ -203,12 +134,12 @@ Webpage: https://bug7a.github.io/js-components/
         // Shown in the installed app only (not in the browser), on the first page of a visit.
         // It closes when the page is loaded (window "load") and launchScreenMinDuration is over,
         // or when the site calls EasyPWA.hideLaunchScreen() (with launchScreenHideByCode: true).
-        launchScreen: true,
+        launchScreen: false,
         launchScreenIconUrl: "icon/icon-192.png",   // Relative to this file. "": no icon.
         launchScreenTitle: "",                      // "": appName. " ": no title.
         launchScreenMessage: "",                    // Ex: "Loading..."
         launchScreenMinDuration: 600,               // ms. Not a short flash on a fast page.
-        launchScreenHideByCode: true,              // true: stays until EasyPWA.hideLaunchScreen() (max. 10 s).
+        launchScreenHideByCode: false,              // true: stays until EasyPWA.hideLaunchScreen() (max. 10 s).
         launchScreenInBrowser: false,               // true: also in the browser (for tests).
 
         // Colors of the install banner, the notice and the button of the offline page.
@@ -216,7 +147,7 @@ Webpage: https://bug7a.github.io/js-components/
             banner: "#1F2326",
             bannerText: "#FFFFFF",
             bannerSoftText: "rgba(255, 255, 255, 0.65)",
-            button: "#2F6FEB",
+            button: "#3D7A6B",
             buttonText: "#FFFFFF",
             notice: "#C0392B",
             noticeText: "#FFFFFF",
@@ -470,7 +401,11 @@ Webpage: https://bug7a.github.io/js-components/
             // A page that is not saved (excluded): the "No internet connection" page when it can not be opened.
             if (request.mode === "navigate" && request.method === "GET" && SETTINGS.offlinePage &&
                 new URL(request.url).origin === self.location.origin) {
-                event.respondWith(withPageTimeout(fetch(request)).catch(function () { return createOfflineResponse(); }));
+                // WHY: The page request the browser already started (navigation preload) is used, not a second one.
+                event.respondWith(withPageTimeout((async function () {
+                    const preloaded = await event.preloadResponse;
+                    return preloaded || await fetch(request);
+                })()).catch(function () { return createOfflineResponse(); }));
             }
             return; // Other sites, forms...: the browser does everything as before.
         }
@@ -768,6 +703,7 @@ Webpage: https://bug7a.github.io/js-components/
 
         const isBannerAllowed = function () {
             if (!SETTINGS.installBanner) return 0;
+            if (window.self !== window.top) return 0; // WHY: The site is shown in a frame of another page (a live demo).
             if (isBannerHiddenByVisitor() || isBannerHiddenOnThisPage()) return 0;
             if (!isPhoneOrTablet() && !SETTINGS.installBannerOnDesktop) return 0;
             return 1;
