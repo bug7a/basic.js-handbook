@@ -118,8 +118,6 @@ Webpage: https://bug7a.github.io/js-components/
             "basic/basic.min.js",
             "basic/font/open-sans/OpenSans-Bold.ttf",
             "basic/font/open-sans/OpenSans-Regular.ttf",
-            "basic/img/button-background.png",
-            "basic/img/textbox-background.png",
             "basic/scroll-bar.min.js",
             "comp/search-results.min.js",
             "comp/toast.min.js",
@@ -183,6 +181,12 @@ Webpage: https://bug7a.github.io/js-components/
         offlineNetworkTimeout: 4000,
         // Change it (2, 3...) to delete all the saved files of this app one time (Ex: after the site moved).
         offlineCacheVersion: 1,
+
+        // false: on a computer the page is a plain web page: no manifest link (so the browser offers no install),
+        // no service worker (one left from an earlier visit is removed) and no install banner. Phones and tablets
+        // are not changed. NOTE: Then do not write <link rel="manifest"> in the page: this file adds it where needed.
+        // (A computer with a touch screen can be taken as a tablet.)
+        desktopApp: true,
 
         // The install banner at the bottom. (EasyPWA.install() works without it too.)
         installBanner: true,
@@ -628,6 +632,11 @@ Webpage: https://bug7a.github.io/js-components/
             return (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) ? 1 : 0;
         };
 
+        // 0: a computer and desktopApp is false: no manifest, no service worker, no banner.
+        const isAppDevice = function () {
+            return (SETTINGS.desktopApp || isPhoneOrTablet()) ? 1 : 0;
+        };
+
         const canShowIosHelp = function () {
             return (isIOS() && !isInstalled() && !isInAppBrowser()) ? 1 : 0;
         };
@@ -674,7 +683,7 @@ Webpage: https://bug7a.github.io/js-components/
                 head.appendChild(meta);
             };
 
-            addLink("manifest", resolve(SETTINGS.manifestUrl));
+            if (isAppDevice()) addLink("manifest", resolve(SETTINGS.manifestUrl));
             addLink("apple-touch-icon", resolve(SETTINGS.appleTouchIconUrl));
             addMeta("theme-color", SETTINGS.themeColor);
             addMeta("mobile-web-app-capable", "yes");
@@ -703,14 +712,14 @@ Webpage: https://bug7a.github.io/js-components/
 
             const container = navigator.serviceWorker;
 
-            // Turned off: remove the service worker of this file.
-            if (!SETTINGS.serviceWorker) {
+            // Turned off (or a computer with desktopApp false): remove the service worker of this file.
+            if (!SETTINGS.serviceWorker || !isAppDevice()) {
                 container.getRegistrations().then(function (registrations) {
                     registrations.forEach(function (registration) {
                         const worker = registration.active || registration.waiting || registration.installing;
                         if (worker && new URL(worker.scriptURL).pathname === workerUrl.pathname) {
                             registration.unregister();
-                            log("Service worker removed (serviceWorker: false).");
+                            log("Service worker removed (" + (SETTINGS.serviceWorker ? "desktopApp" : "serviceWorker") + ": false).");
                         }
                     });
                 });
@@ -769,6 +778,7 @@ Webpage: https://bug7a.github.io/js-components/
         const isBannerAllowed = function () {
             if (!SETTINGS.installBanner) return 0;
             if (isBannerHiddenByVisitor() || isBannerHiddenOnThisPage()) return 0;
+            if (!isAppDevice()) return 0;
             if (!isPhoneOrTablet() && !SETTINGS.installBannerOnDesktop) return 0;
             return 1;
         };

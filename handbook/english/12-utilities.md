@@ -15,11 +15,11 @@ Simplifies the console log mechanism.
 
 ## 2. Type Conversion
 
-- `num(value_string, type_option)` — Converts a string to a number.
+- `basic.num(value_string, type_option)` — Converts a string to a number.
     - default: `type_option = float` uses the default format. (`3.14` float)
     - `type_option = integer/int` — supports only integer format.
-- `str(number_value)` — Converts a numeric object to a simple String variable while maintaining its format. Equivalent to `String($num)`.
-- `twoDigitFormat(number_value)` — If the provided number is a single digit (between `0` and `9`), it prepends a `'0'` and returns it as a 2-digit string (especially useful for Date and Time formats).
+- `basic.str(number_value)` — Converts a numeric object to a simple String variable while maintaining its format. Equivalent to `String($num)`.
+- `basic.twoDigitFormat(number_value)` — If the provided number is a single digit (between `0` and `9`), it prepends a `'0'` and returns it as a 2-digit string (especially useful for Date and Time formats).
 
 ## 3. Mathematical Enhancements
 
@@ -32,17 +32,17 @@ let randomNumber = random(0, 100);
 
 ## 4. Device Detection
 
-- `isMobile()` — Scans whether the screen is currently being accessed from Mobile (Touch Device - Tablet, Smartphone) mode. It returns `1` (True) if accessed from a browser-supported mobile or mobile app structure; otherwise, it returns `0`.
+- `basic.isMobile()` — Scans whether the screen is currently being accessed from Mobile (Touch Device - Tablet, Smartphone) mode. It returns `1` (True) if accessed from a browser-supported mobile or mobile app structure; otherwise, it returns `0`.
 
 ```javascript
-if ( isMobile() ) {
+if ( basic.isMobile() ) {
     println("Accessed from a mobile device.");
 }
 ```
 
 ## 5. Browser Actions
 
-- `go(url_address, target)` — An interface for the `window.open` mechanism.
+- `basic.go(url_address, target)` — An interface for the `window.open` mechanism.
     - `target = "_self"` (Default) changes the site in the same tab.
     - `target = "_blank"` opens it in a different tab or another window name.
 
@@ -66,7 +66,7 @@ Functions attached to the `basic.date` variable:
 - `basic.time.second` — Returns the valid second between 0-59.
 - `basic.time.millisecond` — Reads the instant millisecond.
 
-> Note: If you need to add a "0" prefix to these values, you can easily integrate your helper like `twoDigitFormat(basic.time.minute)`.
+> Note: If you need to add a "0" prefix to these values, you can easily integrate your helper like `basic.twoDigitFormat(basic.time.minute)`.
 
 ## 8. Memory / Data Storage Persistence
 
@@ -92,6 +92,29 @@ if (doesDataExist) {
     println("Retrieved ID Info: " + _savedID);
 }
 ```
+
+---
+
+## 9. Colors
+
+- `Black(alpha)`, `White(alpha)` — Black or white with the given opacity (0 to 1).
+- `Alpha(color, percent)` — Any color with the given opacity (v26.10.25). A hex color becomes `rgba(...)`. A name, `rgb()`, `hsl()` or `var(--token)` becomes `color-mix(...)`.
+
+```javascript
+Box(20, 20, 120, 80, { color: Alpha("#456789", 0.5) });
+Box(160, 20, 120, 80, { color: Black(0.1) });
+Box(300, 20, 120, 80, { border: 1, borderColor: Alpha("tomato", 0.3) });
+```
+
+---
+
+## 10. Helpers for Components
+
+- `basic.isOn(value)` — `1`, `"1"` and `true` give `true`.
+- `basic.addCss(id, css, replace)` — Adds a `<style>` once, for `:hover`, `@keyframes` and the like. The same `id` adds nothing unless `replace` is given.
+- `basic.applyStylePackage(params, packages, defaults)` — The first line of a component with style packages (`styleName`).
+- `basic.resolveTheme(themes, name)` — The colors of a theme (`"light"`, `"dark"`, `"auto"`): the missing keys come from `themes.light`.
+- `basic.scaleStyle(style, factor)`, `basic.scaleSize(value, factor)`, `basic.scaleCssText(text, factor)` — A style package, a size or a CSS text multiplied by `factor`, for a component that follows `basic.uiScale`.
 
 ---
 
