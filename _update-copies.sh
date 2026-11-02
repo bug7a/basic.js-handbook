@@ -8,9 +8,9 @@
 #   handbook/  <- ../../__handbook (english/, turkce/: the chapters and the files of their examples)
 #
 # Run it after the library, a component or a chapter of the handbook is changed:
-#   ./03-webpage-m2/webpage-handbook/_update-copies.sh      (from anywhere)
+#   ./03-webpages/webpage-handbook/_update-copies.sh      (from anywhere)
 #
-# comp-m4/toast.js has no .min.js twin, so comp/toast.min.js is made here with terser (npx, like _make-min-js.sh).
+# comp/toast.js has no .min.js twin, so comp/toast.min.js is made here with terser (npx, like _make-min-js.sh).
 #
 # Then it writes offlineFiles in easy-pwa.js (between "OFFLINE FILES START" and "END"): every file of the site,
 # so the app (PWA, offline mode) saves all the chapters and the files of the examples at the first visit.
@@ -26,15 +26,17 @@ echo "Site: $SITE"
 rm -rf "$SITE/basic"
 mkdir -p "$SITE/basic"
 cp "$REPO/basic/basic.min.js" "$REPO/basic/basic.min.css" "$REPO/basic/scroll-bar.min.js" "$REPO/basic/LICENSE" "$SITE/basic/"
-cp -R "$REPO/basic/font" "$REPO/basic/img" "$SITE/basic/"
+cp -R "$REPO/basic/font" "$SITE/basic/"
 echo "  basic/     ok"
 
 # COMP
 rm -rf "$SITE/comp"
 mkdir -p "$SITE/comp"
-cp "$REPO/comp-m4/web-view.min.js" "$REPO/comp-m4/search-results.min.js" "$SITE/comp/"
-npx --yes terser "$REPO/comp-m4/toast.js" --compress --mangle --comments "/Bismillah/" -o "$SITE/comp/toast.min.js"
-node --check "$SITE/comp/toast.min.js"
+# WHY from the source: the components have no .min twins in the repository (2026-10-30)
+for name in web-view search-results toast; do
+    npx --yes terser "$REPO/comp/$name.js" --compress --mangle --comments "/Bismillah/" -o "$SITE/comp/$name.min.js"
+    node --check "$SITE/comp/$name.min.js"
+done
 echo "  comp/      ok"
 
 # HANDBOOK

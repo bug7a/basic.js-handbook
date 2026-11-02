@@ -76,7 +76,7 @@ keeps copies of the files it needs:
 | Folder | Its source (in the repository) |
 |---|---|
 | `basic/` | `basic/`: `basic.min.js`, `basic.min.css`, `scroll-bar.min.js`, `LICENSE`, `font/`, `img/` |
-| `comp/` | `comp-m4/`: `web-view.min.js`, `search-results.min.js` and `toast.min.js` made from `toast.js` |
+| `comp/` | `comp/`: `web-view.min.js`, `search-results.min.js` and `toast.min.js` made from `toast.js` |
 | `handbook/` | `__handbook/`: `english/`, `turkce/` (the chapters and the files of the examples, `test.png`…) |
 
 The copies do not update themselves. When the library, these components or the handbook change, run
@@ -130,7 +130,7 @@ Good to know:
 ## App (PWA) and offline use
 
 The handbook is an installable app and **opens without internet too**. The `easy-pwa.js` file of
-`04-template-m2/easy-pwa` does this (one file with no library; it is both the page script and the service worker).
+`04-templates/easy-pwa` does this (one file with no library; it is both the page script and the service worker).
 
 | File | Contents |
 |---|---|
@@ -249,7 +249,7 @@ reposunun köküne) kopyalanıp yayınlanabilir. Deponun başka hiçbir dosyası
 | Klasör | Kaynağı (depoda) |
 |---|---|
 | `basic/` | `basic/`: `basic.min.js`, `basic.min.css`, `scroll-bar.min.js`, `LICENSE`, `font/`, `img/` |
-| `comp/` | `comp-m4/`: `web-view.min.js`, `search-results.min.js` ve `toast.js`'ten yapılan `toast.min.js` |
+| `comp/` | `comp/`: `web-view.min.js`, `search-results.min.js` ve `toast.js`'ten yapılan `toast.min.js` |
 | `handbook/` | `__handbook/`: `english/`, `turkce/` (bölümler ve örneklerin dosyaları, `test.png`…) |
 
 Kopyalar kendiliğinden güncellenmez. Kütüphane, bu bileşenler veya el kitabı değişince `./_update-copies.sh`
@@ -303,7 +303,7 @@ Bilmekte fayda var:
 
 ## Uygulama (PWA) ve çevrimdışı çalışma
 
-El kitabı kurulabilir bir uygulamadır ve **internet yokken de açılır**. Bunu `04-template-m2/easy-pwa` klasörünün
+El kitabı kurulabilir bir uygulamadır ve **internet yokken de açılır**. Bunu `04-templates/easy-pwa` klasörünün
 `easy-pwa.js` dosyası yapar (kütüphanesiz tek dosya; hem sayfa script'i hem service worker).
 
 | Dosya | İçerik |
