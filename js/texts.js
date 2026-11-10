@@ -8,8 +8,11 @@ basic.js Handbook Website - Texts - v26.09
   Diğer bölümlerin metni __handbook klasöründeki Markdown dosyalarından gelir.
 - The interface copy and the "Quick start" chapter. Both languages must have the same keys.
 
-Developer: Bugra Ozden
-Email: bugra.ozden@gmail.com
+Webpage: https://bug7a.github.io/basic.js-handbook/
+
+Copyright 2020-2026 Bugra Ozden <bugra.ozden@gmail.com> (https://bug7a.github.io/)
+Licensed under the Apache License, Version 2.0
+SPDX-License-Identifier: Apache-2.0
 
 */
 
@@ -39,6 +42,7 @@ const TEXTS = {
             start: "Getting started",
             objects: "Objects",
             layout: "Layout and page",
+            components: "Components",
             more: "Motion and more",
         },
 
@@ -173,6 +177,7 @@ const TEXTS = {
             start: "Başlangıç",
             objects: "Nesneler",
             layout: "Yerleşim ve sayfa",
+            components: "Bileşenler",
             more: "Hareket ve diğerleri",
         },
 

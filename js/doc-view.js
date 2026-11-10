@@ -8,8 +8,11 @@ basic.js Handbook Website - Document View - v26.09
 - Sağda "Bu sayfada" listesi (geniş ekranda), altta önceki / sonraki bölüm.
 - Draws the chosen chapter: the Markdown blocks become basic.js objects.
 
-Developer: Bugra Ozden
-Email: bugra.ozden@gmail.com
+Webpage: https://bug7a.github.io/basic.js-handbook/
+
+Copyright 2020-2026 Bugra Ozden <bugra.ozden@gmail.com> (https://bug7a.github.io/)
+Licensed under the Apache License, Version 2.0
+SPDX-License-Identifier: Apache-2.0
 
 */
 
@@ -101,12 +104,13 @@ DocView.clear = function () {
 DocView.renderBlocks = function (blocks, inQuote = 0) {
 
     blocks.forEach(function (block, index) {
-        DocView.renderBlock(block, index, inQuote);
+        DocView.renderBlock(block, index, inQuote, blocks);
     });
 
 };
 
-DocView.renderBlock = function (block, index, inQuote) {
+// blocks: all the blocks around this one (a code block gets the code blocks before it).
+DocView.renderBlock = function (block, index, inQuote, blocks = []) {
 
     const L = SITE.L;
 
@@ -133,7 +137,7 @@ DocView.renderBlock = function (block, index, inQuote) {
             break;
 
         case "code":
-            CodeBlock.create(block);
+            CodeBlock.create(block, blocks.slice(0, index).filter(function (earlier) { return earlier.type === "code"; }));
             break;
 
     }

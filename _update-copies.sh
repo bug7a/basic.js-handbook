@@ -4,13 +4,14 @@
 #
 # Refreshes the copies that make this site work on its own (outside the repository):
 #   basic/     <- ../../basic      (basic.min.js, basic.min.css, scroll-bar.min.js, the font and the pictures)
-#   comp/      <- ../../comp       (web-view.min.js, search-results.min.js, toast.min.js)
+#   comp/      <- ../../comp       (web-view, search-results, toast: the site; tooltip, smart-button, text-field,
+#                                   dialog, select-box: the examples that use a component, js/code-block.js -> KIT)
 #   handbook/  <- ../../__handbook (english/, turkce/: the chapters and the files of their examples)
 #
 # Run it after the library, a component or a chapter of the handbook is changed:
 #   ./03-webpages/webpage-handbook/_update-copies.sh      (from anywhere)
 #
-# comp/toast.js has no .min.js twin, so comp/toast.min.js is made here with terser (npx, like _make-min-js.sh).
+# The components have no .min.js twins, so their .min.js files are made here with terser (npx, like _make-min-js.sh).
 #
 # Then it writes offlineFiles in easy-pwa.js (between "OFFLINE FILES START" and "END"): every file of the site,
 # so the app (PWA, offline mode) saves all the chapters and the files of the examples at the first visit.
@@ -32,9 +33,19 @@ echo "  basic/     ok"
 # COMP
 rm -rf "$SITE/comp"
 mkdir -p "$SITE/comp"
+# WHY the notice: terser keeps only the Bismillah line of a header (as _make-min-js.sh does)
+addNotice() {
+    local source="$1" min="$2" notice
+    notice="$(grep -m1 -E '^[[:space:]]*Copyright [0-9]' "$source" | sed -E 's/^[[:space:]]+//')"
+    [ -n "$notice" ] || return 0
+    notice="/*! $notice | Apache-2.0 | https://bug7a.github.io/js-components/ */"
+    { head -n 1 "$min"; echo "$notice"; tail -n +2 "$min"; } > "$min.tmp" && mv "$min.tmp" "$min"
+}
+
 # WHY from the source: the components have no .min twins in the repository (2026-10-30)
-for name in web-view search-results toast; do
+for name in web-view search-results toast tooltip smart-button text-field dialog select-box; do
     npx --yes terser "$REPO/comp/$name.js" --compress --mangle --comments "/Bismillah/" -o "$SITE/comp/$name.min.js"
+    addNotice "$REPO/comp/$name.js" "$SITE/comp/$name.min.js"
     node --check "$SITE/comp/$name.min.js"
 done
 echo "  comp/      ok"

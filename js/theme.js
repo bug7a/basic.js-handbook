@@ -7,8 +7,11 @@ basic.js Handbook Website - Site Theme & UI Helpers - v26.09
 - Renkler, ölçüler, ikonlar ve sayfa boyunca tekrar eden küçük arayüz parçaları.
 - Colors, metrics, icons and the small UI pieces the site repeats.
 
-Developer: Bugra Ozden
-Email: bugra.ozden@gmail.com
+Webpage: https://bug7a.github.io/basic.js-handbook/
+
+Copyright 2020-2026 Bugra Ozden <bugra.ozden@gmail.com> (https://bug7a.github.io/)
+Licensed under the Apache License, Version 2.0
+SPDX-License-Identifier: Apache-2.0
 
 */
 
@@ -27,9 +30,12 @@ const SITE = {
     TEXT: "rgba(0, 0, 0, 0.82)",
     TEXT_SOFT: "rgba(0, 0, 0, 0.58)",
     TEXT_FAINT: "rgba(0, 0, 0, 0.4)",
-    ACCENT: "#2F6FEB",
-    ACCENT_SOFT: "#E8F0FE",
-    NOTE_BG: "#F1F5FE",
+    // WHY the turquoise of the basic.js site (03-webpages/webpage-basicjs/js/theme.js): the main action of the kit,
+    //     SmartButton tone "cyan" #5BBAC1, one palette for the sites of the family (the user, 2026-11-09; blue #2F6FEB
+    //     before). The accent here is a text (links, the chosen chapter), so it is the dark tone of "cyanDark" (6.2 : 1).
+    ACCENT: "#376265",
+    ACCENT_SOFT: "#DEF1F3",
+    NOTE_BG: "#EEF6F7",
     ERROR: "#D64545",
 
     // Kod blokları (koyu)
@@ -255,19 +261,20 @@ SITE.injectCss = function () {
         + ".hb-text em { font-style: italic; }"
         + ".hb-text code { font-family: " + SITE.MONO + "; font-size: 0.86em; background: rgba(0, 0, 0, 0.055);"
         + "  border-radius: 5px; padding: 1px 5px; color: #1F2328; white-space: break-spaces; }"
-        + ".hb-text a { color: " + SITE.ACCENT + "; text-decoration: none; border-bottom: 1px solid rgba(47, 111, 235, 0.3); }"
+        + ".hb-text a { color: " + SITE.ACCENT + "; text-decoration: none; border-bottom: 1px solid rgba(91, 186, 193, 0.7); }"
         + ".hb-text a:hover { border-bottom-color: " + SITE.ACCENT + "; }"
         + ".hb-text a code { color: inherit; background: " + SITE.ACCENT_SOFT + "; }"
         + ".hb-text ul, .hb-text ol { margin: 0px; padding-left: 24px; }"
         + ".hb-text li { margin: 6px 0px; padding-left: 2px; }"
         + ".hb-text li::marker { color: " + SITE.TEXT_FAINT + "; }"
+        + ".hb-text .hb-table { overflow-x: auto; pointer-events: auto; }"
         + ".hb-text table { border-collapse: collapse; width: 100%; font-size: 0.94em; }"
         + ".hb-text th, .hb-text td { border: 1px solid " + SITE.LINE + "; padding: 8px 10px; text-align: left; vertical-align: top; }"
         + ".hb-text th { background: " + SITE.SIDEBAR + "; font-family: opensans-bold; font-weight: normal; }"
         + ".hb-heading code { font-size: 0.82em; }"
         + ".hb-flash { animation: hbFlash 1.4s ease-out; }"
-        + "@keyframes hbFlash { 0% { background: rgba(47, 111, 235, 0.16); } 100% { background: transparent; } }"
-        + "::selection { background: rgba(47, 111, 235, 0.22); }";
+        + "@keyframes hbFlash { 0% { background: rgba(91, 186, 193, 0.24); } 100% { background: transparent; } }"
+        + "::selection { background: rgba(91, 186, 193, 0.3); }";
 
     const style = document.createElement("style");
     style.id = "hb-site-css";

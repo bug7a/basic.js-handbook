@@ -11,8 +11,11 @@ basic.js Handbook Website - Site Configuration - v26.09
   El kitabını güncellemek için o dosyaları düzenleyin; site bir şey kopyalamaz.
 - The chapters are read from the Markdown files in __handbook/english and __handbook/turkce.
 
-Developer: Bugra Ozden
-Email: bugra.ozden@gmail.com
+Webpage: https://bug7a.github.io/basic.js-handbook/
+
+Copyright 2020-2026 Bugra Ozden <bugra.ozden@gmail.com> (https://bug7a.github.io/)
+Licensed under the Apache License, Version 2.0
+SPDX-License-Identifier: Apache-2.0
 
 */
 
@@ -22,7 +25,7 @@ const CONFIG = {
 
     // *** BRAND:
     brandName: "basic.js Handbook",
-    logoFile: "assets/basicjs-handbook.svg", // Üst çubuktaki logo (356 x 83) / Header logo, relative to this page
+    logoFile: "assets/basicjs-ui-library.svg", // Üst çubuktaki logo: basic.js'in logosu (355 x 81) / Header logo: the logo of basic.js, relative to this page
 
     // *** PATHS: (Bu sayfaya göre)
     // Canlı örnekler buradaki basic/basic.min.js ile çalışır. (Site kendi içinden çalışır: basic/ bu klasörde.)
@@ -48,6 +51,8 @@ const CONFIG = {
         { id: "common-properties", file: "04-common-properties.md", group: "layout" },
         { id: "autolayout", file: "05-autolayout.md", group: "layout" },
         { id: "page", file: "08-page.md", group: "layout" },
+        { id: "using-components", file: "14-using-components.md", group: "components" },
+        { id: "making-a-component", file: "15-making-a-component.md", group: "components" },
         { id: "motion", file: "10-motion.md", group: "more" },
         { id: "sound", file: "13-sound.md", group: "more" },
         { id: "utilities", file: "12-utilities.md", group: "more" },

@@ -2,7 +2,7 @@
 
 /*
 
-basic.js Handbook Website - Code Block - v26.09
+basic.js Handbook Website - Code Block - v26.11
 
 - El kitabındaki kod blokları: renklendirilmiş kod, Kopyala ve (ekrana nesne çizen JavaScript örneklerinde) Çalıştır.
 - Çalıştır: kod, basic.js yüklü küçük bir sayfa olarak WebView (iframe, srcdoc) içinde açılır.
@@ -10,9 +10,17 @@ basic.js Handbook Website - Code Block - v26.09
   İlk çalıştırmadan sonra kod düzenlenebilir: Ctrl (Cmd) + Enter tekrar çalıştırır, Sıfırla ilk haline döndürür.
 - window.onload veya start() içermeyen parçalar, bir start() fonksiyonunun içine konularak çalıştırılır.
 - Code blocks of the handbook: highlighted code, Copy and (for examples that draw objects) Run.
+- Not run: a component (startObject), a part of a component (box. without a box) and a block that calls an object
+  of another file. A block that calls an object made in an earlier block of the chapter runs with that block before
+  it (the component of chapter 15, then its use). A block that uses a component of the kit (CodeBlock.KIT) runs with
+  its files (the copies in comp/).
+- After Run the result is brought into the window: it is under the code.
 
-Developer: Bugra Ozden
-Email: bugra.ozden@gmail.com
+Webpage: https://bug7a.github.io/basic.js-handbook/
+
+Copyright 2020-2026 Bugra Ozden <bugra.ozden@gmail.com> (https://bug7a.github.io/)
+Licensed under the Apache License, Version 2.0
+SPDX-License-Identifier: Apache-2.0
 
 */
 
@@ -20,18 +28,106 @@ Email: bugra.ozden@gmail.com
 
 const CodeBlock = {};
 
-// Ekrana nesne çizen JavaScript örnekleri çalıştırılabilir.
-CodeBlock.isRunnable = function (block) {
+CodeBlock.DRAWS = /\b(Box|Label|Button|Input|Icon|HGroup|VGroup|AutoLayout|startBox|startFlexBox|createBox|createLabel|createButton|createImage|createTextBox)\s*\(/;
+CodeBlock.MAKES_COMPONENT = /\b(?:startObject|startExtendedObject)\s*\(/;
+// WHY: the page of the site has these copies, the page of an example does not.
+CodeBlock.SITE_ONLY = ["WebView", "SearchResults", "Toast"];
+
+// The components of the kit that an example can use (copies in comp/, _update-copies.sh), in the order they load:
+// a file that another one needs comes before it.
+CodeBlock.KIT = [
+    { name: "Tooltip", file: "tooltip.min.js", needs: [] },
+    { name: "SmartButton", file: "smart-button.min.js", needs: [] },
+    { name: "TextField", file: "text-field.min.js", needs: ["tooltip.min.js"] },
+    { name: "Dialog", file: "dialog.min.js", needs: ["smart-button.min.js"] },
+    { name: "SelectBox", file: "select-box.min.js", needs: [] },
+];
+
+// The JavaScript examples that draw objects (or a component) can be run.
+// prefix: the code of the earlier blocks of the chapter that make what this block calls (CodeBlock.findPrefix).
+CodeBlock.isRunnable = function (block, prefix = "") {
     if (block.language != "javascript" && block.language != "js") return false;
-    return /\b(Box|Label|Button|Input|Icon|HGroup|VGroup|AutoLayout|startBox|startFlexBox|createBox|createLabel|createButton|createImage|createTextBox)\s*\(/.test(block.code);
+    const bare = CodeBlock.withoutTexts(block.code);
+    const isDrawing = CodeBlock.DRAWS.test(block.code) || CodeBlock.callsComponent(bare, prefix);
+    if (!isDrawing) return false;
+    // WHY: a component only defines, it draws nothing by itself.
+    if (CodeBlock.MAKES_COMPONENT.test(bare)) return false;
+    // WHY: a part of a component uses the box of a component that is not there.
+    if (/\bbox\./.test(bare) && !/\b(?:const|let|var)\s+box\b/.test(bare)) return false;
+    return CodeBlock.findMissingNames(prefix + block.code).length === 0;
+};
+
+// The code without its strings and comments. WHY: a text like "Background (zoomed)" is not a call.
+CodeBlock.withoutTexts = function (code) {
+    return code.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*|"(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*'|`(?:\\.|[^`\\])*`/g, "");
+};
+
+CodeBlock.isMadeIn = function (code, name) {
+    return new RegExp("\\b(?:const|let|var|function|class)\\s+" + name + "\\b").test(code);
+};
+
+// The objects that the code calls (Name(...)) and that neither basic.js nor the code itself makes.
+CodeBlock.findMissingNames = function (code) {
+    const bare = CodeBlock.withoutTexts(code);
+    const names = new Set(bare.match(/\b[A-Z][A-Za-z0-9_]*(?=\s*\()/g) || []);
+    return Array.from(names).filter(function (name) {
+        return !CodeBlock.isMadeIn(bare, name) && !CodeBlock.isOnExamplePage(name);
+    });
+};
+
+CodeBlock.findKitPart = function (name) {
+    return CodeBlock.KIT.find(function (part) { return part.name === name; }) || null;
+};
+
+// The code calls a component (Name( or Name.): one of the kit, or one made in an earlier block of the chapter.
+CodeBlock.callsComponent = function (bare, prefix) {
+    const names = bare.match(/\b[A-Z][A-Za-z0-9_]*(?=\s*[(.])/g) || [];
+    return names.some(function (name) {
+        return CodeBlock.findKitPart(name) !== null || (prefix !== "" && CodeBlock.isMadeIn(prefix, name));
+    });
+};
+
+// The files of the kit components that the code uses, with the files they need, in the order of CodeBlock.KIT.
+CodeBlock.findKitFiles = function (code) {
+    const bare = CodeBlock.withoutTexts(code);
+    const files = new Set();
+    CodeBlock.KIT.forEach(function (part) {
+        if (!new RegExp("\\b" + part.name + "\\b").test(bare)) return;
+        part.needs.forEach(function (file) { files.add(file); });
+        files.add(part.file);
+    });
+    return CodeBlock.KIT.map(function (part) { return part.file; }).filter(function (file) { return files.has(file); });
+};
+
+// WHY eval: a const of a script (const Box = ...) is not a property of window.
+CodeBlock.isOnExamplePage = function (name) {
+    if (CodeBlock.findKitPart(name)) return true;
+    if (CodeBlock.SITE_ONLY.includes(name)) return false;
+    try {
+        return (0, eval)("typeof " + name) !== "undefined";
+    } catch (error) {
+        return false;
+    }
+};
+
+// The code of the earlier blocks of the chapter that make what this block calls (Ex: the component of the block
+// before its use). It runs before the block, unseen.
+CodeBlock.findPrefix = function (block, earlierBlocks) {
+    const missing = CodeBlock.findMissingNames(block.code);
+    const makers = earlierBlocks.filter(function (earlier) {
+        return missing.some(function (name) { return CodeBlock.isMadeIn(earlier.code, name); });
+    });
+    return makers.map(function (earlier) { return earlier.code + "\n\n"; }).join("");
 };
 
 // *** CREATE:
-CodeBlock.create = function (block) {
+// earlierBlocks: the code blocks of the chapter before this one.
+CodeBlock.create = function (block, earlierBlocks = []) {
 
     const T = SITE.T;
     const L = SITE.L;
-    const runnable = CodeBlock.isRunnable(block);
+    const prefix = CodeBlock.findPrefix(block, earlierBlocks);
+    const runnable = CodeBlock.isRunnable(block, prefix);
     const language = (block.language == "html" || block.language == "htm") ? "html" : "js";
     let hasRun = 0;
     let consoleCount = 0;
@@ -110,8 +206,8 @@ CodeBlock.create = function (block) {
                 card.view = WebView({
                     width: "100%",
                     height: CONFIG.runHeight,
-                    title: T.result,
-                    placeholderText: "",
+                    ariaLabel: T.result,
+                    emptyText: "",
                     style: {
                         box: { color: "#FFFFFF", border: 0, round: 0 },
                         loading: { color: "#FFFFFF", spinnerColor: "rgba(0, 0, 0, 0.35)", spinnerSize: 22 },
@@ -174,7 +270,8 @@ CodeBlock.create = function (block) {
         if (code !== highlightedCode) setCode(code);
 
         clearConsole();
-        card.view.loadHtml(CodeBlock.buildPage(code));
+        card.view.loadHtml(CodeBlock.buildPage(prefix + code));
+        CodeBlock.showResult(card);
 
     };
 
@@ -260,6 +357,9 @@ CodeBlock.buildPage = function (code) {
 
     let script = hasStart ? code : "var start = function () {\n" + code + "\n};";
     script = script.replace(/<\/script/gi, "<\\/script");
+    const kitScripts = CodeBlock.findKitFiles(code).map(function (file) {
+        return "<script src=\"" + rootUrl + "comp/" + file + "\"></script>\n";
+    }).join("");
 
     return "<!DOCTYPE html>\n<html>\n<head>\n"
         + "<meta charset=\"UTF-8\">\n"
@@ -269,8 +369,18 @@ CodeBlock.buildPage = function (code) {
         + "<script>" + CodeBlock.CONSOLE_BRIDGE + "</script>\n"
         + "<script src=\"" + rootUrl + "basic/basic.min.js\"></script>\n"
         + "<script src=\"" + rootUrl + "basic/scroll-bar.min.js\"></script>\n"
+        + kitScripts
         + "</head>\n<body>\n<script>\n" + script + "\n</script>\n</body>\n</html>";
 
+};
+
+// Brings the result of a run into the window. WHY: it is under the code, so a Run seemed to do nothing.
+CodeBlock.showResult = function (card) {
+    const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // WHY the next frame: the result box was hidden until this run, so it has no place yet.
+    requestAnimationFrame(function () {
+        card.resultBox.elem.scrollIntoView({ behavior: (isReduced) ? "auto" : "smooth", block: "nearest" });
+    });
 };
 
 // console.log / warn / error / info ve hatalar, üst sayfaya mesaj olarak gönderilir.
@@ -297,11 +407,11 @@ CodeBlock.copy = function (text) {
     const T = SITE.T;
 
     const done = function () {
-        if (typeof Toast === "function") Toast.show({ key: "copy", type: "success", message: T.copied });
+        if (typeof Toast === "function") Toast.show({ key: "copy", type: "success", messageText: T.copied });
     };
 
     const fail = function () {
-        if (typeof Toast === "function") Toast.show({ key: "copy", type: "error", message: T.copyFailed });
+        if (typeof Toast === "function") Toast.show({ key: "copy", type: "error", messageText: T.copyFailed });
     };
 
     if (navigator.clipboard && window.isSecureContext) {

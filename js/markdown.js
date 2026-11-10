@@ -25,8 +25,11 @@ USAGE:
 const doc = Markdown.parse(text);   // { blocks, title }
 Markdown.resolveFile = function (fileName) { return chapterId or null; }; // "02-box.md" -> "#/box"
 
-Developer: Bugra Ozden
-Email: bugra.ozden@gmail.com
+Webpage: https://bug7a.github.io/basic.js-handbook/
+
+Copyright 2020-2026 Bugra Ozden <bugra.ozden@gmail.com> (https://bug7a.github.io/)
+Licensed under the Apache License, Version 2.0
+SPDX-License-Identifier: Apache-2.0
 
 */
 
@@ -217,7 +220,8 @@ Markdown.tableHtml = function (rows) {
         return row.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map(function (cell) { return cell.trim(); });
     };
 
-    let html = "<table><thead><tr>";
+    // WHY the box: a wide table (Ex: the components for new pages) scrolls to the side on a phone, it is not cut
+    let html = "<div class=\"hb-table\"><table><thead><tr>";
     cells(rows[0]).forEach(function (cell) { html += "<th>" + Markdown.inline(cell) + "</th>"; });
     html += "</tr></thead><tbody>";
 
@@ -227,7 +231,7 @@ Markdown.tableHtml = function (rows) {
         html += "</tr>";
     });
 
-    return html + "</tbody></table>";
+    return html + "</tbody></table></div>";
 
 };
 

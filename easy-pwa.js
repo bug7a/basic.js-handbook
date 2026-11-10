@@ -49,9 +49,11 @@ EasyPWA.hideLaunchScreen();             // Closes the launch screen (launchScree
 window.addEventListener("easypwa:installable", fn);   window.addEventListener("easypwa:installed", fn);
 
 Started Date: September 2026
-Developer: Bugra Ozden
-Email: bugra.ozden@gmail.com
 Webpage: https://bug7a.github.io/js-components/
+
+Copyright 2020-2026 Bugra Ozden <bugra.ozden@gmail.com> (https://bug7a.github.io/)
+Licensed under the Apache License, Version 2.0
+SPDX-License-Identifier: Apache-2.0
 
 */
 
@@ -112,15 +114,21 @@ Webpage: https://bug7a.github.io/js-components/
         // OFFLINE FILES START
         offlineFiles: [
             "./",
-            "assets/basicjs-handbook.svg",
+            "assets/basicjs-ui-library.svg",
             "basic/LICENSE",
             "basic/basic.min.css",
             "basic/basic.min.js",
+            "basic/font/open-sans/LICENSE.txt",
             "basic/font/open-sans/OpenSans-Bold.ttf",
             "basic/font/open-sans/OpenSans-Regular.ttf",
             "basic/scroll-bar.min.js",
+            "comp/dialog.min.js",
             "comp/search-results.min.js",
+            "comp/select-box.min.js",
+            "comp/smart-button.min.js",
+            "comp/text-field.min.js",
             "comp/toast.min.js",
+            "comp/tooltip.min.js",
             "comp/web-view.min.js",
             "easy-pwa.js",
             "handbook/english/00-introduction.md",
@@ -138,6 +146,8 @@ Webpage: https://bug7a.github.io/js-components/
             "handbook/english/11-other-functions.md",
             "handbook/english/12-utilities.md",
             "handbook/english/13-sound.md",
+            "handbook/english/14-using-components.md",
+            "handbook/english/15-making-a-component.md",
             "handbook/english/test-project.htm",
             "handbook/english/test.png",
             "handbook/turkce/00-introduction.md",
@@ -155,6 +165,8 @@ Webpage: https://bug7a.github.io/js-components/
             "handbook/turkce/11-other-functions.md",
             "handbook/turkce/12-utilities.md",
             "handbook/turkce/13-sound.md",
+            "handbook/turkce/14-using-components.md",
+            "handbook/turkce/15-making-a-component.md",
             "handbook/turkce/test-project.htm",
             "handbook/turkce/test.png",
             "icon/apple-touch-icon.png",
@@ -199,7 +211,7 @@ Webpage: https://bug7a.github.io/js-components/
         // "auto" (light or dark by the setting of the device), "light" or "dark". The colors are in themes.
         theme: "light",
         themes: {
-            light: { page: "#FBFBF9", title: "rgba(0, 0, 0, 0.85)", text: "rgba(0, 0, 0, 0.55)", spinner: "#2F6FEB" },
+            light: { page: "#FBFBF9", title: "rgba(0, 0, 0, 0.85)", text: "rgba(0, 0, 0, 0.55)", spinner: "#5BBAC1" },
             dark: { page: "#141414", title: "rgba(255, 255, 255, 0.9)", text: "rgba(255, 255, 255, 0.55)", spinner: "#5FB39F" },
         },
 
@@ -220,8 +232,8 @@ Webpage: https://bug7a.github.io/js-components/
             banner: "#1F2326",
             bannerText: "#FFFFFF",
             bannerSoftText: "rgba(255, 255, 255, 0.65)",
-            button: "#2F6FEB",
-            buttonText: "#FFFFFF",
+            button: "#5BBAC1",                      // The turquoise of the site (js/theme.js), the kit's SmartButton "cyan"
+            buttonText: "rgba(0, 0, 0, 0.75)",
             notice: "#C0392B",
             noticeText: "#FFFFFF",
         },
